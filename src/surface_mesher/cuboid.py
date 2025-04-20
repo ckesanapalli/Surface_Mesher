@@ -42,6 +42,7 @@ def generate_face_quads(u_coords: ArrayLike, v_coords: ArrayLike, fixed_axis: in
      [1. 1. 0.]
      [0. 1. 0.]]
     """
+
     uu, vv = np.meshgrid(u_coords, v_coords, indexing="ij")
 
     # Vertices ordered counter-clockwise:
@@ -143,12 +144,17 @@ def generate_cuboid_surface(x_coords: ArrayLike, y_coords: ArrayLike, z_coords: 
     >>> print(faces.shape)  # 6 faces total from the cuboid
     (16, 4, 3)
     """
+
     # Convert to NumPy arrays and validate
     x_coords = np.asarray(x_coords, dtype=float)
     y_coords = np.asarray(y_coords, dtype=float)
     z_coords = np.asarray(z_coords, dtype=float)
 
-    for name, coords in zip(("x_coords", "y_coords", "z_coords"), (x_coords, y_coords, z_coords), strict=False):
+    for name, coords in zip(
+        ("x_coords", "y_coords", "z_coords"),
+        (x_coords, y_coords, z_coords),
+        strict=False,
+    ):
         if coords.ndim != 1:
             scalar_error_msg = f"{name} must be a 1D array."
             raise ValueError(scalar_error_msg)
@@ -159,19 +165,17 @@ def generate_cuboid_surface(x_coords: ArrayLike, y_coords: ArrayLike, z_coords: 
             increasing_error_msg = f"{name} must be strictly increasing."
             raise ValueError(increasing_error_msg)
 
-    faces = []
-
-    # XY planes (bottom and top)
-    faces.append(generate_face_quads(x_coords, y_coords, fixed_axis=2, fixed_value=z_coords[0]))
-    faces.append(generate_face_quads(x_coords, y_coords, fixed_axis=2, fixed_value=z_coords[-1]))
-
-    # XZ planes (front and back)
-    faces.append(generate_face_quads(x_coords, z_coords, fixed_axis=1, fixed_value=y_coords[0]))
-    faces.append(generate_face_quads(x_coords, z_coords, fixed_axis=1, fixed_value=y_coords[-1]))
-
-    # YZ planes (left and right)
-    faces.append(generate_face_quads(y_coords, z_coords, fixed_axis=0, fixed_value=x_coords[0]))
-    faces.append(generate_face_quads(y_coords, z_coords, fixed_axis=0, fixed_value=x_coords[-1]))
+    faces = [
+        # XY planes (bottom and top)
+        generate_face_quads(x_coords, y_coords, fixed_axis=2, fixed_value=z_coords[0]),
+        generate_face_quads(x_coords, y_coords, fixed_axis=2, fixed_value=z_coords[-1]),
+        # XZ planes (front and back)
+        generate_face_quads(x_coords, z_coords, fixed_axis=1, fixed_value=y_coords[0]),
+        generate_face_quads(x_coords, z_coords, fixed_axis=1, fixed_value=y_coords[-1]),
+        # YZ planes (left and right)
+        generate_face_quads(y_coords, z_coords, fixed_axis=0, fixed_value=x_coords[0]),
+        generate_face_quads(y_coords, z_coords, fixed_axis=0, fixed_value=x_coords[-1]),
+    ]
 
     return np.concatenate(faces, axis=0)
 
