@@ -6,10 +6,7 @@ import numpy as np
 from numpy.typing import ArrayLike
 
 
-def generate_face_quads(u_coords: ArrayLike,
-                        v_coords: ArrayLike,
-                        fixed_axis: int,
-                        fixed_value: float) -> np.ndarray:
+def generate_face_quads(u_coords: ArrayLike, v_coords: ArrayLike, fixed_axis: int, fixed_value: float) -> np.ndarray:
     """
     Generate quadrilateral faces on a grid where one axis is fixed,
     with counter-clockwise vertex ordering.
@@ -53,9 +50,9 @@ def generate_face_quads(u_coords: ArrayLike,
     # p2 = top-right
     # p3 = top-left
     p0 = np.stack([uu[:-1, :-1], vv[:-1, :-1]], axis=-1).reshape(-1, 2)
-    p1 = np.stack([uu[1:, :-1],  vv[1:, :-1]], axis=-1).reshape(-1, 2)
-    p2 = np.stack([uu[1:, 1:],   vv[1:, 1:]], axis=-1).reshape(-1, 2)
-    p3 = np.stack([uu[:-1, 1:],  vv[:-1, 1:]], axis=-1).reshape(-1, 2)
+    p1 = np.stack([uu[1:, :-1], vv[1:, :-1]], axis=-1).reshape(-1, 2)
+    p2 = np.stack([uu[1:, 1:], vv[1:, 1:]], axis=-1).reshape(-1, 2)
+    p3 = np.stack([uu[:-1, 1:], vv[:-1, 1:]], axis=-1).reshape(-1, 2)
 
     # Stack into quads: [p0, p1, p2, p3]
     quad_2d = np.stack([p0, p1, p2, p3], axis=1)
@@ -70,6 +67,7 @@ def generate_face_quads(u_coords: ArrayLike,
     quads_3d[:, :, fixed_axis] = fixed_value
 
     return quads_3d
+
 
 def generate_axis_coords(start: float, length: float, step: float) -> np.ndarray:
     """
@@ -95,8 +93,6 @@ def generate_axis_coords(start: float, length: float, step: float) -> np.ndarray
     >>> generate_axis_coords(0.0, 10.0, 2.0)
     array([ 0.,  2.,  4.,  6.,  8., 10.])
     """
-    
-    
 
     if step <= 0:
         step_error_msg = "step must be a positive number."
@@ -109,11 +105,7 @@ def generate_axis_coords(start: float, length: float, step: float) -> np.ndarray
     return np.linspace(start, start + length, num_steps + 1)
 
 
-def generate_cuboid_surface(
-    x_coords: ArrayLike, 
-    y_coords: ArrayLike,
-    z_coords: ArrayLike
-) -> np.ndarray:
+def generate_cuboid_surface(x_coords: ArrayLike, y_coords: ArrayLike, z_coords: ArrayLike) -> np.ndarray:
     """
     Generate a full cuboid surface mesh using explicit coordinate arrays along each axis.
 
@@ -200,6 +192,7 @@ class Cuboid:
     origin : np.ndarray
         The origin point of the cuboid in 3D space.
     """
+
     length: float
     width: float
     height: float
@@ -228,7 +221,7 @@ class Cuboid:
         >>> print(faces.shape)   # Number of quads: 6 faces * 2x1 divisions each
         (40, 4, 3)
         """
-        
+
         mesh_sizes = np.array(mesh_sizes, dtype=float)
 
         # Normalize input to (3,) shape
@@ -248,9 +241,9 @@ class Cuboid:
 
         # Generate coordinate arrays based on origin and dimensions
         ox, oy, oz = self.origin
-        x_coords = generate_axis_coords(-self.length/2.0, self.length, mesh_sizes[0]) + ox
-        y_coords = generate_axis_coords(-self.width/2.0, self.width, mesh_sizes[1]) + oy
-        z_coords = generate_axis_coords(-self.height/2.0, self.height, mesh_sizes[2]) + oz
+        x_coords = generate_axis_coords(-self.length / 2.0, self.length, mesh_sizes[0]) + ox
+        y_coords = generate_axis_coords(-self.width / 2.0, self.width, mesh_sizes[1]) + oy
+        z_coords = generate_axis_coords(-self.height / 2.0, self.height, mesh_sizes[2]) + oz
 
         # Use external utility to generate surface mesh
         return generate_cuboid_surface(x_coords, y_coords, z_coords)
@@ -259,10 +252,10 @@ class Cuboid:
         """
         Create a 3D mesh of the cuboid as quadrilateral faces with specified resolution.
         resolution : int | ArrayLike of 3 integers
-            The number of divisions along each axis. If a single integer is provided, 
-            it is applied uniformly to all three axes. If an array-like of three integers 
+            The number of divisions along each axis. If a single integer is provided,
+            it is applied uniformly to all three axes. If an array-like of three integers
             is provided, it specifies the resolution for each axis (x, y, z).
-            An array of shape (N, 4, 3), where each item represents a quadrilateral face 
+            An array of shape (N, 4, 3), where each item represents a quadrilateral face
             defined by 4 points in 3D space.
         Raises
         ------
@@ -280,7 +273,6 @@ class Cuboid:
         >>> mesh.shape
         (52, 4, 3)
         """
-        
 
         resolution = np.array(resolution, dtype=int)
 

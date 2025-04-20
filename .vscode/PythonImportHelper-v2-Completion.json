@@ -554,7 +554,7 @@
         "kind": 2,
         "importPath": "src.surface_mesher.cuboid",
         "description": "src.surface_mesher.cuboid",
-        "peekOfCode": "def generate_face_quads(u_coords: ArrayLike,\n                        v_coords: ArrayLike,\n                        fixed_axis: int,\n                        fixed_value: float) -> np.ndarray:\n    \"\"\"\n    Generate quadrilateral faces on a grid where one axis is fixed,\n    with counter-clockwise vertex ordering.\n    Parameters\n    ----------\n    u_coords : ArrayLike",
+        "peekOfCode": "def generate_face_quads(u_coords: ArrayLike, v_coords: ArrayLike, fixed_axis: int, fixed_value: float) -> np.ndarray:\n    \"\"\"\n    Generate quadrilateral faces on a grid where one axis is fixed,\n    with counter-clockwise vertex ordering.\n    Parameters\n    ----------\n    u_coords : ArrayLike\n        Coordinates along the first varying axis (horizontal direction).\n    v_coords : ArrayLike\n        Coordinates along the second varying axis (vertical direction).",
         "detail": "src.surface_mesher.cuboid",
         "documentation": {}
     },
@@ -572,7 +572,7 @@
         "kind": 2,
         "importPath": "src.surface_mesher.cuboid",
         "description": "src.surface_mesher.cuboid",
-        "peekOfCode": "def generate_cuboid_surface(\n    x_coords: ArrayLike, \n    y_coords: ArrayLike,\n    z_coords: ArrayLike\n) -> np.ndarray:\n    \"\"\"\n    Generate a full cuboid surface mesh using explicit coordinate arrays along each axis.\n    This function creates quadrilateral surface faces based on 1D coordinate arrays for the\n    x, y, and z axes. The surface mesh includes all six sides of the cuboid spanned by\n    the given coordinates. Vertex order for each quad is counter-clockwise.",
+        "peekOfCode": "def generate_cuboid_surface(x_coords: ArrayLike, y_coords: ArrayLike, z_coords: ArrayLike) -> np.ndarray:\n    \"\"\"\n    Generate a full cuboid surface mesh using explicit coordinate arrays along each axis.\n    This function creates quadrilateral surface faces based on 1D coordinate arrays for the\n    x, y, and z axes. The surface mesh includes all six sides of the cuboid spanned by\n    the given coordinates. Vertex order for each quad is counter-clockwise.\n    Parameters\n    ----------\n    x_coords : ArrayLike of float\n        1D strictly increasing array of x-axis positions for vertical planes (YZ-facing).",
         "detail": "src.surface_mesher.cuboid",
         "documentation": {}
     },
