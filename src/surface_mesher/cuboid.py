@@ -86,7 +86,7 @@ def generate_axis_coords(start: float, length: float, step: float) -> np.ndarray
 
     Returns
     -------
-    coords : np.ndarray
+    np.ndarray
         1D array of coordinates from start to start + length (inclusive).
 
     Examples
@@ -125,7 +125,7 @@ def generate_cuboid_surface(x_coords: ArrayLike, y_coords: ArrayLike, z_coords: 
 
     Returns
     -------
-    faces : np.ndarray
+    np.ndarray
         Array of shape (N, 4, 3), where N is the number of quadrilateral faces.
         Each face is defined by four 3D points in counter-clockwise order.
 
@@ -214,7 +214,7 @@ class Cuboid:
 
         Returns
         -------
-        faces : np.ndarray
+        np.ndarray
             An array of shape (N, 4, 3), each representing a quadrilateral face of the cuboid.
 
         Examples
@@ -255,16 +255,25 @@ class Cuboid:
     def create_mesh_with_resolution(self, resolution: int | ArrayLike) -> np.ndarray:
         """
         Create a 3D mesh of the cuboid as quadrilateral faces with specified resolution.
+
+        Parameters
+        ----------
         resolution : int | ArrayLike of 3 integers
             The number of divisions along each axis. If a single integer is provided,
             it is applied uniformly to all three axes. If an array-like of three integers
             is provided, it specifies the resolution for each axis (x, y, z).
+
+        Returns
+        -------
+        np.ndarray
             An array of shape (N, 4, 3), where each item represents a quadrilateral face
             defined by 4 points in 3D space.
+
         Raises
         ------
         ValueError
             If `resolution` is not a positive integer or an array-like of three positive integers.
+
         Examples
         --------
         >>> cuboid = Cuboid(length=2.0, width=1.0, height=1.0)
