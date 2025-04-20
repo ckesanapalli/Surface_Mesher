@@ -4,7 +4,6 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
-import numpy as np
 from numpy.typing import ArrayLike
 
 def generate_face_quads(u_coords: ArrayLike,
