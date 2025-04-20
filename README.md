@@ -1,5 +1,13 @@
 # 🧱 Surface Mesher
 
+[![Python Package](https://github.com/ckesanapalli//surface-mesher/actions/workflows/python-package.yml/badge.svg)](https://github.com/ckesanapalli/surface-mesher/actions/workflows/python-package.yml/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/ckesanapalli/surface-mesher/badge.svg?branch=master)](https://coveralls.io/github/ckesanapalli/surface-mesher?branch=master)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.txt)
+[![Code Style: ruff](https://img.shields.io/badge/code%20style-ruff-blueviolet.svg)](https://docs.astral.sh/ruff/)
+[![Powered by uv](https://img.shields.io/badge/Powered%20by-uv-22272e?logo=python&logoColor=white)](https://docs.astral.sh/uv/)
+[![Python >= 3.10](https://img.shields.io/badge/python-≥3.10-blue.svg)](https://www.python.org/downloads/)
+
+
 **Surface Mesher** is a Python library for generating structured 3D surface meshes of primitive shapes, with a strong focus on **quadrilateral-dominant (quad) meshing**. The meshes are particularly suited for **visualization** and **Boundary Element Method (BEM)** simulations.
 
 > ⚠️ This project is currently under active development.
