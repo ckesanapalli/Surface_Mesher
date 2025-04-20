@@ -37,7 +37,9 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        coverage run -m pytest tests
-        coveralls
+        coverage run -m pytest tests --doctest-modules
+        coverage xml
+    - name: Upload coverage to Coveralls
+      run: coveralls
       env:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
