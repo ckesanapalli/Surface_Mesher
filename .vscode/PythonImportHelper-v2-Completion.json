@@ -1,0 +1,786 @@
+[
+    {
+        "label": "runpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "runpy",
+        "description": "runpy",
+        "detail": "runpy",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "site",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "site",
+        "description": "site",
+        "detail": "site",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "argparse",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "argparse",
+        "description": "argparse",
+        "detail": "argparse",
+        "documentation": {}
+    },
+    {
+        "label": "glob",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "glob",
+        "description": "glob",
+        "detail": "glob",
+        "documentation": {}
+    },
+    {
+        "label": "shutil",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "shutil",
+        "description": "shutil",
+        "detail": "shutil",
+        "documentation": {}
+    },
+    {
+        "label": "sysconfig",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sysconfig",
+        "description": "sysconfig",
+        "detail": "sysconfig",
+        "documentation": {}
+    },
+    {
+        "label": "tempfile",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "tempfile",
+        "description": "tempfile",
+        "detail": "tempfile",
+        "documentation": {}
+    },
+    {
+        "label": "winreg",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "winreg",
+        "description": "winreg",
+        "detail": "winreg",
+        "documentation": {}
+    },
+    {
+        "label": "subprocess",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "subprocess",
+        "description": "subprocess",
+        "detail": "subprocess",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "numpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "numpy",
+        "description": "numpy",
+        "detail": "numpy",
+        "documentation": {}
+    },
+    {
+        "label": "ArrayLike",
+        "importPath": "numpy.typing",
+        "description": "numpy.typing",
+        "isExtraImport": true,
+        "detail": "numpy.typing",
+        "documentation": {}
+    },
+    {
+        "label": "pytest",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pytest",
+        "description": "pytest",
+        "detail": "pytest",
+        "documentation": {}
+    },
+    {
+        "label": "generate_cuboid_surface",
+        "importPath": "surface_mesher.cuboid",
+        "description": "surface_mesher.cuboid",
+        "isExtraImport": true,
+        "detail": "surface_mesher.cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "generate_axis_coords",
+        "importPath": "surface_mesher.cuboid",
+        "description": "surface_mesher.cuboid",
+        "isExtraImport": true,
+        "detail": "surface_mesher.cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "generate_face_quads",
+        "importPath": "surface_mesher.cuboid",
+        "description": "surface_mesher.cuboid",
+        "isExtraImport": true,
+        "detail": "surface_mesher.cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "Cuboid",
+        "importPath": "surface_mesher.cuboid",
+        "description": "surface_mesher.cuboid",
+        "isExtraImport": true,
+        "detail": "surface_mesher.cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "bin_dir",
+        "kind": 5,
+        "importPath": ".venv.Scripts.activate_this",
+        "description": ".venv.Scripts.activate_this",
+        "peekOfCode": "bin_dir = os.path.dirname(abs_file)\nbase = bin_dir[: -len(\"Scripts\") - 1]  # strip away the bin part from the __file__, plus the path separator\n# prepend bin to PATH (this file is inside the bin directory)\nos.environ[\"PATH\"] = os.pathsep.join([bin_dir, *os.environ.get(\"PATH\", \"\").split(os.pathsep)])\nos.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"surface-mesher\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"..\\\\Lib\\\\site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))",
+        "detail": ".venv.Scripts.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "base",
+        "kind": 5,
+        "importPath": ".venv.Scripts.activate_this",
+        "description": ".venv.Scripts.activate_this",
+        "peekOfCode": "base = bin_dir[: -len(\"Scripts\") - 1]  # strip away the bin part from the __file__, plus the path separator\n# prepend bin to PATH (this file is inside the bin directory)\nos.environ[\"PATH\"] = os.pathsep.join([bin_dir, *os.environ.get(\"PATH\", \"\").split(os.pathsep)])\nos.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"surface-mesher\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"..\\\\Lib\\\\site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path)",
+        "detail": ".venv.Scripts.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "os.environ[\"PATH\"]",
+        "kind": 5,
+        "importPath": ".venv.Scripts.activate_this",
+        "description": ".venv.Scripts.activate_this",
+        "peekOfCode": "os.environ[\"PATH\"] = os.pathsep.join([bin_dir, *os.environ.get(\"PATH\", \"\").split(os.pathsep)])\nos.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"surface-mesher\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"..\\\\Lib\\\\site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix",
+        "detail": ".venv.Scripts.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "os.environ[\"VIRTUAL_ENV\"]",
+        "kind": 5,
+        "importPath": ".venv.Scripts.activate_this",
+        "description": ".venv.Scripts.activate_this",
+        "peekOfCode": "os.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"surface-mesher\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"..\\\\Lib\\\\site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": ".venv.Scripts.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "os.environ[\"VIRTUAL_ENV_PROMPT\"]",
+        "kind": 5,
+        "importPath": ".venv.Scripts.activate_this",
+        "description": ".venv.Scripts.activate_this",
+        "peekOfCode": "os.environ[\"VIRTUAL_ENV_PROMPT\"] = \"surface-mesher\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"..\\\\Lib\\\\site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": ".venv.Scripts.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "prev_length",
+        "kind": 5,
+        "importPath": ".venv.Scripts.activate_this",
+        "description": ".venv.Scripts.activate_this",
+        "peekOfCode": "prev_length = len(sys.path)\nfor lib in \"..\\\\Lib\\\\site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": ".venv.Scripts.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "sys.path[:]",
+        "kind": 5,
+        "importPath": ".venv.Scripts.activate_this",
+        "description": ".venv.Scripts.activate_this",
+        "peekOfCode": "sys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": ".venv.Scripts.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "sys.real_prefix",
+        "kind": 5,
+        "importPath": ".venv.Scripts.activate_this",
+        "description": ".venv.Scripts.activate_this",
+        "peekOfCode": "sys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": ".venv.Scripts.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "sys.prefix",
+        "kind": 5,
+        "importPath": ".venv.Scripts.activate_this",
+        "description": ".venv.Scripts.activate_this",
+        "peekOfCode": "sys.prefix = base",
+        "detail": ".venv.Scripts.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "Tee",
+        "kind": 6,
+        "importPath": ".venv.Scripts.pywin32_postinstall",
+        "description": ".venv.Scripts.pywin32_postinstall",
+        "peekOfCode": "class Tee:\n    def __init__(self, file):\n        self.f = file\n    def write(self, what):\n        if self.f is not None:\n            try:\n                self.f.write(what.replace(\"\\n\", \"\\r\\n\"))\n            except OSError:\n                pass\n        tee_f.write(what)",
+        "detail": ".venv.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "get_root_hkey",
+        "kind": 2,
+        "importPath": ".venv.Scripts.pywin32_postinstall",
+        "description": ".venv.Scripts.pywin32_postinstall",
+        "peekOfCode": "def get_root_hkey():\n    try:\n        winreg.OpenKey(\n            winreg.HKEY_LOCAL_MACHINE, root_key_name, 0, winreg.KEY_CREATE_SUB_KEY\n        )\n        return winreg.HKEY_LOCAL_MACHINE\n    except OSError:\n        # Either not exist, or no permissions to create subkey means\n        # must be HKCU\n        return winreg.HKEY_CURRENT_USER",
+        "detail": ".venv.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "create_shortcut",
+        "kind": 2,
+        "importPath": ".venv.Scripts.pywin32_postinstall",
+        "description": ".venv.Scripts.pywin32_postinstall",
+        "peekOfCode": "def create_shortcut(\n    path, description, filename, arguments=\"\", workdir=\"\", iconpath=\"\", iconindex=0\n):\n    import pythoncom\n    from win32com.shell import shell\n    ilink = pythoncom.CoCreateInstance(\n        shell.CLSID_ShellLink,\n        None,\n        pythoncom.CLSCTX_INPROC_SERVER,\n        shell.IID_IShellLink,",
+        "detail": ".venv.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "get_special_folder_path",
+        "kind": 2,
+        "importPath": ".venv.Scripts.pywin32_postinstall",
+        "description": ".venv.Scripts.pywin32_postinstall",
+        "peekOfCode": "def get_special_folder_path(path_name):\n    from win32com.shell import shell, shellcon\n    for maybe in \"\"\"\n        CSIDL_COMMON_STARTMENU CSIDL_STARTMENU CSIDL_COMMON_APPDATA\n        CSIDL_LOCAL_APPDATA CSIDL_APPDATA CSIDL_COMMON_DESKTOPDIRECTORY\n        CSIDL_DESKTOPDIRECTORY CSIDL_COMMON_STARTUP CSIDL_STARTUP\n        CSIDL_COMMON_PROGRAMS CSIDL_PROGRAMS CSIDL_PROGRAM_FILES_COMMON\n        CSIDL_PROGRAM_FILES CSIDL_FONTS\"\"\".split():\n        if maybe == path_name:\n            csidl = getattr(shellcon, maybe)",
+        "detail": ".venv.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "CopyTo",
+        "kind": 2,
+        "importPath": ".venv.Scripts.pywin32_postinstall",
+        "description": ".venv.Scripts.pywin32_postinstall",
+        "peekOfCode": "def CopyTo(desc, src, dest):\n    import win32api\n    import win32con\n    while 1:\n        try:\n            win32api.CopyFile(src, dest, 0)\n            return\n        except win32api.error as details:\n            if details.winerror == 5:  # access denied - user not admin.\n                raise",
+        "detail": ".venv.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "LoadSystemModule",
+        "kind": 2,
+        "importPath": ".venv.Scripts.pywin32_postinstall",
+        "description": ".venv.Scripts.pywin32_postinstall",
+        "peekOfCode": "def LoadSystemModule(lib_dir, modname):\n    # See if this is a debug build.\n    import importlib.machinery\n    import importlib.util\n    suffix = \"_d\" if \"_d.pyd\" in importlib.machinery.EXTENSION_SUFFIXES else \"\"\n    filename = \"%s%d%d%s.dll\" % (\n        modname,\n        sys.version_info.major,\n        sys.version_info.minor,\n        suffix,",
+        "detail": ".venv.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "SetPyKeyVal",
+        "kind": 2,
+        "importPath": ".venv.Scripts.pywin32_postinstall",
+        "description": ".venv.Scripts.pywin32_postinstall",
+        "peekOfCode": "def SetPyKeyVal(key_name, value_name, value):\n    root_hkey = get_root_hkey()\n    root_key = winreg.OpenKey(root_hkey, root_key_name)\n    try:\n        my_key = winreg.CreateKey(root_key, key_name)\n        try:\n            winreg.SetValueEx(my_key, value_name, 0, winreg.REG_SZ, value)\n            if verbose:\n                print(f\"-> {root_key_name}\\\\{key_name}[{value_name}]={value!r}\")\n        finally:",
+        "detail": ".venv.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "UnsetPyKeyVal",
+        "kind": 2,
+        "importPath": ".venv.Scripts.pywin32_postinstall",
+        "description": ".venv.Scripts.pywin32_postinstall",
+        "peekOfCode": "def UnsetPyKeyVal(key_name, value_name, delete_key=False):\n    root_hkey = get_root_hkey()\n    root_key = winreg.OpenKey(root_hkey, root_key_name)\n    try:\n        my_key = winreg.OpenKey(root_key, key_name, 0, winreg.KEY_SET_VALUE)\n        try:\n            winreg.DeleteValue(my_key, value_name)\n            if verbose:\n                print(f\"-> DELETE {root_key_name}\\\\{key_name}[{value_name}]\")\n        finally:",
+        "detail": ".venv.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "RegisterCOMObjects",
+        "kind": 2,
+        "importPath": ".venv.Scripts.pywin32_postinstall",
+        "description": ".venv.Scripts.pywin32_postinstall",
+        "peekOfCode": "def RegisterCOMObjects(register=True):\n    import win32com.server.register\n    if register:\n        func = win32com.server.register.RegisterClasses\n    else:\n        func = win32com.server.register.UnregisterClasses\n    flags = {}\n    if not verbose:\n        flags[\"quiet\"] = 1\n    for module, klass_name in com_modules:",
+        "detail": ".venv.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "RegisterHelpFile",
+        "kind": 2,
+        "importPath": ".venv.Scripts.pywin32_postinstall",
+        "description": ".venv.Scripts.pywin32_postinstall",
+        "peekOfCode": "def RegisterHelpFile(register=True, lib_dir=None):\n    if lib_dir is None:\n        lib_dir = sysconfig.get_paths()[\"platlib\"]\n    if register:\n        # Register the .chm help file.\n        chm_file = os.path.join(lib_dir, \"PyWin32.chm\")\n        if os.path.isfile(chm_file):\n            # This isn't recursive, so if 'Help' doesn't exist, we croak\n            SetPyKeyVal(\"Help\", None, None)\n            SetPyKeyVal(\"Help\\\\Pythonwin Reference\", None, chm_file)",
+        "detail": ".venv.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "RegisterPythonwin",
+        "kind": 2,
+        "importPath": ".venv.Scripts.pywin32_postinstall",
+        "description": ".venv.Scripts.pywin32_postinstall",
+        "peekOfCode": "def RegisterPythonwin(register=True, lib_dir=None):\n    \"\"\"Add (or remove) Pythonwin to context menu for python scripts.\n    ??? Should probably also add Edit command for pys files also.\n    Also need to remove these keys on uninstall, but there's no function\n    to add registry entries to uninstall log ???\n    \"\"\"\n    import os\n    if lib_dir is None:\n        lib_dir = sysconfig.get_paths()[\"platlib\"]\n    classes_root = get_root_hkey()",
+        "detail": ".venv.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "get_shortcuts_folder",
+        "kind": 2,
+        "importPath": ".venv.Scripts.pywin32_postinstall",
+        "description": ".venv.Scripts.pywin32_postinstall",
+        "peekOfCode": "def get_shortcuts_folder():\n    if get_root_hkey() == winreg.HKEY_LOCAL_MACHINE:\n        try:\n            fldr = get_special_folder_path(\"CSIDL_COMMON_PROGRAMS\")\n        except OSError:\n            # No CSIDL_COMMON_PROGRAMS on this platform\n            fldr = get_special_folder_path(\"CSIDL_PROGRAMS\")\n    else:\n        # non-admin install - always goes in this user's start menu.\n        fldr = get_special_folder_path(\"CSIDL_PROGRAMS\")",
+        "detail": ".venv.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "get_system_dir",
+        "kind": 2,
+        "importPath": ".venv.Scripts.pywin32_postinstall",
+        "description": ".venv.Scripts.pywin32_postinstall",
+        "peekOfCode": "def get_system_dir():\n    import win32api  # we assume this exists.\n    try:\n        import pythoncom\n        import win32process\n        from win32com.shell import shell, shellcon\n        try:\n            if win32process.IsWow64Process():\n                return shell.SHGetSpecialFolderPath(0, shellcon.CSIDL_SYSTEMX86)\n            return shell.SHGetSpecialFolderPath(0, shellcon.CSIDL_SYSTEM)",
+        "detail": ".venv.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "fixup_dbi",
+        "kind": 2,
+        "importPath": ".venv.Scripts.pywin32_postinstall",
+        "description": ".venv.Scripts.pywin32_postinstall",
+        "peekOfCode": "def fixup_dbi():\n    # We used to have a dbi.pyd with our .pyd files, but now have a .py file.\n    # If the user didn't uninstall, they will find the .pyd which will cause\n    # problems - so handle that.\n    import win32api\n    import win32con\n    pyd_name = os.path.join(os.path.dirname(win32api.__file__), \"dbi.pyd\")\n    pyd_d_name = os.path.join(os.path.dirname(win32api.__file__), \"dbi_d.pyd\")\n    py_name = os.path.join(os.path.dirname(win32con.__file__), \"dbi.py\")\n    for this_pyd in (pyd_name, pyd_d_name):",
+        "detail": ".venv.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "install",
+        "kind": 2,
+        "importPath": ".venv.Scripts.pywin32_postinstall",
+        "description": ".venv.Scripts.pywin32_postinstall",
+        "peekOfCode": "def install(lib_dir):\n    import traceback\n    # The .pth file is now installed as a regular file.\n    # Create the .pth file in the site-packages dir, and use only relative paths\n    # We used to write a .pth directly to sys.prefix - clobber it.\n    if os.path.isfile(os.path.join(sys.prefix, \"pywin32.pth\")):\n        os.unlink(os.path.join(sys.prefix, \"pywin32.pth\"))\n    # The .pth may be new and therefore not loaded in this session.\n    # Setup the paths just in case.\n    for name in \"win32 win32\\\\lib Pythonwin\".split():",
+        "detail": ".venv.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "uninstall",
+        "kind": 2,
+        "importPath": ".venv.Scripts.pywin32_postinstall",
+        "description": ".venv.Scripts.pywin32_postinstall",
+        "peekOfCode": "def uninstall(lib_dir):\n    # First ensure our system modules are loaded from pywin32_system, so\n    # we can remove the ones we copied...\n    LoadSystemModule(lib_dir, \"pywintypes\")\n    LoadSystemModule(lib_dir, \"pythoncom\")\n    try:\n        RegisterCOMObjects(False)\n    except Exception as why:\n        print(f\"Failed to unregister COM objects: {why}\")\n    try:",
+        "detail": ".venv.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "verify_destination",
+        "kind": 2,
+        "importPath": ".venv.Scripts.pywin32_postinstall",
+        "description": ".venv.Scripts.pywin32_postinstall",
+        "peekOfCode": "def verify_destination(location: str) -> str:\n    location = os.path.abspath(location)\n    if not os.path.isdir(location):\n        raise argparse.ArgumentTypeError(\n            f'Path \"{location}\" is not an existing directory!'\n        )\n    return location\ndef main():\n    parser = argparse.ArgumentParser(\n        formatter_class=argparse.RawDescriptionHelpFormatter,",
+        "detail": ".venv.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": ".venv.Scripts.pywin32_postinstall",
+        "description": ".venv.Scripts.pywin32_postinstall",
+        "peekOfCode": "def main():\n    parser = argparse.ArgumentParser(\n        formatter_class=argparse.RawDescriptionHelpFormatter,\n        description=\"\"\"A post-install script for the pywin32 extensions.\n    * Typical usage:\n    > python -m pywin32_postinstall -install\n    * or (shorter but you don't have control over which python environment is used)\n    > pywin32_postinstall -install\n    You need to execute this script, with a '-install' parameter,\n    to ensure the environment is setup correctly to install COM objects, services, etc.",
+        "detail": ".venv.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "tee_f",
+        "kind": 5,
+        "importPath": ".venv.Scripts.pywin32_postinstall",
+        "description": ".venv.Scripts.pywin32_postinstall",
+        "peekOfCode": "tee_f = open(\n    os.path.join(\n        tempfile.gettempdir(),  # Send output somewhere so it can be found if necessary...\n        \"pywin32_postinstall.log\",\n    ),\n    \"w\",\n)\nclass Tee:\n    def __init__(self, file):\n        self.f = file",
+        "detail": ".venv.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "sys.stderr",
+        "kind": 5,
+        "importPath": ".venv.Scripts.pywin32_postinstall",
+        "description": ".venv.Scripts.pywin32_postinstall",
+        "peekOfCode": "sys.stderr = Tee(sys.stderr)\nsys.stdout = Tee(sys.stdout)\ncom_modules = [\n    # module_name,                      class_names\n    (\"win32com.servers.interp\", \"Interpreter\"),\n    (\"win32com.servers.dictionary\", \"DictionaryPolicy\"),\n    (\"win32com.axscript.client.pyscript\", \"PyScript\"),\n]\n# Is this a 'silent' install - ie, avoid all dialogs.\n# Different than 'verbose'",
+        "detail": ".venv.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "sys.stdout",
+        "kind": 5,
+        "importPath": ".venv.Scripts.pywin32_postinstall",
+        "description": ".venv.Scripts.pywin32_postinstall",
+        "peekOfCode": "sys.stdout = Tee(sys.stdout)\ncom_modules = [\n    # module_name,                      class_names\n    (\"win32com.servers.interp\", \"Interpreter\"),\n    (\"win32com.servers.dictionary\", \"DictionaryPolicy\"),\n    (\"win32com.axscript.client.pyscript\", \"PyScript\"),\n]\n# Is this a 'silent' install - ie, avoid all dialogs.\n# Different than 'verbose'\nsilent = 0",
+        "detail": ".venv.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "com_modules",
+        "kind": 5,
+        "importPath": ".venv.Scripts.pywin32_postinstall",
+        "description": ".venv.Scripts.pywin32_postinstall",
+        "peekOfCode": "com_modules = [\n    # module_name,                      class_names\n    (\"win32com.servers.interp\", \"Interpreter\"),\n    (\"win32com.servers.dictionary\", \"DictionaryPolicy\"),\n    (\"win32com.axscript.client.pyscript\", \"PyScript\"),\n]\n# Is this a 'silent' install - ie, avoid all dialogs.\n# Different than 'verbose'\nsilent = 0\n# Verbosity of output messages.",
+        "detail": ".venv.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "silent",
+        "kind": 5,
+        "importPath": ".venv.Scripts.pywin32_postinstall",
+        "description": ".venv.Scripts.pywin32_postinstall",
+        "peekOfCode": "silent = 0\n# Verbosity of output messages.\nverbose = 1\nroot_key_name = \"Software\\\\Python\\\\PythonCore\\\\\" + sys.winver\ndef get_root_hkey():\n    try:\n        winreg.OpenKey(\n            winreg.HKEY_LOCAL_MACHINE, root_key_name, 0, winreg.KEY_CREATE_SUB_KEY\n        )\n        return winreg.HKEY_LOCAL_MACHINE",
+        "detail": ".venv.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "verbose",
+        "kind": 5,
+        "importPath": ".venv.Scripts.pywin32_postinstall",
+        "description": ".venv.Scripts.pywin32_postinstall",
+        "peekOfCode": "verbose = 1\nroot_key_name = \"Software\\\\Python\\\\PythonCore\\\\\" + sys.winver\ndef get_root_hkey():\n    try:\n        winreg.OpenKey(\n            winreg.HKEY_LOCAL_MACHINE, root_key_name, 0, winreg.KEY_CREATE_SUB_KEY\n        )\n        return winreg.HKEY_LOCAL_MACHINE\n    except OSError:\n        # Either not exist, or no permissions to create subkey means",
+        "detail": ".venv.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "root_key_name",
+        "kind": 5,
+        "importPath": ".venv.Scripts.pywin32_postinstall",
+        "description": ".venv.Scripts.pywin32_postinstall",
+        "peekOfCode": "root_key_name = \"Software\\\\Python\\\\PythonCore\\\\\" + sys.winver\ndef get_root_hkey():\n    try:\n        winreg.OpenKey(\n            winreg.HKEY_LOCAL_MACHINE, root_key_name, 0, winreg.KEY_CREATE_SUB_KEY\n        )\n        return winreg.HKEY_LOCAL_MACHINE\n    except OSError:\n        # Either not exist, or no permissions to create subkey means\n        # must be HKCU",
+        "detail": ".venv.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "run_test",
+        "kind": 2,
+        "importPath": ".venv.Scripts.pywin32_testall",
+        "description": ".venv.Scripts.pywin32_testall",
+        "peekOfCode": "def run_test(script, cmdline_extras):\n    dirname, scriptname = os.path.split(script)\n    # some tests prefer to be run from their directory.\n    cmd = [sys.executable, \"-u\", scriptname] + cmdline_extras\n    print(\"--- Running '%s' ---\" % script)\n    sys.stdout.flush()\n    result = subprocess.run(cmd, check=False, cwd=dirname)\n    print(f\"*** Test script '{script}' exited with {result.returncode}\")\n    sys.stdout.flush()\n    if result.returncode:",
+        "detail": ".venv.Scripts.pywin32_testall",
+        "documentation": {}
+    },
+    {
+        "label": "find_and_run",
+        "kind": 2,
+        "importPath": ".venv.Scripts.pywin32_testall",
+        "description": ".venv.Scripts.pywin32_testall",
+        "peekOfCode": "def find_and_run(possible_locations, extras):\n    for maybe in possible_locations:\n        if os.path.isfile(maybe):\n            run_test(maybe, extras)\n            break\n    else:\n        raise RuntimeError(\n            \"Failed to locate a test script in one of %s\" % possible_locations\n        )\ndef main():",
+        "detail": ".venv.Scripts.pywin32_testall",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": ".venv.Scripts.pywin32_testall",
+        "description": ".venv.Scripts.pywin32_testall",
+        "peekOfCode": "def main():\n    import argparse\n    code_directories = [project_root] + site_packages\n    parser = argparse.ArgumentParser(\n        description=\"A script to trigger tests in all subprojects of PyWin32.\"\n    )\n    parser.add_argument(\n        \"-no-user-interaction\",\n        default=False,\n        action=\"store_true\",",
+        "detail": ".venv.Scripts.pywin32_testall",
+        "documentation": {}
+    },
+    {
+        "label": "project_root",
+        "kind": 5,
+        "importPath": ".venv.Scripts.pywin32_testall",
+        "description": ".venv.Scripts.pywin32_testall",
+        "peekOfCode": "project_root = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))\nsite_packages = [site.getusersitepackages()] + site.getsitepackages()\nfailures = []\n# Run a test using subprocess and wait for the result.\n# If we get an returncode != 0, we know that there was an error, but we don't\n# abort immediately - we run as many tests as we can.\ndef run_test(script, cmdline_extras):\n    dirname, scriptname = os.path.split(script)\n    # some tests prefer to be run from their directory.\n    cmd = [sys.executable, \"-u\", scriptname] + cmdline_extras",
+        "detail": ".venv.Scripts.pywin32_testall",
+        "documentation": {}
+    },
+    {
+        "label": "site_packages",
+        "kind": 5,
+        "importPath": ".venv.Scripts.pywin32_testall",
+        "description": ".venv.Scripts.pywin32_testall",
+        "peekOfCode": "site_packages = [site.getusersitepackages()] + site.getsitepackages()\nfailures = []\n# Run a test using subprocess and wait for the result.\n# If we get an returncode != 0, we know that there was an error, but we don't\n# abort immediately - we run as many tests as we can.\ndef run_test(script, cmdline_extras):\n    dirname, scriptname = os.path.split(script)\n    # some tests prefer to be run from their directory.\n    cmd = [sys.executable, \"-u\", scriptname] + cmdline_extras\n    print(\"--- Running '%s' ---\" % script)",
+        "detail": ".venv.Scripts.pywin32_testall",
+        "documentation": {}
+    },
+    {
+        "label": "failures",
+        "kind": 5,
+        "importPath": ".venv.Scripts.pywin32_testall",
+        "description": ".venv.Scripts.pywin32_testall",
+        "peekOfCode": "failures = []\n# Run a test using subprocess and wait for the result.\n# If we get an returncode != 0, we know that there was an error, but we don't\n# abort immediately - we run as many tests as we can.\ndef run_test(script, cmdline_extras):\n    dirname, scriptname = os.path.split(script)\n    # some tests prefer to be run from their directory.\n    cmd = [sys.executable, \"-u\", scriptname] + cmdline_extras\n    print(\"--- Running '%s' ---\" % script)\n    sys.stdout.flush()",
+        "detail": ".venv.Scripts.pywin32_testall",
+        "documentation": {}
+    },
+    {
+        "label": "Cuboid",
+        "kind": 6,
+        "importPath": "src.surface_mesher.cuboid",
+        "description": "src.surface_mesher.cuboid",
+        "peekOfCode": "class Cuboid:\n    \"\"\"\n    Class to create a cuboid surface mesh.\n    Attributes\n    ----------\n    length : float\n        The length of the cuboid.\n    width : float\n        The width of the cuboid.\n    height : float",
+        "detail": "src.surface_mesher.cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "generate_face_quads",
+        "kind": 2,
+        "importPath": "src.surface_mesher.cuboid",
+        "description": "src.surface_mesher.cuboid",
+        "peekOfCode": "def generate_face_quads(u_coords: ArrayLike,\n                        v_coords: ArrayLike,\n                        fixed_axis: int,\n                        fixed_value: float) -> np.ndarray:\n    \"\"\"\n    Generate quadrilateral faces on a grid where one axis is fixed,\n    with counter-clockwise vertex ordering.\n    Parameters\n    ----------\n    u_coords : ArrayLike",
+        "detail": "src.surface_mesher.cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "generate_axis_coords",
+        "kind": 2,
+        "importPath": "src.surface_mesher.cuboid",
+        "description": "src.surface_mesher.cuboid",
+        "peekOfCode": "def generate_axis_coords(start: float, length: float, step: float) -> np.ndarray:\n    \"\"\"\n    Generate 1D coordinate array from `start` to `start + length` using a step size,\n    adjusting the step to fit evenly based on the nearest number of intervals.\n    Parameters\n    ----------\n    start : float\n        The starting coordinate.\n    length : float\n        The total length of the interval.",
+        "detail": "src.surface_mesher.cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "generate_cuboid_surface",
+        "kind": 2,
+        "importPath": "src.surface_mesher.cuboid",
+        "description": "src.surface_mesher.cuboid",
+        "peekOfCode": "def generate_cuboid_surface(\n    x_coords: ArrayLike, \n    y_coords: ArrayLike,\n    z_coords: ArrayLike\n) -> np.ndarray:\n    \"\"\"\n    Generate a full cuboid surface mesh using explicit coordinate arrays along each axis.\n    This function creates quadrilateral surface faces based on 1D coordinate arrays for the\n    x, y, and z axes. The surface mesh includes all six sides of the cuboid spanned by\n    the given coordinates. Vertex order for each quad is counter-clockwise.",
+        "detail": "src.surface_mesher.cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "test_generate_axis_coords",
+        "kind": 2,
+        "importPath": "tests.test_cuboid",
+        "description": "tests.test_cuboid",
+        "peekOfCode": "def test_generate_axis_coords():\n    # Basic test cases\n    coords = generate_axis_coords(0.0, 10.0, 3.0)\n    assert np.allclose(coords, [0.0, 3.33333333, 6.66666667, 10.0])\n    coords = generate_axis_coords(0.0, 10.0, 2.0)\n    assert np.array_equal(coords, [0.0, 2.0, 4.0, 6.0, 8.0, 10.0])\n    # Edge case: step exactly matches length\n    coords = generate_axis_coords(0.0, 5.0, 5.0)\n    assert np.array_equal(coords, [0.0, 5.0])\n    # Edge case: zero step (should raise ValueError)",
+        "detail": "tests.test_cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "test_generate_face_quads_basic",
+        "kind": 2,
+        "importPath": "tests.test_cuboid",
+        "description": "tests.test_cuboid",
+        "peekOfCode": "def test_generate_face_quads_basic():\n    u = np.array([0, 1])\n    v = np.array([0, 1])\n    result = generate_face_quads(u, v, fixed_axis=2, fixed_value=5.0)\n    expected = np.array([\n        [[0, 0, 5], [1, 0, 5], [1, 1, 5], [0, 1, 5]]\n    ])\n    np.testing.assert_array_equal(result, expected)\ndef test_generate_face_quads_valid_fixed_axes():\n    u = np.array([0, 1])",
+        "detail": "tests.test_cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "test_generate_face_quads_valid_fixed_axes",
+        "kind": 2,
+        "importPath": "tests.test_cuboid",
+        "description": "tests.test_cuboid",
+        "peekOfCode": "def test_generate_face_quads_valid_fixed_axes():\n    u = np.array([0, 1])\n    v = np.array([0, 1])\n    for axis in [0, 1, 2]:\n        result = generate_face_quads(u, v, fixed_axis=axis, fixed_value=7.0)\n        assert result.shape == (1, 4, 3)\n        assert np.all(result[:, :, axis] == 7.0)\ndef test_generate_face_quads_zero_area():\n    u = np.array([0])\n    v = np.array([0])",
+        "detail": "tests.test_cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "test_generate_face_quads_zero_area",
+        "kind": 2,
+        "importPath": "tests.test_cuboid",
+        "description": "tests.test_cuboid",
+        "peekOfCode": "def test_generate_face_quads_zero_area():\n    u = np.array([0])\n    v = np.array([0])\n    result = generate_face_quads(u, v, 0, 0)\n    assert result.shape == (0, 4, 3)\ndef test_generate_face_quads_rectangular_grid():\n    u = np.array([0, 1, 2])\n    v = np.array([0, 1])\n    result = generate_face_quads(u, v, 2, 3)\n    assert result.shape == (2, 4, 3)",
+        "detail": "tests.test_cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "test_generate_face_quads_rectangular_grid",
+        "kind": 2,
+        "importPath": "tests.test_cuboid",
+        "description": "tests.test_cuboid",
+        "peekOfCode": "def test_generate_face_quads_rectangular_grid():\n    u = np.array([0, 1, 2])\n    v = np.array([0, 1])\n    result = generate_face_quads(u, v, 2, 3)\n    assert result.shape == (2, 4, 3)\n# ---------------------- #\n# VALID MESH GENERATION  #\n# ---------------------- #\ndef test_valid_mesh_basic():\n    x = [0.0, 1.0]",
+        "detail": "tests.test_cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "test_valid_mesh_basic",
+        "kind": 2,
+        "importPath": "tests.test_cuboid",
+        "description": "tests.test_cuboid",
+        "peekOfCode": "def test_valid_mesh_basic():\n    x = [0.0, 1.0]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]\n    faces = generate_cuboid_surface(x, y, z)\n    assert faces.shape == (6, 4, 3)\n    assert np.isclose(faces[:, :, 2].min(), 0.0)\n    assert np.isclose(faces[:, :, 2].max(), 1.0)\ndef test_valid_mesh_multiple_cells():\n    x = [0.0, 1.0, 2.0]",
+        "detail": "tests.test_cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "test_valid_mesh_multiple_cells",
+        "kind": 2,
+        "importPath": "tests.test_cuboid",
+        "description": "tests.test_cuboid",
+        "peekOfCode": "def test_valid_mesh_multiple_cells():\n    x = [0.0, 1.0, 2.0]\n    y = [0.0, 0.5, 1.0]\n    z = [0.0, 0.5, 1.0]\n    faces = generate_cuboid_surface(x, y, z)\n    # Expect:\n    # XY faces: (2 x 2) x 2 = 8\n    # XZ faces: (2 x 2) x 2 = 8\n    # YZ faces: (2 x 2) x 2 = 8\n    assert faces.shape == (24, 4, 3)",
+        "detail": "tests.test_cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "test_accepts_all_arraylike_types",
+        "kind": 2,
+        "importPath": "tests.test_cuboid",
+        "description": "tests.test_cuboid",
+        "peekOfCode": "def test_accepts_all_arraylike_types(container_type):\n    x = container_type([0.0, 1.0, 2.0])\n    y = container_type([0.0, 1.0])\n    z = container_type([0.0, 0.5, 1.0])\n    faces = generate_cuboid_surface(x, y, z)\n    assert faces.shape == (16, 4, 3)\n# --------------------------- #\n# INVALID: COORD VALIDATION   #\n# --------------------------- #\ndef test_fails_non_1d_array():",
+        "detail": "tests.test_cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "test_fails_non_1d_array",
+        "kind": 2,
+        "importPath": "tests.test_cuboid",
+        "description": "tests.test_cuboid",
+        "peekOfCode": "def test_fails_non_1d_array():\n    x = np.array([[0.0, 1.0]])  # Not 1D\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]\n    with pytest.raises(ValueError, match=\"x_coords must be a 1D array.\"):\n        generate_cuboid_surface(x, y, z)\ndef test_fails_too_few_values():\n    x = [0.0]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]",
+        "detail": "tests.test_cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "test_fails_too_few_values",
+        "kind": 2,
+        "importPath": "tests.test_cuboid",
+        "description": "tests.test_cuboid",
+        "peekOfCode": "def test_fails_too_few_values():\n    x = [0.0]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]\n    with pytest.raises(ValueError, match=\"x_coords must contain at least two values\"):\n        generate_cuboid_surface(x, y, z)\ndef test_fails_non_strictly_increasing():\n    x = [0.0, 1.0, 0.5]  # Not strictly increasing\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]",
+        "detail": "tests.test_cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "test_fails_non_strictly_increasing",
+        "kind": 2,
+        "importPath": "tests.test_cuboid",
+        "description": "tests.test_cuboid",
+        "peekOfCode": "def test_fails_non_strictly_increasing():\n    x = [0.0, 1.0, 0.5]  # Not strictly increasing\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]\n    with pytest.raises(ValueError, match=\"x_coords must be strictly increasing.\"):\n        generate_cuboid_surface(x, y, z)\n# ----------------------------- #\n# GEOMETRY & VERTEX STRUCTURE   #\n# ----------------------------- #\ndef test_quad_structure_and_ccw_order():",
+        "detail": "tests.test_cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "test_quad_structure_and_ccw_order",
+        "kind": 2,
+        "importPath": "tests.test_cuboid",
+        "description": "tests.test_cuboid",
+        "peekOfCode": "def test_quad_structure_and_ccw_order():\n    x = [0.0, 1.0]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]\n    faces = generate_cuboid_surface(x, y, z)\n    # Check each face has 4 vertices in 3D\n    assert faces.shape[1:] == (4, 3)\n    # Check that quads lie on expected planes\n    z_faces = [f for f in faces if np.allclose(f[:, 2], 0.0)]\n    assert len(z_faces) > 0",
+        "detail": "tests.test_cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "test_large_but_valid_axis",
+        "kind": 2,
+        "importPath": "tests.test_cuboid",
+        "description": "tests.test_cuboid",
+        "peekOfCode": "def test_large_but_valid_axis():\n    x = np.linspace(0, 1, 10)  # 9 segments\n    y = [0.0, 1.0]             # 1 segment\n    z = [0.0, 1.0]             # 1 segment\n    faces = generate_cuboid_surface(x, y, z)\n    assert faces.shape[0] == 38  # Correct: 18 + 18 + 2\ndef test_degenerate_case_single_face_each():\n    x = [0.0, 1.0]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]",
+        "detail": "tests.test_cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "test_degenerate_case_single_face_each",
+        "kind": 2,
+        "importPath": "tests.test_cuboid",
+        "description": "tests.test_cuboid",
+        "peekOfCode": "def test_degenerate_case_single_face_each():\n    x = [0.0, 1.0]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]\n    faces = generate_cuboid_surface(x, y, z)\n    assert faces.shape[0] == 6  # One quad per face\n    for quad in faces:\n        assert quad.shape == (4, 3)\ndef test_create_mesh_from_edge_sizes_valid_float():\n    cuboid = Cuboid(length=2.0, width=1.0, height=1.0)",
+        "detail": "tests.test_cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "test_create_mesh_from_edge_sizes_valid_float",
+        "kind": 2,
+        "importPath": "tests.test_cuboid",
+        "description": "tests.test_cuboid",
+        "peekOfCode": "def test_create_mesh_from_edge_sizes_valid_float():\n    cuboid = Cuboid(length=2.0, width=1.0, height=1.0)\n    faces = cuboid.create_mesh_from_edge_sizes(0.5)\n    assert isinstance(faces, np.ndarray)\n    assert faces.shape == (40, 4, 3)\ndef test_create_mesh_from_edge_sizes_valid_arraylike():\n    cuboid = Cuboid(length=2.0, width=1.0, height=1.0)\n    faces = cuboid.create_mesh_from_edge_sizes([0.5, 0.5, 0.5])\n    assert isinstance(faces, np.ndarray)\n    assert faces.shape == (40, 4, 3)",
+        "detail": "tests.test_cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "test_create_mesh_from_edge_sizes_valid_arraylike",
+        "kind": 2,
+        "importPath": "tests.test_cuboid",
+        "description": "tests.test_cuboid",
+        "peekOfCode": "def test_create_mesh_from_edge_sizes_valid_arraylike():\n    cuboid = Cuboid(length=2.0, width=1.0, height=1.0)\n    faces = cuboid.create_mesh_from_edge_sizes([0.5, 0.5, 0.5])\n    assert isinstance(faces, np.ndarray)\n    assert faces.shape == (40, 4, 3)\ndef test_create_mesh_from_edge_sizes_invalid_shape():\n    cuboid = Cuboid(length=2.0, width=1.0, height=1.0)\n    with pytest.raises(ValueError, match=\"mesh_sizes must be a single float or an array of three floats.\"):\n        cuboid.create_mesh_from_edge_sizes([0.5, 0.5])\ndef test_create_mesh_from_edge_sizes_nonpositive():",
+        "detail": "tests.test_cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "test_create_mesh_from_edge_sizes_invalid_shape",
+        "kind": 2,
+        "importPath": "tests.test_cuboid",
+        "description": "tests.test_cuboid",
+        "peekOfCode": "def test_create_mesh_from_edge_sizes_invalid_shape():\n    cuboid = Cuboid(length=2.0, width=1.0, height=1.0)\n    with pytest.raises(ValueError, match=\"mesh_sizes must be a single float or an array of three floats.\"):\n        cuboid.create_mesh_from_edge_sizes([0.5, 0.5])\ndef test_create_mesh_from_edge_sizes_nonpositive():\n    cuboid = Cuboid(length=2.0, width=1.0, height=1.0)\n    with pytest.raises(ValueError, match=\"mesh_sizes must be positive values.\"):\n        cuboid.create_mesh_from_edge_sizes([0.5, -0.5, 0.5])\ndef test_create_mesh_from_edge_sizes_too_large():\n    cuboid = Cuboid(length=2.0, width=1.0, height=1.0)",
+        "detail": "tests.test_cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "test_create_mesh_from_edge_sizes_nonpositive",
+        "kind": 2,
+        "importPath": "tests.test_cuboid",
+        "description": "tests.test_cuboid",
+        "peekOfCode": "def test_create_mesh_from_edge_sizes_nonpositive():\n    cuboid = Cuboid(length=2.0, width=1.0, height=1.0)\n    with pytest.raises(ValueError, match=\"mesh_sizes must be positive values.\"):\n        cuboid.create_mesh_from_edge_sizes([0.5, -0.5, 0.5])\ndef test_create_mesh_from_edge_sizes_too_large():\n    cuboid = Cuboid(length=2.0, width=1.0, height=1.0)\n    with pytest.raises(ValueError, match=\"mesh_sizes must be less than or equal to the cuboid dimensions.\"):\n        cuboid.create_mesh_from_edge_sizes([3.0, 0.5, 0.5])\ndef test_create_mesh_with_resolution_scalar():\n    cuboid = Cuboid(length=2.0, width=1.0, height=1.0)",
+        "detail": "tests.test_cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "test_create_mesh_from_edge_sizes_too_large",
+        "kind": 2,
+        "importPath": "tests.test_cuboid",
+        "description": "tests.test_cuboid",
+        "peekOfCode": "def test_create_mesh_from_edge_sizes_too_large():\n    cuboid = Cuboid(length=2.0, width=1.0, height=1.0)\n    with pytest.raises(ValueError, match=\"mesh_sizes must be less than or equal to the cuboid dimensions.\"):\n        cuboid.create_mesh_from_edge_sizes([3.0, 0.5, 0.5])\ndef test_create_mesh_with_resolution_scalar():\n    cuboid = Cuboid(length=2.0, width=1.0, height=1.0)\n    faces = cuboid.create_mesh_with_resolution(2)\n    assert faces.shape == (24, 4, 3)\ndef test_create_mesh_with_resolution_arraylike():\n    cuboid = Cuboid(length=2.0, width=1.0, height=1.0)",
+        "detail": "tests.test_cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "test_create_mesh_with_resolution_scalar",
+        "kind": 2,
+        "importPath": "tests.test_cuboid",
+        "description": "tests.test_cuboid",
+        "peekOfCode": "def test_create_mesh_with_resolution_scalar():\n    cuboid = Cuboid(length=2.0, width=1.0, height=1.0)\n    faces = cuboid.create_mesh_with_resolution(2)\n    assert faces.shape == (24, 4, 3)\ndef test_create_mesh_with_resolution_arraylike():\n    cuboid = Cuboid(length=2.0, width=1.0, height=1.0)\n    faces = cuboid.create_mesh_with_resolution([2, 1, 2])\n    assert isinstance(faces, np.ndarray)\n    assert faces.shape[1:] == (4, 3)\ndef test_create_mesh_with_resolution_invalid_shape():",
+        "detail": "tests.test_cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "test_create_mesh_with_resolution_arraylike",
+        "kind": 2,
+        "importPath": "tests.test_cuboid",
+        "description": "tests.test_cuboid",
+        "peekOfCode": "def test_create_mesh_with_resolution_arraylike():\n    cuboid = Cuboid(length=2.0, width=1.0, height=1.0)\n    faces = cuboid.create_mesh_with_resolution([2, 1, 2])\n    assert isinstance(faces, np.ndarray)\n    assert faces.shape[1:] == (4, 3)\ndef test_create_mesh_with_resolution_invalid_shape():\n    cuboid = Cuboid(length=2.0, width=1.0, height=1.0)\n    with pytest.raises(ValueError, match=\"divisions must be a single int or an array of three ints.\"):\n        cuboid.create_mesh_with_resolution([2, 2])\ndef test_create_mesh_with_resolution_nonpositive():",
+        "detail": "tests.test_cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "test_create_mesh_with_resolution_invalid_shape",
+        "kind": 2,
+        "importPath": "tests.test_cuboid",
+        "description": "tests.test_cuboid",
+        "peekOfCode": "def test_create_mesh_with_resolution_invalid_shape():\n    cuboid = Cuboid(length=2.0, width=1.0, height=1.0)\n    with pytest.raises(ValueError, match=\"divisions must be a single int or an array of three ints.\"):\n        cuboid.create_mesh_with_resolution([2, 2])\ndef test_create_mesh_with_resolution_nonpositive():\n    cuboid = Cuboid(length=2.0, width=1.0, height=1.0)\n    with pytest.raises(ValueError, match=\"divisions must be positive values.\"):\n        cuboid.create_mesh_with_resolution([2, 0, 2])",
+        "detail": "tests.test_cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "test_create_mesh_with_resolution_nonpositive",
+        "kind": 2,
+        "importPath": "tests.test_cuboid",
+        "description": "tests.test_cuboid",
+        "peekOfCode": "def test_create_mesh_with_resolution_nonpositive():\n    cuboid = Cuboid(length=2.0, width=1.0, height=1.0)\n    with pytest.raises(ValueError, match=\"divisions must be positive values.\"):\n        cuboid.create_mesh_with_resolution([2, 0, 2])",
+        "detail": "tests.test_cuboid",
+        "documentation": {}
+    }
+]

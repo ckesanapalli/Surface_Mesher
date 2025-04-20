@@ -1,0 +1,32 @@
+[project]
+name = "surface-mesher"
+version = "0.1.0"
+description = "A Python library to create a simple 3D Surface Mesh using Quadrilateral faces only."
+readme = "README.md"
+authors = [
+    { name = "Chaitanya Kesanapalli", email = "7126460+ckesanapalli@users.noreply.github.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "numpy>=2.2.5",
+]
+
+[project.scripts]
+surface-mesher = "surface_mesher:main"
+
+[project.optional-dependencies]
+examples = [
+    "ipykernel>=6.29.5",
+    "jupyterlab>=4.4.0",
+    "matplotlib>=3.10.1",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.5",
+    "pytest-cov>=6.1.1",
+]
