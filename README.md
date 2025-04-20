@@ -34,13 +34,13 @@ Use cases include:
 
 ## ⚙️ Requirements
 
-- **Python**: >= 3.13
+- **Python**: >= 3.10
 - **Dependencies**:
-  - `numpy>=2.2.5`
+  - `numpy>=1.24`
   - Optional (for examples and visualization):
-    - `ipykernel>=6.29.5`
-    - `jupyterlab>=4.4.0`
-    - `matplotlib>=3.10.1`
+    - `ipykernel`
+    - `jupyterlab`
+    - `matplotlib`
 
 ---
 
