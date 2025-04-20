@@ -39,3 +39,5 @@ jobs:
       run: |
         coverage run -m pytest tests
         coveralls
+      env:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
