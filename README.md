@@ -52,12 +52,6 @@ You can install the latest development version via Git:
 pip install git+https://github.com/your-username/surface-mesher.git
 ```
 
-To install optional dependencies for visualization and examples:
-
-```bash
-pip install "surface-mesher[examples]"
-```
-
 ---
 
 ## 🧱 Basic Usage
