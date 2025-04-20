@@ -3,8 +3,8 @@
 from dataclasses import dataclass, field
 
 import numpy as np
-
 from numpy.typing import ArrayLike
+
 
 def generate_face_quads(u_coords: ArrayLike,
                         v_coords: ArrayLike,
@@ -45,7 +45,7 @@ def generate_face_quads(u_coords: ArrayLike,
      [1. 1. 0.]
      [0. 1. 0.]]
     """
-    uu, vv = np.meshgrid(u_coords, v_coords, indexing='ij')
+    uu, vv = np.meshgrid(u_coords, v_coords, indexing="ij")
 
     # Vertices ordered counter-clockwise:
     # p0 = bottom-left
@@ -95,14 +95,18 @@ def generate_axis_coords(start: float, length: float, step: float) -> np.ndarray
     >>> generate_axis_coords(0.0, 10.0, 2.0)
     array([ 0.,  2.,  4.,  6.,  8., 10.])
     """
+    
+    
+
     if step <= 0:
-        raise ValueError("step must be a positive number.")
+        step_error_msg = "step must be a positive number."
+        raise ValueError(step_error_msg)
     if length <= 0:
-        raise ValueError("length must be a positive number.")
+        length_error_msg = "length must be a positive number."
+        raise ValueError(length_error_msg)
 
     num_steps = max(1, np.round(length / step).astype(int))
-    coords = np.linspace(start, start + length, num_steps + 1)
-    return coords
+    return np.linspace(start, start + length, num_steps + 1)
 
 
 def generate_cuboid_surface(
@@ -152,13 +156,16 @@ def generate_cuboid_surface(
     y_coords = np.asarray(y_coords, dtype=float)
     z_coords = np.asarray(z_coords, dtype=float)
 
-    for name, coords in zip(("x_coords", "y_coords", "z_coords"), (x_coords, y_coords, z_coords)):
+    for name, coords in zip(("x_coords", "y_coords", "z_coords"), (x_coords, y_coords, z_coords), strict=False):
         if coords.ndim != 1:
-            raise ValueError(f"{name} must be a 1D array.")
+            scalar_error_msg = f"{name} must be a 1D array."
+            raise ValueError(scalar_error_msg)
         if coords.size < 2:
-            raise ValueError(f"{name} must contain at least two values to form quads.")
+            size_error_msg = f"{name} must contain at least two values to form quads."
+            raise ValueError(size_error_msg)
         if not np.all(np.diff(coords) > 0):
-            raise ValueError(f"{name} must be strictly increasing.")
+            increasing_error_msg = f"{name} must be strictly increasing."
+            raise ValueError(increasing_error_msg)
 
     faces = []
 
@@ -221,19 +228,23 @@ class Cuboid:
         >>> print(faces.shape)   # Number of quads: 6 faces * 2x1 divisions each
         (40, 4, 3)
         """
+        
         mesh_sizes = np.array(mesh_sizes, dtype=float)
 
         # Normalize input to (3,) shape
         if mesh_sizes.ndim == 0:
             mesh_sizes = np.full(3, mesh_sizes)
         elif mesh_sizes.shape != (3,):
-            raise ValueError("mesh_sizes must be a single float or an array of three floats.")
+            mesh_sizes_error_msg = "mesh_sizes must be a single float or an array of three floats."
+            raise ValueError(mesh_sizes_error_msg)
 
         if np.any(mesh_sizes <= 0):
-            raise ValueError("mesh_sizes must be positive values.")
+            mesh_sizes_positive_msg = "mesh_sizes must be positive values."
+            raise ValueError(mesh_sizes_positive_msg)
 
         if np.any(mesh_sizes > np.array([self.length, self.width, self.height])):
-            raise ValueError("mesh_sizes must be less than or equal to the cuboid dimensions.")
+            mesh_sizes_dimensions_msg = "mesh_sizes must be less than or equal to the cuboid dimensions."
+            raise ValueError(mesh_sizes_dimensions_msg)
 
         # Generate coordinate arrays based on origin and dimensions
         ox, oy, oz = self.origin
@@ -269,16 +280,20 @@ class Cuboid:
         >>> mesh.shape
         (52, 4, 3)
         """
+        
+
         resolution = np.array(resolution, dtype=int)
 
         # Normalize to (3,) shape
         if resolution.ndim == 0:
             resolution = np.full(3, resolution)
         elif len(resolution) != 3:
-            raise ValueError("divisions must be a single int or an array of three ints.")
+            divisions_error_msg = "divisions must be a single int or an array of three ints."
+            raise ValueError(divisions_error_msg)
 
         if np.any(resolution <= 0):
-            raise ValueError("divisions must be positive values.")
+            divisions_positive_msg = "divisions must be positive values."
+            raise ValueError(divisions_positive_msg)
 
         edge_sizes = np.array([self.length, self.width, self.height]) / resolution
 
