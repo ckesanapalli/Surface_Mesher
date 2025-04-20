@@ -92,8 +92,6 @@ def generate_axis_coords(start: float, length: float, step: float) -> np.ndarray
 
     Examples
     --------
-    >>> generate_axis_coords(0.0, 10.0, 3.0)
-    array([ 0.,  3.33333333,  6.66666667, 10.])
     >>> generate_axis_coords(0.0, 10.0, 2.0)
     array([ 0.,  2.,  4.,  6.,  8., 10.])
     """
@@ -145,9 +143,9 @@ def generate_cuboid_surface(
     >>> x = [0.0, 1.0, 2.0]
     >>> y = [0.0, 1.0]
     >>> z = [0.0, 0.5, 1.0]
-    >>> faces = create_mesh_from_coordinate_arrays(x, y, z)
-    >>> print(faces.shape)
-    (16, 4, 3)  # 6 faces total from the cuboid
+    >>> faces = generate_cuboid_surface(x, y, z)
+    >>> print(faces.shape)  # 6 faces total from the cuboid
+    (16, 4, 3)
     """
     # Convert to NumPy arrays and validate
     x_coords = np.asarray(x_coords, dtype=float)
@@ -220,8 +218,8 @@ class Cuboid:
         >>> from surface_mesher.cuboid import Cuboid
         >>> cuboid = Cuboid(length=2.0, width=1.0, height=1.0)
         >>> faces = cuboid.create_mesh_from_edge_sizes(0.5)
-        >>> print(faces.shape)
-        (24, 4, 3)  # Number of quads: 6 faces * 2x1 divisions each
+        >>> print(faces.shape)   # Number of quads: 6 faces * 2x1 divisions each
+        (40, 4, 3)
         """
         mesh_sizes = np.array(mesh_sizes, dtype=float)
 
@@ -248,17 +246,28 @@ class Cuboid:
 
     def create_mesh_with_resolution(self, resolution: int | ArrayLike) -> np.ndarray:
         """
-        Create a 3D mesh of the cuboid as quads (N, 4, 3), where each face is a quadrilateral.
-
-        Parameters
-        ----------
-        resolution : int | Arraylike of 3 integers
-            The number of divisions along each axis. If a single int is given, it is used as the resolution.
-
-        Returns
-        -------
-        faces : np.ndarray
-            An array of shape (N, 4, 3), where each item is a quad defined by 4 3D points.
+        Create a 3D mesh of the cuboid as quadrilateral faces with specified resolution.
+        resolution : int | ArrayLike of 3 integers
+            The number of divisions along each axis. If a single integer is provided, 
+            it is applied uniformly to all three axes. If an array-like of three integers 
+            is provided, it specifies the resolution for each axis (x, y, z).
+            An array of shape (N, 4, 3), where each item represents a quadrilateral face 
+            defined by 4 points in 3D space.
+        Raises
+        ------
+        ValueError
+            If `resolution` is not a positive integer or an array-like of three positive integers.
+        Examples
+        --------
+        >>> cuboid = Cuboid(length=2.0, width=1.0, height=1.0)
+        >>> resolution = 2
+        >>> mesh = cuboid.create_mesh_with_resolution(resolution)
+        >>> mesh.shape
+        (24, 4, 3)
+        >>> resolution = [2, 3, 4]
+        >>> mesh = cuboid.create_mesh_with_resolution(resolution)
+        >>> mesh.shape
+        (52, 4, 3)
         """
         resolution = np.array(resolution, dtype=int)
 
