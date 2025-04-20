@@ -49,7 +49,7 @@ Use cases include:
 You can install the latest development version via Git:
 
 ```bash
-pip install git+https://github.com/your-username/surface-mesher.git
+pip install git+https://github.com/ckesanapalli/surface-mesher.git
 ```
 
 ---
