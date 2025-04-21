@@ -1,14 +1,10 @@
 """This file contains the class and functions to create a cuboid surface mesh."""
 
-from dataclasses import dataclass, field
-
 import numpy as np
 from numpy.typing import ArrayLike
 
-from .shape import Shape
 
-
-def generate_face_quads(u_coords: ArrayLike, v_coords: ArrayLike, fixed_axis: int, fixed_value: float) -> np.ndarray:
+def quad_faces_from_grid(u_coords: ArrayLike, v_coords: ArrayLike, fixed_axis: int, fixed_value: float) -> np.ndarray:
     """
     Generate quadrilateral faces on a grid where one axis is fixed,
     with counter-clockwise vertex ordering.
@@ -32,10 +28,10 @@ def generate_face_quads(u_coords: ArrayLike, v_coords: ArrayLike, fixed_axis: in
     Examples
     --------
     >>> import numpy as np
-    >>> from surface_mesher.cuboid import generate_face_quads
+    >>> from surface_mesher.cuboid import quad_faces_from_grid
     >>> u = np.array([0.0, 1.0])
     >>> v = np.array([0.0, 1.0])
-    >>> quads = generate_face_quads(u, v, fixed_axis=2, fixed_value=0.0)
+    >>> quads = quad_faces_from_grid(u, v, fixed_axis=2, fixed_value=0.0)
     >>> print(quads.shape)
     (1, 4, 3)
     >>> print(quads[0])
@@ -72,43 +68,7 @@ def generate_face_quads(u_coords: ArrayLike, v_coords: ArrayLike, fixed_axis: in
     return quads_3d
 
 
-def generate_axis_coords(start: float, length: float, step: float) -> np.ndarray:
-    """
-    Generate 1D coordinate array from `start` to `start + length` using a step size,
-    adjusting the step to fit evenly based on the nearest number of intervals.
-
-    Parameters
-    ----------
-    start : float
-        The starting coordinate.
-    length : float
-        The total length of the interval.
-    step : float
-        Approximate spacing between coordinates (will be adjusted slightly).
-
-    Returns
-    -------
-    np.ndarray
-        1D array of coordinates from start to start + length (inclusive).
-
-    Examples
-    --------
-    >>> generate_axis_coords(0.0, 10.0, 2.0)
-    array([ 0.,  2.,  4.,  6.,  8., 10.])
-    """
-
-    if step <= 0:
-        step_error_msg = "step must be a positive number."
-        raise ValueError(step_error_msg)
-    if length <= 0:
-        length_error_msg = "length must be a positive number."
-        raise ValueError(length_error_msg)
-
-    num_steps = max(1, np.round(length / step).astype(int))
-    return np.linspace(start, start + length, num_steps + 1)
-
-
-def generate_cuboid_surface(x_coords: ArrayLike, y_coords: ArrayLike, z_coords: ArrayLike) -> np.ndarray:
+def cuboid_mesh(x_coords: ArrayLike, y_coords: ArrayLike, z_coords: ArrayLike) -> np.ndarray:
     """
     Generate a full cuboid surface mesh using explicit coordinate arrays along each axis.
 
@@ -142,7 +102,7 @@ def generate_cuboid_surface(x_coords: ArrayLike, y_coords: ArrayLike, z_coords: 
     >>> x = [0.0, 1.0, 2.0]
     >>> y = [0.0, 1.0]
     >>> z = [0.0, 0.5, 1.0]
-    >>> faces = generate_cuboid_surface(x, y, z)
+    >>> faces = cuboid_mesh(x, y, z)
     >>> print(faces.shape)  # 6 faces total from the cuboid
     (16, 4, 3)
     """
@@ -169,139 +129,71 @@ def generate_cuboid_surface(x_coords: ArrayLike, y_coords: ArrayLike, z_coords: 
 
     faces = [
         # XY planes (bottom and top)
-        generate_face_quads(x_coords, y_coords, fixed_axis=2, fixed_value=z_coords[0]),
-        generate_face_quads(x_coords, y_coords, fixed_axis=2, fixed_value=z_coords[-1]),
+        quad_faces_from_grid(x_coords, y_coords, fixed_axis=2, fixed_value=z_coords[0]),
+        quad_faces_from_grid(x_coords, y_coords, fixed_axis=2, fixed_value=z_coords[-1]),
         # XZ planes (front and back)
-        generate_face_quads(x_coords, z_coords, fixed_axis=1, fixed_value=y_coords[0]),
-        generate_face_quads(x_coords, z_coords, fixed_axis=1, fixed_value=y_coords[-1]),
+        quad_faces_from_grid(x_coords, z_coords, fixed_axis=1, fixed_value=y_coords[0]),
+        quad_faces_from_grid(x_coords, z_coords, fixed_axis=1, fixed_value=y_coords[-1]),
         # YZ planes (left and right)
-        generate_face_quads(y_coords, z_coords, fixed_axis=0, fixed_value=x_coords[0]),
-        generate_face_quads(y_coords, z_coords, fixed_axis=0, fixed_value=x_coords[-1]),
+        quad_faces_from_grid(y_coords, z_coords, fixed_axis=0, fixed_value=x_coords[0]),
+        quad_faces_from_grid(y_coords, z_coords, fixed_axis=0, fixed_value=x_coords[-1]),
     ]
 
     return np.concatenate(faces, axis=0)
 
 
-@dataclass
-class Cuboid(Shape):
+def cuboid_mesh_with_resolution(
+    length: float, width: float, height: float, origin: tuple[float, float, float] = (0.0, 0.0, 0.0), resolution: int | tuple[int, int, int] = (1, 1, 1)
+) -> np.ndarray:
     """
-    Class to create a cuboid surface mesh.
+    Generate a 3D surface mesh of a cuboid with quadrilateral faces based on resolution.
 
-    Attributes
+    Parameters
     ----------
     length : float
-        The length of the cuboid.
+        Length of the cuboid along the x-axis.
     width : float
-        The width of the cuboid.
+        Width of the cuboid along the y-axis.
     height : float
-        The height of the cuboid.
-    origin : np.ndarray
-        The origin point of the cuboid in 3D space.
+        Height of the cuboid along the z-axis.
+    origin : tuple of 3 floats, optional
+        Center point of the cuboid in 3D space. Default is (0.0, 0.0, 0.0).
+    resolution : int or tuple of 3 ints
+        Number of subdivisions along each axis. If a single int is provided,
+        it's used for all axes.
+
+    Returns
+    -------
+    np.ndarray
+        Surface mesh of shape (N, 4, 3), where N is the number of quad faces.
+
+    Examples
+    --------
+    >>> from surface_mesher import cuboid_mesh_with_resolution
+    >>> mesh = cuboid_mesh_with_resolution(2.0, 1.0, 1.0, resolution=2)
+    >>> mesh.shape
+    (24, 4, 3)
+
+    >>> mesh = cuboid_mesh_with_resolution(2.0, 1.0, 1.0, resolution=[2, 1, 2])
+    >>> mesh.shape[1:]
+    (4, 3)
     """
+    resolution = np.array(resolution, dtype=int)
 
-    length: float
-    width: float
-    height: float
-    origin: np.ndarray = field(default_factory=lambda: np.zeros(3))
+    if resolution.ndim == 0:
+        resolution = np.full(3, resolution)
+    elif resolution.shape != (3,):
+        msg = "resolution must be a single int or an array-like of three ints."
+        raise ValueError(msg)
+    if np.any(resolution <= 0):
+        msg = "resolution must contain only positive values."
+        raise ValueError(msg)
 
-    def create_mesh_from_edge_sizes(self, mesh_sizes: float | ArrayLike) -> np.ndarray:
-        """
-        Create a 3D surface mesh of the cuboid using specified edge sizes along each axis.
+    res_x, res_y, res_z = resolution
+    ox, oy, oz = origin
 
-        Parameters
-        ----------
-        mesh_sizes : float | Arraylike of 3 floats
-            Edge size(s) for mesh generation. Can be a single float or a sequence of three values
-            for the x, y, and z directions.
+    x_coords = np.linspace(-length / 2.0 + ox, length / 2.0 + ox, res_x + 1)
+    y_coords = np.linspace(-width / 2.0 + oy, width / 2.0 + oy, res_y + 1)
+    z_coords = np.linspace(-height / 2.0 + oz, height / 2.0 + oz, res_z + 1)
 
-        Returns
-        -------
-        np.ndarray
-            An array of shape (N, 4, 3), each representing a quadrilateral face of the cuboid.
-
-        Examples
-        --------
-        >>> from surface_mesher.cuboid import Cuboid
-        >>> cuboid = Cuboid(length=2.0, width=1.0, height=1.0)
-        >>> faces = cuboid.create_mesh_from_edge_sizes(0.5)
-        >>> print(faces.shape)   # Number of quads: 6 faces * 2x1 divisions each
-        (40, 4, 3)
-        """
-
-        mesh_sizes = np.array(mesh_sizes, dtype=float)
-
-        # Normalize input to (3,) shape
-        if mesh_sizes.ndim == 0:
-            mesh_sizes = np.full(3, mesh_sizes)
-        elif mesh_sizes.shape != (3,):
-            mesh_sizes_error_msg = "mesh_sizes must be a single float or an array of three floats."
-            raise ValueError(mesh_sizes_error_msg)
-
-        if np.any(mesh_sizes <= 0):
-            mesh_sizes_positive_msg = "mesh_sizes must be positive values."
-            raise ValueError(mesh_sizes_positive_msg)
-
-        if np.any(mesh_sizes > np.array([self.length, self.width, self.height])):
-            mesh_sizes_dimensions_msg = "mesh_sizes must be less than or equal to the cuboid dimensions."
-            raise ValueError(mesh_sizes_dimensions_msg)
-
-        # Generate coordinate arrays based on origin and dimensions
-        ox, oy, oz = self.origin
-        x_coords = generate_axis_coords(-self.length / 2.0, self.length, mesh_sizes[0]) + ox
-        y_coords = generate_axis_coords(-self.width / 2.0, self.width, mesh_sizes[1]) + oy
-        z_coords = generate_axis_coords(-self.height / 2.0, self.height, mesh_sizes[2]) + oz
-
-        # Use external utility to generate surface mesh
-        return generate_cuboid_surface(x_coords, y_coords, z_coords)
-
-    def create_mesh_with_resolution(self, resolution: int | ArrayLike) -> np.ndarray:
-        """
-        Create a 3D mesh of the cuboid as quadrilateral faces with specified resolution.
-
-        Parameters
-        ----------
-        resolution : int | ArrayLike of 3 integers
-            The number of divisions along each axis. If a single integer is provided,
-            it is applied uniformly to all three axes. If an array-like of three integers
-            is provided, it specifies the resolution for each axis (x, y, z).
-
-        Returns
-        -------
-        np.ndarray
-            An array of shape (N, 4, 3), where each item represents a quadrilateral face
-            defined by 4 points in 3D space.
-
-        Raises
-        ------
-        ValueError
-            If `resolution` is not a positive integer or an array-like of three positive integers.
-
-        Examples
-        --------
-        >>> cuboid = Cuboid(length=2.0, width=1.0, height=1.0)
-        >>> resolution = 2
-        >>> mesh = cuboid.create_mesh_with_resolution(resolution)
-        >>> mesh.shape
-        (24, 4, 3)
-        >>> resolution = [2, 3, 4]
-        >>> mesh = cuboid.create_mesh_with_resolution(resolution)
-        >>> mesh.shape
-        (52, 4, 3)
-        """
-
-        resolution = np.array(resolution, dtype=int)
-
-        # Normalize to (3,) shape
-        if resolution.ndim == 0:
-            resolution = np.full(3, resolution)
-        elif len(resolution) != 3:
-            divisions_error_msg = "divisions must be a single int or an array of three ints."
-            raise ValueError(divisions_error_msg)
-
-        if np.any(resolution <= 0):
-            divisions_positive_msg = "divisions must be positive values."
-            raise ValueError(divisions_positive_msg)
-
-        edge_sizes = np.array([self.length, self.width, self.height]) / resolution
-
-        return self.create_mesh_from_edge_sizes(edge_sizes)
+    return cuboid_mesh(x_coords, y_coords, z_coords)
