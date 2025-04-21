@@ -123,6 +123,14 @@
         "documentation": {}
     },
     {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
         "label": "numpy",
         "kind": 6,
         "isExtraImport": true,
@@ -140,6 +148,30 @@
         "documentation": {}
     },
     {
+        "label": "ArrayLike",
+        "importPath": "numpy.typing",
+        "description": "numpy.typing",
+        "isExtraImport": true,
+        "detail": "numpy.typing",
+        "documentation": {}
+    },
+    {
+        "label": "ABC",
+        "importPath": "abc",
+        "description": "abc",
+        "isExtraImport": true,
+        "detail": "abc",
+        "documentation": {}
+    },
+    {
+        "label": "abstractmethod",
+        "importPath": "abc",
+        "description": "abc",
+        "isExtraImport": true,
+        "detail": "abc",
+        "documentation": {}
+    },
+    {
         "label": "pytest",
         "kind": 6,
         "isExtraImport": true,
@@ -150,34 +182,42 @@
     },
     {
         "label": "generate_cuboid_surface",
-        "importPath": "surface_mesher.cuboid",
-        "description": "surface_mesher.cuboid",
+        "importPath": "surface_mesher",
+        "description": "surface_mesher",
         "isExtraImport": true,
-        "detail": "surface_mesher.cuboid",
+        "detail": "surface_mesher",
         "documentation": {}
     },
     {
         "label": "generate_axis_coords",
-        "importPath": "surface_mesher.cuboid",
-        "description": "surface_mesher.cuboid",
+        "importPath": "surface_mesher",
+        "description": "surface_mesher",
         "isExtraImport": true,
-        "detail": "surface_mesher.cuboid",
+        "detail": "surface_mesher",
         "documentation": {}
     },
     {
         "label": "generate_face_quads",
-        "importPath": "surface_mesher.cuboid",
-        "description": "surface_mesher.cuboid",
+        "importPath": "surface_mesher",
+        "description": "surface_mesher",
         "isExtraImport": true,
-        "detail": "surface_mesher.cuboid",
+        "detail": "surface_mesher",
         "documentation": {}
     },
     {
         "label": "Cuboid",
-        "importPath": "surface_mesher.cuboid",
-        "description": "surface_mesher.cuboid",
+        "importPath": "surface_mesher",
+        "description": "surface_mesher",
         "isExtraImport": true,
-        "detail": "surface_mesher.cuboid",
+        "detail": "surface_mesher",
+        "documentation": {}
+    },
+    {
+        "label": "Shape",
+        "importPath": "surface_mesher",
+        "description": "surface_mesher",
+        "isExtraImport": true,
+        "detail": "surface_mesher",
         "documentation": {}
     },
     {
@@ -545,7 +585,7 @@
         "kind": 6,
         "importPath": "src.surface_mesher.cuboid",
         "description": "src.surface_mesher.cuboid",
-        "peekOfCode": "class Cuboid:\n    \"\"\"\n    Class to create a cuboid surface mesh.\n    Attributes\n    ----------\n    length : float\n        The length of the cuboid.\n    width : float\n        The width of the cuboid.\n    height : float",
+        "peekOfCode": "class Cuboid(Shape):\n    \"\"\"\n    Class to create a cuboid surface mesh.\n    Attributes\n    ----------\n    length : float\n        The length of the cuboid.\n    width : float\n        The width of the cuboid.\n    height : float",
         "detail": "src.surface_mesher.cuboid",
         "documentation": {}
     },
@@ -574,6 +614,15 @@
         "description": "src.surface_mesher.cuboid",
         "peekOfCode": "def generate_cuboid_surface(x_coords: ArrayLike, y_coords: ArrayLike, z_coords: ArrayLike) -> np.ndarray:\n    \"\"\"\n    Generate a full cuboid surface mesh using explicit coordinate arrays along each axis.\n    This function creates quadrilateral surface faces based on 1D coordinate arrays for the\n    x, y, and z axes. The surface mesh includes all six sides of the cuboid spanned by\n    the given coordinates. Vertex order for each quad is counter-clockwise.\n    Parameters\n    ----------\n    x_coords : ArrayLike of float\n        1D strictly increasing array of x-axis positions for vertical planes (YZ-facing).",
         "detail": "src.surface_mesher.cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "Shape",
+        "kind": 6,
+        "importPath": "src.surface_mesher.shape",
+        "description": "src.surface_mesher.shape",
+        "peekOfCode": "class Shape(ABC):\n    \"\"\"\n    Abstract base class for 3D shapes.\n    \"\"\"\n    @abstractmethod\n    def create_mesh_from_edge_sizes(self, mesh_sizes: float | ArrayLike) -> np.ndarray:\n        \"\"\"Generate surface mesh based on edge sizes.\"\"\"\n        ...  # pragma: no cover\n    @abstractmethod\n    def create_mesh_with_resolution(self, resolution: int | ArrayLike) -> np.ndarray:",
+        "detail": "src.surface_mesher.shape",
         "documentation": {}
     },
     {
@@ -781,6 +830,33 @@
         "description": "tests.test_cuboid",
         "peekOfCode": "def test_create_mesh_with_resolution_nonpositive():\n    cuboid = Cuboid(length=2.0, width=1.0, height=1.0)\n    with pytest.raises(ValueError, match=\"divisions must be positive values.\"):\n        cuboid.create_mesh_with_resolution([2, 0, 2])",
         "detail": "tests.test_cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "test_shape_instantiation_fails",
+        "kind": 2,
+        "importPath": "tests.test_shape",
+        "description": "tests.test_shape",
+        "peekOfCode": "def test_shape_instantiation_fails():\n    with pytest.raises(TypeError):\n        Shape()  # Cannot instantiate abstract class\ndef test_shape_subclass_without_implementation_fails():\n    class IncompleteShape(Shape):\n        ... # pragma: no cover\n    with pytest.raises(TypeError):\n        IncompleteShape()  # Still abstract, no methods implemented\ndef test_shape_subclass_with_methods_can_instantiate():\n    class DummyShape(Shape):",
+        "detail": "tests.test_shape",
+        "documentation": {}
+    },
+    {
+        "label": "test_shape_subclass_without_implementation_fails",
+        "kind": 2,
+        "importPath": "tests.test_shape",
+        "description": "tests.test_shape",
+        "peekOfCode": "def test_shape_subclass_without_implementation_fails():\n    class IncompleteShape(Shape):\n        ... # pragma: no cover\n    with pytest.raises(TypeError):\n        IncompleteShape()  # Still abstract, no methods implemented\ndef test_shape_subclass_with_methods_can_instantiate():\n    class DummyShape(Shape):\n        def create_mesh_from_edge_sizes(self, mesh_sizes):\n            return np.array([[1, 2, 3]])\n        def create_mesh_with_resolution(self, resolution):",
+        "detail": "tests.test_shape",
+        "documentation": {}
+    },
+    {
+        "label": "test_shape_subclass_with_methods_can_instantiate",
+        "kind": 2,
+        "importPath": "tests.test_shape",
+        "description": "tests.test_shape",
+        "peekOfCode": "def test_shape_subclass_with_methods_can_instantiate():\n    class DummyShape(Shape):\n        def create_mesh_from_edge_sizes(self, mesh_sizes):\n            return np.array([[1, 2, 3]])\n        def create_mesh_with_resolution(self, resolution):\n            return np.array([[4, 5, 6]])\n    shape = DummyShape()\n    assert isinstance(shape.create_mesh_from_edge_sizes(1), np.ndarray)\n    assert isinstance(shape.create_mesh_with_resolution(1), np.ndarray)",
+        "detail": "tests.test_shape",
         "documentation": {}
     }
 ]

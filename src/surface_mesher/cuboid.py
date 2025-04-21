@@ -5,6 +5,8 @@ from dataclasses import dataclass, field
 import numpy as np
 from numpy.typing import ArrayLike
 
+from .shape import Shape
+
 
 def generate_face_quads(u_coords: ArrayLike, v_coords: ArrayLike, fixed_axis: int, fixed_value: float) -> np.ndarray:
     """
@@ -181,7 +183,7 @@ def generate_cuboid_surface(x_coords: ArrayLike, y_coords: ArrayLike, z_coords: 
 
 
 @dataclass
-class Cuboid:
+class Cuboid(Shape):
     """
     Class to create a cuboid surface mesh.
 

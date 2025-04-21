@@ -1,6 +1,6 @@
 import pytest
 import numpy as np
-from surface_mesher.cuboid import (
+from surface_mesher import (
     generate_cuboid_surface,
     generate_axis_coords,
     generate_face_quads,
