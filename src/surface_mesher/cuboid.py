@@ -4,7 +4,32 @@ import numpy as np
 from numpy.typing import ArrayLike
 
 
-def quad_faces_from_grid(u_coords: ArrayLike, v_coords: ArrayLike, fixed_axis: int, fixed_value: float) -> np.ndarray:
+def convert_2d_face_to_3d(quad_2d_mesh: np.ndarray, fixed_axis: int, fixed_value: float) -> np.ndarray:
+    """
+    Convert a 2D quadrilateral mesh to a 3D mesh by adding a fixed coordinate.
+    """
+    face_count = quad_2d_mesh.shape[0]
+    quads_3d_mesh = np.empty((face_count, 4, 3), dtype=float)
+
+    match fixed_axis:
+        case 0:
+            quads_3d_mesh[:, :, 0] = fixed_value
+            quads_3d_mesh[:, :, 1:] = quad_2d_mesh
+        case 1:
+            quads_3d_mesh[:, :, 1] = fixed_value
+            quads_3d_mesh[:, :, 0] = quad_2d_mesh[:, :, 0]
+            quads_3d_mesh[:, :, 2] = quad_2d_mesh[:, :, 1]
+        case 2:
+            quads_3d_mesh[:, :, 2] = fixed_value
+            quads_3d_mesh[:, :, :2] = quad_2d_mesh
+        case _:
+            axis_error_msg = f"fixed_axis must be 0 (x), 1 (y), or 2 (z). Got {fixed_axis}."
+            raise ValueError(axis_error_msg)
+
+    return quads_3d_mesh
+
+
+def quad_faces_from_edges(u_coords: ArrayLike, v_coords: ArrayLike) -> np.ndarray:
     """
     Generate quadrilateral faces on a grid where one axis is fixed,
     with counter-clockwise vertex ordering.
@@ -22,50 +47,36 @@ def quad_faces_from_grid(u_coords: ArrayLike, v_coords: ArrayLike, fixed_axis: i
 
     Returns
     -------
-    quads_3d : np.ndarray
-        Shape (N, 4, 3) array of 3D quad vertices, with each face ordered counter-clockwise.
+    np.ndarray
+        Shape (N, 4, 2) array of 2D quad vertices, with each face ordered counter-clockwise.
 
     Examples
     --------
     >>> import numpy as np
-    >>> from surface_mesher.cuboid import quad_faces_from_grid
+    >>> from surface_mesher.cuboid import quad_faces_from_edges
     >>> u = np.array([0.0, 1.0])
     >>> v = np.array([0.0, 1.0])
-    >>> quads = quad_faces_from_grid(u, v, fixed_axis=2, fixed_value=0.0)
+    >>> quads = quad_faces_from_edges(u, v)
     >>> print(quads.shape)
-    (1, 4, 3)
+    (1, 4, 2)
     >>> print(quads[0])
-    [[0. 0. 0.]
-     [1. 0. 0.]
-     [1. 1. 0.]
-     [0. 1. 0.]]
+    [[0. 0.]
+     [1. 0.]
+     [1. 1.]
+     [0. 1.]]
     """
 
+    # Meshgrid + quad generation
     uu, vv = np.meshgrid(u_coords, v_coords, indexing="ij")
 
-    # Vertices ordered counter-clockwise:
-    # p0 = bottom-left
-    # p1 = bottom-right
-    # p2 = top-right
-    # p3 = top-left
-    p0 = np.stack([uu[:-1, :-1], vv[:-1, :-1]], axis=-1).reshape(-1, 2)
-    p1 = np.stack([uu[1:, :-1], vv[1:, :-1]], axis=-1).reshape(-1, 2)
-    p2 = np.stack([uu[1:, 1:], vv[1:, 1:]], axis=-1).reshape(-1, 2)
-    p3 = np.stack([uu[:-1, 1:], vv[:-1, 1:]], axis=-1).reshape(-1, 2)
+    corners = [
+        (uu[:-1, :-1], vv[:-1, :-1]),  # bottom-left
+        (uu[1:, :-1], vv[1:, :-1]),  # bottom-right
+        (uu[1:, 1:], vv[1:, 1:]),  # top-right
+        (uu[:-1, 1:], vv[:-1, 1:]),  # top-left
+    ]
 
-    # Stack into quads: [p0, p1, p2, p3]
-    quad_2d = np.stack([p0, p1, p2, p3], axis=1)
-
-    # Insert into 3D
-    quads_3d = np.zeros((quad_2d.shape[0], 4, 3))
-    axes = [0, 1, 2]
-    axes.remove(fixed_axis)
-
-    quads_3d[:, :, axes[0]] = quad_2d[:, :, 0]
-    quads_3d[:, :, axes[1]] = quad_2d[:, :, 1]
-    quads_3d[:, :, fixed_axis] = fixed_value
-
-    return quads_3d
+    return np.stack([np.stack([x, y], axis=-1).reshape(-1, 2) for x, y in corners], axis=1)
 
 
 def cuboid_mesh(x_coords: ArrayLike, y_coords: ArrayLike, z_coords: ArrayLike) -> np.ndarray:
@@ -106,40 +117,40 @@ def cuboid_mesh(x_coords: ArrayLike, y_coords: ArrayLike, z_coords: ArrayLike) -
     >>> print(faces.shape)  # 6 faces total from the cuboid
     (16, 4, 3)
     """
+    coords = [np.asarray(c, dtype=float) for c in (x_coords, y_coords, z_coords)]
 
-    # Convert to NumPy arrays and validate
-    x_coords = np.asarray(x_coords, dtype=float)
-    y_coords = np.asarray(y_coords, dtype=float)
-    z_coords = np.asarray(z_coords, dtype=float)
+    for name, arr in zip(("x", "y", "z"), coords, strict=False):
+        if arr.ndim != 1:
+            msg = f"{name}_coords must be 1D, got shape {arr.shape}."
+            raise ValueError(msg)
+        if arr.size < 2:
+            msg = f"{name}_coords must have at least 2 points, got {arr.size}."
+            raise ValueError(msg)
+        if not np.all(np.diff(arr) > 0):
+            msg = f"{name}_coords must be strictly increasing."
+            raise ValueError(msg)
 
-    for name, coords in zip(
-        ("x_coords", "y_coords", "z_coords"),
-        (x_coords, y_coords, z_coords),
-        strict=False,
-    ):
-        if coords.ndim != 1:
-            scalar_error_msg = f"{name} must be a 1D array."
-            raise ValueError(scalar_error_msg)
-        if coords.size < 2:
-            size_error_msg = f"{name} must contain at least two values to form quads."
-            raise ValueError(size_error_msg)
-        if not np.all(np.diff(coords) > 0):
-            increasing_error_msg = f"{name} must be strictly increasing."
-            raise ValueError(increasing_error_msg)
+    x, y, z = coords
 
-    faces = [
-        # XY planes (bottom and top)
-        quad_faces_from_grid(x_coords, y_coords, fixed_axis=2, fixed_value=z_coords[0]),
-        quad_faces_from_grid(x_coords, y_coords, fixed_axis=2, fixed_value=z_coords[-1]),
-        # XZ planes (front and back)
-        quad_faces_from_grid(x_coords, z_coords, fixed_axis=1, fixed_value=y_coords[0]),
-        quad_faces_from_grid(x_coords, z_coords, fixed_axis=1, fixed_value=y_coords[-1]),
-        # YZ planes (left and right)
-        quad_faces_from_grid(y_coords, z_coords, fixed_axis=0, fixed_value=x_coords[0]),
-        quad_faces_from_grid(y_coords, z_coords, fixed_axis=0, fixed_value=x_coords[-1]),
-    ]
+    xy = quad_faces_from_edges(x, y)
+    yz = quad_faces_from_edges(y, z)
+    zx = quad_faces_from_edges(z, x)
 
-    return np.concatenate(faces, axis=0)
+    xf0, xf1 = x[0], x[-1]
+    yf0, yf1 = y[0], y[-1]
+    zf0, zf1 = z[0], z[-1]
+
+    return np.concatenate(
+        [
+            convert_2d_face_to_3d(xy, fixed_axis=2, fixed_value=zf0),
+            convert_2d_face_to_3d(xy, fixed_axis=2, fixed_value=zf1),
+            convert_2d_face_to_3d(yz, fixed_axis=0, fixed_value=xf0),
+            convert_2d_face_to_3d(yz, fixed_axis=0, fixed_value=xf1),
+            convert_2d_face_to_3d(zx, fixed_axis=1, fixed_value=yf0),
+            convert_2d_face_to_3d(zx, fixed_axis=1, fixed_value=yf1),
+        ],
+        axis=0,
+    )
 
 
 def cuboid_mesh_with_resolution(
@@ -192,8 +203,12 @@ def cuboid_mesh_with_resolution(
     res_x, res_y, res_z = resolution
     ox, oy, oz = origin
 
-    x_coords = np.linspace(-length / 2.0 + ox, length / 2.0 + ox, res_x + 1)
-    y_coords = np.linspace(-width / 2.0 + oy, width / 2.0 + oy, res_y + 1)
-    z_coords = np.linspace(-height / 2.0 + oz, height / 2.0 + oz, res_z + 1)
+    x_edge_point = ox + length / 2.0
+    y_edge_point = oy + width / 2.0
+    z_edge_point = oz + height / 2.0
+
+    x_coords = np.linspace(-x_edge_point, x_edge_point, res_x + 1)
+    y_coords = np.linspace(-y_edge_point, y_edge_point, res_y + 1)
+    z_coords = np.linspace(-z_edge_point, z_edge_point, res_z + 1)
 
     return cuboid_mesh(x_coords, y_coords, z_coords)

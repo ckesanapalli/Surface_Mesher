@@ -133,7 +133,7 @@
         "documentation": {}
     },
     {
-        "label": "cuboid_mesh",
+        "label": "circle_mesh_radial",
         "importPath": "surface_mesher",
         "description": "surface_mesher",
         "isExtraImport": true,
@@ -141,19 +141,44 @@
         "documentation": {}
     },
     {
-        "label": "quad_faces_from_grid",
-        "importPath": "surface_mesher",
-        "description": "surface_mesher",
+        "label": "re",
+        "kind": 6,
         "isExtraImport": true,
-        "detail": "surface_mesher",
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "convert_2d_face_to_3d",
+        "importPath": "surface_mesher.cuboid",
+        "description": "surface_mesher.cuboid",
+        "isExtraImport": true,
+        "detail": "surface_mesher.cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "quad_faces_from_edges",
+        "importPath": "surface_mesher.cuboid",
+        "description": "surface_mesher.cuboid",
+        "isExtraImport": true,
+        "detail": "surface_mesher.cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "cuboid_mesh",
+        "importPath": "surface_mesher.cuboid",
+        "description": "surface_mesher.cuboid",
+        "isExtraImport": true,
+        "detail": "surface_mesher.cuboid",
         "documentation": {}
     },
     {
         "label": "cuboid_mesh_with_resolution",
-        "importPath": "surface_mesher",
-        "description": "surface_mesher",
+        "importPath": "surface_mesher.cuboid",
+        "description": "surface_mesher.cuboid",
         "isExtraImport": true,
-        "detail": "surface_mesher",
+        "detail": "surface_mesher.cuboid",
         "documentation": {}
     },
     {
@@ -517,11 +542,29 @@
         "documentation": {}
     },
     {
-        "label": "quad_faces_from_grid",
+        "label": "circle_mesh_radial",
+        "kind": 2,
+        "importPath": "src.surface_mesher.circle",
+        "description": "src.surface_mesher.circle",
+        "peekOfCode": "def circle_mesh_radial(radius: float, radial_resolution: int, segment_resolution: int) -> np.ndarray:\n    \"\"\"\n    Generate a 2D circular mesh with curvilinear quadrilateral faces.\n    The mesh is constructed using radial and angular divisions, and\n    each cell is approximately a curved quadrilateral.\n    Parameters\n    ----------\n    radius : float\n        Radius of the circle.\n    radial_resolution : int",
+        "detail": "src.surface_mesher.circle",
+        "documentation": {}
+    },
+    {
+        "label": "convert_2d_face_to_3d",
         "kind": 2,
         "importPath": "src.surface_mesher.cuboid",
         "description": "src.surface_mesher.cuboid",
-        "peekOfCode": "def quad_faces_from_grid(u_coords: ArrayLike, v_coords: ArrayLike, fixed_axis: int, fixed_value: float) -> np.ndarray:\n    \"\"\"\n    Generate quadrilateral faces on a grid where one axis is fixed,\n    with counter-clockwise vertex ordering.\n    Parameters\n    ----------\n    u_coords : ArrayLike\n        Coordinates along the first varying axis (horizontal direction).\n    v_coords : ArrayLike\n        Coordinates along the second varying axis (vertical direction).",
+        "peekOfCode": "def convert_2d_face_to_3d(quad_2d_mesh: np.ndarray, fixed_axis: int, fixed_value: float) -> np.ndarray:\n    \"\"\"\n    Convert a 2D quadrilateral mesh to a 3D mesh by adding a fixed coordinate.\n    \"\"\"\n    face_count = quad_2d_mesh.shape[0]\n    quads_3d_mesh = np.empty((face_count, 4, 3), dtype=float)\n    match fixed_axis:\n        case 0:\n            quads_3d_mesh[:, :, 0] = fixed_value\n            quads_3d_mesh[:, :, 1:] = quad_2d_mesh",
+        "detail": "src.surface_mesher.cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "quad_faces_from_edges",
+        "kind": 2,
+        "importPath": "src.surface_mesher.cuboid",
+        "description": "src.surface_mesher.cuboid",
+        "peekOfCode": "def quad_faces_from_edges(u_coords: ArrayLike, v_coords: ArrayLike) -> np.ndarray:\n    \"\"\"\n    Generate quadrilateral faces on a grid where one axis is fixed,\n    with counter-clockwise vertex ordering.\n    Parameters\n    ----------\n    u_coords : ArrayLike\n        Coordinates along the first varying axis (horizontal direction).\n    v_coords : ArrayLike\n        Coordinates along the second varying axis (vertical direction).",
         "detail": "src.surface_mesher.cuboid",
         "documentation": {}
     },
@@ -544,119 +587,227 @@
         "documentation": {}
     },
     {
-        "label": "test_generate_face_quads_basic",
+        "label": "test_circle_mesh_radial_basic_shape",
+        "kind": 2,
+        "importPath": "tests.test_circle",
+        "description": "tests.test_circle",
+        "peekOfCode": "def test_circle_mesh_radial_basic_shape():\n    radius = 1.0\n    radial_resolution = 5\n    segment_resolution = 8\n    mesh = circle_mesh_radial(radius, radial_resolution, segment_resolution)\n    assert isinstance(mesh, np.ndarray)\n    expected_faces = radial_resolution * segment_resolution\n    assert mesh.shape == (expected_faces, 4, 2)\ndef test_circle_mesh_radial_output_dtype():\n    mesh = circle_mesh_radial(1.0, 3, 3)",
+        "detail": "tests.test_circle",
+        "documentation": {}
+    },
+    {
+        "label": "test_circle_mesh_radial_output_dtype",
+        "kind": 2,
+        "importPath": "tests.test_circle",
+        "description": "tests.test_circle",
+        "peekOfCode": "def test_circle_mesh_radial_output_dtype():\n    mesh = circle_mesh_radial(1.0, 3, 3)\n    assert np.issubdtype(mesh.dtype, np.floating)\n# ---------------------------------- #\n# Geometric correctness tests        #\n# ---------------------------------- #\ndef test_circle_mesh_radial_radius_limit():\n    radius = 1.0\n    mesh = circle_mesh_radial(radius, 10, 10)\n    distances = np.linalg.norm(mesh, axis=-1)",
+        "detail": "tests.test_circle",
+        "documentation": {}
+    },
+    {
+        "label": "test_circle_mesh_radial_radius_limit",
+        "kind": 2,
+        "importPath": "tests.test_circle",
+        "description": "tests.test_circle",
+        "peekOfCode": "def test_circle_mesh_radial_radius_limit():\n    radius = 1.0\n    mesh = circle_mesh_radial(radius, 10, 10)\n    distances = np.linalg.norm(mesh, axis=-1)\n    assert np.all(distances <= radius + 1e-6)  # Allow small numerical error\ndef test_circle_mesh_radial_known_points():\n    radius = 1.0\n    mesh = circle_mesh_radial(radius, radial_resolution=1, segment_resolution=4).round(6)\n    # Check corner points manually\n    points = mesh[-1, :, :]",
+        "detail": "tests.test_circle",
+        "documentation": {}
+    },
+    {
+        "label": "test_circle_mesh_radial_known_points",
+        "kind": 2,
+        "importPath": "tests.test_circle",
+        "description": "tests.test_circle",
+        "peekOfCode": "def test_circle_mesh_radial_known_points():\n    radius = 1.0\n    mesh = circle_mesh_radial(radius, radial_resolution=1, segment_resolution=4).round(6)\n    # Check corner points manually\n    points = mesh[-1, :, :]\n    expected_points = np.array([\n        [0, 0],\n        [0, -radius],\n        [radius, 0],\n        [0, 0],",
+        "detail": "tests.test_circle",
+        "documentation": {}
+    },
+    {
+        "label": "test_circle_mesh_radial_zero_radius",
+        "kind": 2,
+        "importPath": "tests.test_circle",
+        "description": "tests.test_circle",
+        "peekOfCode": "def test_circle_mesh_radial_zero_radius():\n    mesh = circle_mesh_radial(0.0, 5, 8)\n    assert np.allclose(mesh, 0.0)\ndef test_circle_mesh_radial_minimal_resolution():\n    mesh = circle_mesh_radial(1.0, 1, 1)\n    assert mesh.shape == (1, 4, 2)\n    # Should create a minimal mesh\n# ---------------------------------- #\n# Parametrized random tests          #\n# ---------------------------------- #",
+        "detail": "tests.test_circle",
+        "documentation": {}
+    },
+    {
+        "label": "test_circle_mesh_radial_minimal_resolution",
+        "kind": 2,
+        "importPath": "tests.test_circle",
+        "description": "tests.test_circle",
+        "peekOfCode": "def test_circle_mesh_radial_minimal_resolution():\n    mesh = circle_mesh_radial(1.0, 1, 1)\n    assert mesh.shape == (1, 4, 2)\n    # Should create a minimal mesh\n# ---------------------------------- #\n# Parametrized random tests          #\n# ---------------------------------- #\n@pytest.mark.parametrize(\"radial_resolution, segment_resolution\", [\n    (2, 2),\n    (5, 5),",
+        "detail": "tests.test_circle",
+        "documentation": {}
+    },
+    {
+        "label": "test_circle_mesh_various_resolutions",
+        "kind": 2,
+        "importPath": "tests.test_circle",
+        "description": "tests.test_circle",
+        "peekOfCode": "def test_circle_mesh_various_resolutions(radial_resolution, segment_resolution):\n    mesh = circle_mesh_radial(1.0, radial_resolution, segment_resolution)\n    expected_faces = radial_resolution * segment_resolution\n    assert mesh.shape == (expected_faces, 4, 2)\n# ---------------------------------- #\n# Negative and invalid input tests   #\n# ---------------------------------- #\ndef test_circle_mesh_radial_negative_radius():\n    with pytest.raises(ValueError):\n        circle_mesh_radial(-1.0, 5, 5)",
+        "detail": "tests.test_circle",
+        "documentation": {}
+    },
+    {
+        "label": "test_circle_mesh_radial_negative_radius",
+        "kind": 2,
+        "importPath": "tests.test_circle",
+        "description": "tests.test_circle",
+        "peekOfCode": "def test_circle_mesh_radial_negative_radius():\n    with pytest.raises(ValueError):\n        circle_mesh_radial(-1.0, 5, 5)\ndef test_circle_mesh_radial_invalid_resolution():\n    with pytest.raises(ValueError):\n        circle_mesh_radial(1.0, -2, 5)\n    with pytest.raises(ValueError):\n        circle_mesh_radial(1.0, 5, -3)\n# If you want the function to handle invalid inputs better, you need to add manual input checks in the function itself.\n# Currently your function does not have guards against negative numbers — could be good idea to add!",
+        "detail": "tests.test_circle",
+        "documentation": {}
+    },
+    {
+        "label": "test_circle_mesh_radial_invalid_resolution",
+        "kind": 2,
+        "importPath": "tests.test_circle",
+        "description": "tests.test_circle",
+        "peekOfCode": "def test_circle_mesh_radial_invalid_resolution():\n    with pytest.raises(ValueError):\n        circle_mesh_radial(1.0, -2, 5)\n    with pytest.raises(ValueError):\n        circle_mesh_radial(1.0, 5, -3)\n# If you want the function to handle invalid inputs better, you need to add manual input checks in the function itself.\n# Currently your function does not have guards against negative numbers — could be good idea to add!\ndef test_circle_faces_within_bounds():\n    radius = 1.0\n    mesh = circle_mesh_radial(radius, 10, 10)",
+        "detail": "tests.test_circle",
+        "documentation": {}
+    },
+    {
+        "label": "test_circle_faces_within_bounds",
+        "kind": 2,
+        "importPath": "tests.test_circle",
+        "description": "tests.test_circle",
+        "peekOfCode": "def test_circle_faces_within_bounds():\n    radius = 1.0\n    mesh = circle_mesh_radial(radius, 10, 10)\n    assert np.all(np.abs(mesh[..., 0]) <= radius + 1e-6)\n    assert np.all(np.abs(mesh[..., 1]) <= radius + 1e-6)",
+        "detail": "tests.test_circle",
+        "documentation": {}
+    },
+    {
+        "label": "test_convert_2d_face_to_3d_basic",
         "kind": 2,
         "importPath": "tests.test_cuboid",
         "description": "tests.test_cuboid",
-        "peekOfCode": "def test_generate_face_quads_basic():\n    u = np.array([0, 1])\n    v = np.array([0, 1])\n    result = quad_faces_from_grid(u, v, fixed_axis=2, fixed_value=5.0)\n    expected = np.array([[[0, 0, 5], [1, 0, 5], [1, 1, 5], [0, 1, 5]]])\n    np.testing.assert_array_equal(result, expected)\ndef test_generate_face_quads_valid_fixed_axes():\n    u = np.array([0, 1])\n    v = np.array([0, 1])\n    for axis in [0, 1, 2]:",
+        "peekOfCode": "def test_convert_2d_face_to_3d_basic():\n    quad_2d = np.array([[[0, 0], [1, 0], [1, 1], [0, 1]]])\n    result = convert_2d_face_to_3d(quad_2d, fixed_axis=2, fixed_value=5.0)\n    expected = np.array([[[0, 0, 5], [1, 0, 5], [1, 1, 5], [0, 1, 5]]])\n    np.testing.assert_array_equal(result, expected)\ndef test_convert_2d_face_to_3d_different_axes():\n    quad_2d = np.array([[[0, 0], [1, 0], [1, 1], [0, 1]]])\n    for axis in [0, 1, 2]:\n        result = convert_2d_face_to_3d(quad_2d, fixed_axis=axis, fixed_value=3.5)\n        assert result.shape == (1, 4, 3)",
         "detail": "tests.test_cuboid",
         "documentation": {}
     },
     {
-        "label": "test_generate_face_quads_valid_fixed_axes",
+        "label": "test_convert_2d_face_to_3d_different_axes",
         "kind": 2,
         "importPath": "tests.test_cuboid",
         "description": "tests.test_cuboid",
-        "peekOfCode": "def test_generate_face_quads_valid_fixed_axes():\n    u = np.array([0, 1])\n    v = np.array([0, 1])\n    for axis in [0, 1, 2]:\n        result = quad_faces_from_grid(u, v, fixed_axis=axis, fixed_value=7.0)\n        assert result.shape == (1, 4, 3)\n        assert np.all(result[:, :, axis] == 7.0)\ndef test_generate_face_quads_zero_area():\n    u = np.array([0])\n    v = np.array([0])",
+        "peekOfCode": "def test_convert_2d_face_to_3d_different_axes():\n    quad_2d = np.array([[[0, 0], [1, 0], [1, 1], [0, 1]]])\n    for axis in [0, 1, 2]:\n        result = convert_2d_face_to_3d(quad_2d, fixed_axis=axis, fixed_value=3.5)\n        assert result.shape == (1, 4, 3)\n        assert np.all(result[:, :, axis] == 3.5)\ndef test_invalid_axis():\n    quad_2d = np.array([[[0, 0], [1, 0], [1, 1], [0, 1]]])\n    with pytest.raises(ValueError, match=re.escape(\"fixed_axis must be 0 (x), 1 (y), or 2 (z). Got 3.\")):\n        convert_2d_face_to_3d(quad_2d, fixed_axis=3, fixed_value=5.0)",
         "detail": "tests.test_cuboid",
         "documentation": {}
     },
     {
-        "label": "test_generate_face_quads_zero_area",
+        "label": "test_invalid_axis",
         "kind": 2,
         "importPath": "tests.test_cuboid",
         "description": "tests.test_cuboid",
-        "peekOfCode": "def test_generate_face_quads_zero_area():\n    u = np.array([0])\n    v = np.array([0])\n    result = quad_faces_from_grid(u, v, 0, 0)\n    assert result.shape == (0, 4, 3)\ndef test_generate_face_quads_rectangular_grid():\n    u = np.array([0, 1, 2])\n    v = np.array([0, 1])\n    result = quad_faces_from_grid(u, v, 2, 3)\n    assert result.shape == (2, 4, 3)",
+        "peekOfCode": "def test_invalid_axis():\n    quad_2d = np.array([[[0, 0], [1, 0], [1, 1], [0, 1]]])\n    with pytest.raises(ValueError, match=re.escape(\"fixed_axis must be 0 (x), 1 (y), or 2 (z). Got 3.\")):\n        convert_2d_face_to_3d(quad_2d, fixed_axis=3, fixed_value=5.0)\n# --------------------------- #\n# quad_faces_from_edges Tests #\n# --------------------------- #\ndef test_quad_faces_from_edges_basic():\n    u = np.array([0, 1])\n    v = np.array([0, 1])",
         "detail": "tests.test_cuboid",
         "documentation": {}
     },
     {
-        "label": "test_generate_face_quads_rectangular_grid",
+        "label": "test_quad_faces_from_edges_basic",
         "kind": 2,
         "importPath": "tests.test_cuboid",
         "description": "tests.test_cuboid",
-        "peekOfCode": "def test_generate_face_quads_rectangular_grid():\n    u = np.array([0, 1, 2])\n    v = np.array([0, 1])\n    result = quad_faces_from_grid(u, v, 2, 3)\n    assert result.shape == (2, 4, 3)\n# --------------------------- #\n# cuboid_mesh Tests #\n# --------------------------- #\ndef test_valid_mesh_basic():\n    x = [0.0, 1.0]",
+        "peekOfCode": "def test_quad_faces_from_edges_basic():\n    u = np.array([0, 1])\n    v = np.array([0, 1])\n    result = quad_faces_from_edges(u, v)\n    expected = np.array([[[0, 0], [1, 0], [1, 1], [0, 1]]])\n    np.testing.assert_array_equal(result, expected)\ndef test_quad_faces_from_edges_zero_area():\n    u = np.array([0])\n    v = np.array([0])\n    result = quad_faces_from_edges(u, v)",
         "detail": "tests.test_cuboid",
         "documentation": {}
     },
     {
-        "label": "test_valid_mesh_basic",
+        "label": "test_quad_faces_from_edges_zero_area",
         "kind": 2,
         "importPath": "tests.test_cuboid",
         "description": "tests.test_cuboid",
-        "peekOfCode": "def test_valid_mesh_basic():\n    x = [0.0, 1.0]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]\n    faces = cuboid_mesh(x, y, z)\n    assert faces.shape == (6, 4, 3)\n    assert np.isclose(faces[:, :, 2].min(), 0.0)\n    assert np.isclose(faces[:, :, 2].max(), 1.0)\ndef test_valid_mesh_multiple_cells():\n    x = [0.0, 1.0, 2.0]",
+        "peekOfCode": "def test_quad_faces_from_edges_zero_area():\n    u = np.array([0])\n    v = np.array([0])\n    result = quad_faces_from_edges(u, v)\n    assert result.shape == (0, 4, 2)\ndef test_quad_faces_from_edges_rectangular_grid():\n    u = np.array([0, 1, 2])\n    v = np.array([0, 1])\n    result = quad_faces_from_edges(u, v)\n    assert result.shape == (2, 4, 2)",
         "detail": "tests.test_cuboid",
         "documentation": {}
     },
     {
-        "label": "test_valid_mesh_multiple_cells",
+        "label": "test_quad_faces_from_edges_rectangular_grid",
         "kind": 2,
         "importPath": "tests.test_cuboid",
         "description": "tests.test_cuboid",
-        "peekOfCode": "def test_valid_mesh_multiple_cells():\n    x = [0.0, 1.0, 2.0]\n    y = [0.0, 0.5, 1.0]\n    z = [0.0, 0.5, 1.0]\n    faces = cuboid_mesh(x, y, z)\n    assert faces.shape == (24, 4, 3)\n@pytest.mark.parametrize(\"container_type\", [list, tuple, np.array])\ndef test_accepts_all_arraylike_types(container_type):\n    x = container_type([0.0, 1.0, 2.0])\n    y = container_type([0.0, 1.0])",
+        "peekOfCode": "def test_quad_faces_from_edges_rectangular_grid():\n    u = np.array([0, 1, 2])\n    v = np.array([0, 1])\n    result = quad_faces_from_edges(u, v)\n    assert result.shape == (2, 4, 2)\n# --------------------------- #\n# cuboid_mesh Tests           #\n# --------------------------- #\ndef test_cuboid_mesh_basic():\n    x = [0.0, 1.0]",
         "detail": "tests.test_cuboid",
         "documentation": {}
     },
     {
-        "label": "test_accepts_all_arraylike_types",
+        "label": "test_cuboid_mesh_basic",
         "kind": 2,
         "importPath": "tests.test_cuboid",
         "description": "tests.test_cuboid",
-        "peekOfCode": "def test_accepts_all_arraylike_types(container_type):\n    x = container_type([0.0, 1.0, 2.0])\n    y = container_type([0.0, 1.0])\n    z = container_type([0.0, 0.5, 1.0])\n    faces = cuboid_mesh(x, y, z)\n    assert faces.shape == (16, 4, 3)\ndef test_fails_non_1d_array():\n    x = np.array([[0.0, 1.0]])  # Not 1D\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]",
+        "peekOfCode": "def test_cuboid_mesh_basic():\n    x = [0.0, 1.0]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]\n    faces = cuboid_mesh(x, y, z)\n    assert faces.shape == (6, 4, 3)\ndef test_cuboid_mesh_multiple_cells():\n    x = [0.0, 1.0, 2.0]\n    y = [0.0, 0.5, 1.0]\n    z = [0.0, 0.5, 1.0]",
         "detail": "tests.test_cuboid",
         "documentation": {}
     },
     {
-        "label": "test_fails_non_1d_array",
+        "label": "test_cuboid_mesh_multiple_cells",
         "kind": 2,
         "importPath": "tests.test_cuboid",
         "description": "tests.test_cuboid",
-        "peekOfCode": "def test_fails_non_1d_array():\n    x = np.array([[0.0, 1.0]])  # Not 1D\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]\n    with pytest.raises(ValueError, match=\"x_coords must be a 1D array.\"):\n        cuboid_mesh(x, y, z)\ndef test_fails_too_few_values():\n    x = [0.0]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]",
+        "peekOfCode": "def test_cuboid_mesh_multiple_cells():\n    x = [0.0, 1.0, 2.0]\n    y = [0.0, 0.5, 1.0]\n    z = [0.0, 0.5, 1.0]\n    faces = cuboid_mesh(x, y, z)\n    assert faces.shape == (24, 4, 3)\n@pytest.mark.parametrize(\"container_type\", [list, tuple, np.array])\ndef test_cuboid_mesh_accepts_arraylike(container_type):\n    x = container_type([0.0, 1.0, 2.0])\n    y = container_type([0.0, 1.0])",
         "detail": "tests.test_cuboid",
         "documentation": {}
     },
     {
-        "label": "test_fails_too_few_values",
+        "label": "test_cuboid_mesh_accepts_arraylike",
         "kind": 2,
         "importPath": "tests.test_cuboid",
         "description": "tests.test_cuboid",
-        "peekOfCode": "def test_fails_too_few_values():\n    x = [0.0]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]\n    with pytest.raises(ValueError, match=\"x_coords must contain at least two values\"):\n        cuboid_mesh(x, y, z)\ndef test_fails_non_strictly_increasing():\n    x = [0.0, 1.0, 0.5]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]",
+        "peekOfCode": "def test_cuboid_mesh_accepts_arraylike(container_type):\n    x = container_type([0.0, 1.0, 2.0])\n    y = container_type([0.0, 1.0])\n    z = container_type([0.0, 0.5, 1.0])\n    faces = cuboid_mesh(x, y, z)\n    assert faces.shape == (16, 4, 3)\ndef test_cuboid_mesh_invalid_dimensions():\n    x = np.array([[0.0, 1.0]])  # Not 1D\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]",
         "detail": "tests.test_cuboid",
         "documentation": {}
     },
     {
-        "label": "test_fails_non_strictly_increasing",
+        "label": "test_cuboid_mesh_invalid_dimensions",
         "kind": 2,
         "importPath": "tests.test_cuboid",
         "description": "tests.test_cuboid",
-        "peekOfCode": "def test_fails_non_strictly_increasing():\n    x = [0.0, 1.0, 0.5]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]\n    with pytest.raises(ValueError, match=\"x_coords must be strictly increasing.\"):\n        cuboid_mesh(x, y, z)\ndef test_quad_structure_and_ccw_order():\n    x = [0.0, 1.0]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]",
+        "peekOfCode": "def test_cuboid_mesh_invalid_dimensions():\n    x = np.array([[0.0, 1.0]])  # Not 1D\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]\n    with pytest.raises(ValueError, match=re.escape(\"x_coords must be 1D, got shape (1, 2).\")):\n        cuboid_mesh(x, y, z)\ndef test_cuboid_mesh_too_few_values():\n    x = [0.0]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]",
         "detail": "tests.test_cuboid",
         "documentation": {}
     },
     {
-        "label": "test_quad_structure_and_ccw_order",
+        "label": "test_cuboid_mesh_too_few_values",
         "kind": 2,
         "importPath": "tests.test_cuboid",
         "description": "tests.test_cuboid",
-        "peekOfCode": "def test_quad_structure_and_ccw_order():\n    x = [0.0, 1.0]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]\n    faces = cuboid_mesh(x, y, z)\n    assert faces.shape[1:] == (4, 3)\n    z_faces = [f for f in faces if np.allclose(f[:, 2], 0.0)]\n    assert len(z_faces) > 0\n    for quad in z_faces:\n        assert np.allclose(quad[:, 2], quad[0, 2])",
+        "peekOfCode": "def test_cuboid_mesh_too_few_values():\n    x = [0.0]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]\n    with pytest.raises(ValueError, match=\"x_coords must have at least 2 points, got 1.\"):\n        cuboid_mesh(x, y, z)\ndef test_cuboid_mesh_non_strictly_increasing():\n    x = [0.0, 1.0, 0.5]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]",
         "detail": "tests.test_cuboid",
         "documentation": {}
     },
     {
-        "label": "test_large_but_valid_axis",
+        "label": "test_cuboid_mesh_non_strictly_increasing",
         "kind": 2,
         "importPath": "tests.test_cuboid",
         "description": "tests.test_cuboid",
-        "peekOfCode": "def test_large_but_valid_axis():\n    x = np.linspace(0, 1, 10)\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]\n    faces = cuboid_mesh(x, y, z)\n    assert faces.shape[0] == 38\ndef test_degenerate_case_single_face_each():\n    x = [0.0, 1.0]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]",
+        "peekOfCode": "def test_cuboid_mesh_non_strictly_increasing():\n    x = [0.0, 1.0, 0.5]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]\n    with pytest.raises(ValueError, match=\"x_coords must be strictly increasing.\"):\n        cuboid_mesh(x, y, z)\ndef test_cuboid_mesh_quad_shape_and_ccw():\n    x = [0.0, 1.0]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]",
         "detail": "tests.test_cuboid",
         "documentation": {}
     },
     {
-        "label": "test_degenerate_case_single_face_each",
+        "label": "test_cuboid_mesh_quad_shape_and_ccw",
         "kind": 2,
         "importPath": "tests.test_cuboid",
         "description": "tests.test_cuboid",
-        "peekOfCode": "def test_degenerate_case_single_face_each():\n    x = [0.0, 1.0]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]\n    faces = cuboid_mesh(x, y, z)\n    assert faces.shape[0] == 6\n    for quad in faces:\n        assert quad.shape == (4, 3)\n# --------------------------- #\n# cuboid_mesh_with_resolution #",
+        "peekOfCode": "def test_cuboid_mesh_quad_shape_and_ccw():\n    x = [0.0, 1.0]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]\n    faces = cuboid_mesh(x, y, z)\n    assert faces.shape[1:] == (4, 3)\ndef test_cuboid_mesh_large_axis():\n    x = np.linspace(0, 1, 10)\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]",
+        "detail": "tests.test_cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "test_cuboid_mesh_large_axis",
+        "kind": 2,
+        "importPath": "tests.test_cuboid",
+        "description": "tests.test_cuboid",
+        "peekOfCode": "def test_cuboid_mesh_large_axis():\n    x = np.linspace(0, 1, 10)\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]\n    faces = cuboid_mesh(x, y, z)\n    assert faces.shape[0] == 38\ndef test_cuboid_mesh_degenerate_case_single_face_each():\n    x = [0.0, 1.0]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]",
+        "detail": "tests.test_cuboid",
+        "documentation": {}
+    },
+    {
+        "label": "test_cuboid_mesh_degenerate_case_single_face_each",
+        "kind": 2,
+        "importPath": "tests.test_cuboid",
+        "description": "tests.test_cuboid",
+        "peekOfCode": "def test_cuboid_mesh_degenerate_case_single_face_each():\n    x = [0.0, 1.0]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]\n    faces = cuboid_mesh(x, y, z)\n    assert faces.shape[0] == 6\n    for quad in faces:\n        assert quad.shape == (4, 3)\n# --------------------------- #\n# cuboid_mesh_with_resolution Tests #",
         "detail": "tests.test_cuboid",
         "documentation": {}
     },
