@@ -1,57 +1,7 @@
 import re
 import pytest
 import numpy as np
-from surface_mesher.cuboid import (
-    convert_2d_face_to_3d,
-    quad_faces_from_edges,
-    cuboid_mesh,
-    cuboid_mesh_with_resolution,
-)
-
-# --------------------------- #
-# convert_2d_face_to_3d Tests  #
-# --------------------------- #
-
-def test_convert_2d_face_to_3d_basic():
-    quad_2d = np.array([[[0, 0], [1, 0], [1, 1], [0, 1]]])
-    result = convert_2d_face_to_3d(quad_2d, fixed_axis=2, fixed_value=5.0)
-    expected = np.array([[[0, 0, 5], [1, 0, 5], [1, 1, 5], [0, 1, 5]]])
-    np.testing.assert_array_equal(result, expected)
-
-def test_convert_2d_face_to_3d_different_axes():
-    quad_2d = np.array([[[0, 0], [1, 0], [1, 1], [0, 1]]])
-    for axis in [0, 1, 2]:
-        result = convert_2d_face_to_3d(quad_2d, fixed_axis=axis, fixed_value=3.5)
-        assert result.shape == (1, 4, 3)
-        assert np.all(result[:, :, axis] == 3.5)
-
-def test_invalid_axis():
-    quad_2d = np.array([[[0, 0], [1, 0], [1, 1], [0, 1]]])
-    with pytest.raises(ValueError, match=re.escape("fixed_axis must be 0 (x), 1 (y), or 2 (z). Got 3.")):
-        convert_2d_face_to_3d(quad_2d, fixed_axis=3, fixed_value=5.0)
-
-# --------------------------- #
-# quad_faces_from_edges Tests #
-# --------------------------- #
-
-def test_quad_faces_from_edges_basic():
-    u = np.array([0, 1])
-    v = np.array([0, 1])
-    result = quad_faces_from_edges(u, v)
-    expected = np.array([[[0, 0], [1, 0], [1, 1], [0, 1]]])
-    np.testing.assert_array_equal(result, expected)
-
-def test_quad_faces_from_edges_zero_area():
-    u = np.array([0])
-    v = np.array([0])
-    result = quad_faces_from_edges(u, v)
-    assert result.shape == (0, 4, 2)
-
-def test_quad_faces_from_edges_rectangular_grid():
-    u = np.array([0, 1, 2])
-    v = np.array([0, 1])
-    result = quad_faces_from_edges(u, v)
-    assert result.shape == (2, 4, 2)
+from surface_mesher import cuboid_mesh, cuboid_mesh_with_resolution
 
 # --------------------------- #
 # cuboid_mesh Tests           #
