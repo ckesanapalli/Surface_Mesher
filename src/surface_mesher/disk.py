@@ -27,9 +27,6 @@ def disk_mesh_radial(radius: float, radial_resolution: int, segment_resolution: 
     Examples
     --------
     >>> from surface_mesher import disk_mesh_radial
-    >>> import matplotlib.pyplot as plt
-    >>> from matplotlib.patches import Polygon
-    >>> from matplotlib.collections import PatchCollection
     >>> # Parameters
     >>> radial_resolution = 12
     >>> segment_resolution = 12
