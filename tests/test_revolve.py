@@ -1,6 +1,6 @@
 import pytest
 import numpy as np
-from surface_mesher.revolve import revolve_curve_along_path, circular_revolve
+from surfmesh.revolve import revolve_curve_along_path, circular_revolve
 
 # ----------------------------- #
 # revolve_curve_along_path tests #

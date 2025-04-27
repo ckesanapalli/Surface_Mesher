@@ -105,7 +105,7 @@ def cuboid_mesher_with_resolution(
 
     Examples
     --------
-    >>> from surface_mesher import cuboid_mesher_with_resolution
+    >>> from surfmesh import cuboid_mesher_with_resolution
     >>> mesh = cuboid_mesher_with_resolution(2.0, 1.0, 1.0, resolution=2)
     >>> mesh.shape
     (24, 4, 3)

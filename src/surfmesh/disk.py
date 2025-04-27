@@ -25,7 +25,7 @@ def circumference_edges(radius: float, segment_resolution: int, start_angle: flo
 
     Examples
     --------
-    >>> from surface_mesher import circumference_edges
+    >>> from surfmesh import circumference_edges
     >>> # Parameters
     >>> radius = 1.0
     >>> segment_resolution = 12
@@ -69,7 +69,7 @@ def disk_mesher_radial(radius: float, radial_resolution: int, segment_resolution
 
     Examples
     --------
-    >>> from surface_mesher import disk_mesher_radial
+    >>> from surfmesh import disk_mesher_radial
     >>> # Parameters
     >>> radial_resolution = 12
     >>> segment_resolution = 12
@@ -123,7 +123,7 @@ def disk_mesher_square_centered(radius: float, square_resolution: int, radial_re
 
     Examples
     --------
-    >>> from surface_mesher import disk_mesher_square_centered
+    >>> from surfmesh import disk_mesher_square_centered
     >>> square_resolution = 10
     >>> radial_resolution = 10
     >>> radius = 1

@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from surface_mesher.sphere import sphere_mesher_from_projection, sphere_mesher_from_radial
+from surfmesh.sphere import sphere_mesher_from_projection, sphere_mesher_from_radial
 
 # ------------------------------ #
 # sphere_mesher_from_projection tests

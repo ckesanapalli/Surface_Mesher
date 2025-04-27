@@ -1,7 +1,7 @@
 import re
 import pytest
 import numpy as np
-from surface_mesher import (
+from surfmesh import (
     convert_2d_face_to_3d,
     quad_faces_from_edges,
     mesh_between_edges,

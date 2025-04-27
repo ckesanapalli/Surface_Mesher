@@ -54,7 +54,7 @@ def quad_faces_from_edges(u_coords: ArrayLike, v_coords: ArrayLike) -> np.ndarra
     Examples
     --------
     >>> import numpy as np
-    >>> from surface_mesher.cuboid import quad_faces_from_edges
+    >>> from surfmesh.cuboid import quad_faces_from_edges
     >>> u = np.array([0.0, 1.0])
     >>> v = np.array([0.0, 1.0])
     >>> quads = quad_faces_from_edges(u, v)

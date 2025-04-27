@@ -1,7 +1,7 @@
 import re
 import pytest
 import numpy as np
-from surface_mesher import cuboid_mesher, cuboid_mesher_with_resolution
+from surfmesh import cuboid_mesher, cuboid_mesher_with_resolution
 
 # --------------------------- #
 # cuboid_mesher Tests           #

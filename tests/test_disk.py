@@ -1,7 +1,7 @@
 import re
 import pytest
 import numpy as np
-from surface_mesher import (
+from surfmesh import (
     disk_mesher_radial,
     circumference_edges,
     disk_mesher_square_centered,

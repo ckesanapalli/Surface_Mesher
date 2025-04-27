@@ -1,4 +1,4 @@
-# Surface Mesher
+# **SurfMesh** - A Surface Meshing Python Library
 
 [![Python Package](https://github.com/ckesanapalli//surface-mesher/actions/workflows/python-package.yml/badge.svg)](https://github.com/ckesanapalli/surface-mesher/actions/workflows/python-package.yml/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/ckesanapalli/surface-mesher/badge.svg?branch=master)](https://coveralls.io/github/ckesanapalli/surface-mesher?branch=master)
@@ -60,7 +60,7 @@ from matplotlib.patches import Polygon
 from matplotlib.collections import PatchCollection
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 
-import surface_mesher as sm
+import surfmesh as sm
 
 plot_res = (4, 4)
 ```
@@ -457,6 +457,7 @@ plt.show()
 
 - [x] Cuboid surface mesh generation
 - [x] Disk face mesh generation
+- [x] Revolve curve mesh generation
 - [x] Cylinder, and sphere support
 - [ ] Curvilinear mesh
 - [ ] STL/PLY export support

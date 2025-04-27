@@ -1,6 +1,6 @@
 import pytest
 import numpy as np
-from surface_mesher import (
+from surfmesh import (
     cylinder_mesher_radial,
     cylinder_mesher_square_centered,
 )

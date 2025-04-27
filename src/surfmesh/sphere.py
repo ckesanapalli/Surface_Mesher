@@ -25,7 +25,7 @@ def sphere_mesher_from_projection(radius: float, resolution: int) -> np.ndarray:
 
     Examples
     --------
-    >>> from surface_mesher import sphere_mesher_from_projection
+    >>> from surfmesh import sphere_mesher_from_projection
     >>> mesh = sphere_mesher_from_projection(radius=1.0, resolution=10)
     >>> mesh.shape
     (600, 4, 3)
@@ -74,7 +74,7 @@ def sphere_mesher_from_radial(
 
     Examples
     --------
-    >>> from surface_mesher import sphere_mesher_from_radial
+    >>> from surfmesh import sphere_mesher_from_radial
     >>> mesh = sphere_mesher_from_radial(radius=1.0, radial_resolution=10, segment_resolution=10)
     >>> mesh.shape
     (100, 4, 3)

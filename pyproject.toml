@@ -1,5 +1,5 @@
 [project]
-name = "surface-mesher"
+name = "surfmesh"
 version = "0.1.0"
 description = "A Python library to create a simple 3D Surface Mesh using Quadrilateral faces only."
 readme = "README.md"
@@ -12,7 +12,7 @@ dependencies = [
 ]
 
 [project.scripts]
-surface-mesher = "surface_mesher:main"
+surfmesh = "surfmesh:main"
 
 [project.optional-dependencies]
 examples = [

@@ -93,7 +93,7 @@ def circular_revolve(curve: ArrayLike, segment_resolution: int, start_angle: flo
     Examples
     --------
     >>> import numpy as np
-    >>> from surface_mesher.revolve import circular_revolve
+    >>> from surfmesh.revolve import circular_revolve
     >>>
     >>> curve = np.array([
     ...     [1.0, 0.0],  # radius, axial position
