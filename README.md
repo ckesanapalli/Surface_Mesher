@@ -94,7 +94,7 @@ plt.show()
 
 
     
-![png](examples/README_files/README_3_1.png)
+![png](README_files/README_3_1.png)
     
 
 
@@ -129,7 +129,7 @@ plt.show()
 
 
     
-![png](examples/README_files/README_5_1.png)
+![png](README_files/README_5_1.png)
     
 
 
@@ -162,7 +162,7 @@ plt.show()
 
 
     
-![png](examples/README_files/README_7_1.png)
+![png](README_files/README_7_1.png)
     
 
 
@@ -202,7 +202,7 @@ plt.show()
 
 
     
-![png](examples/README_files/README_9_1.png)
+![png](README_files/README_9_1.png)
     
 
 
@@ -239,7 +239,7 @@ plt.show()
 
 
     
-![png](examples/README_files/README_11_1.png)
+![png](README_files/README_11_1.png)
     
 
 
@@ -271,7 +271,7 @@ plt.show()
 
 
     
-![png](examples/README_files/README_13_0.png)
+![png](README_files/README_13_0.png)
     
 
 
@@ -300,7 +300,7 @@ plt.show()
 
 
     
-![png](examples/README_files/README_15_0.png)
+![png](README_files/README_15_0.png)
     
 
 
@@ -340,7 +340,7 @@ plt.show()
 
 
     
-![png](examples/README_files/README_17_1.png)
+![png](README_files/README_17_1.png)
     
 
 
@@ -380,7 +380,7 @@ plt.show()
 
 
     
-![png](examples/README_files/README_19_1.png)
+![png](README_files/README_19_1.png)
     
 
 
@@ -413,7 +413,7 @@ plt.show()
 
 
     
-![png](examples/README_files/README_21_1.png)
+![png](README_files/README_21_1.png)
     
 
 
@@ -449,7 +449,7 @@ plt.show()
 
 
     
-![png](examples/README_files/README_23_1.png)
+![png](README_files/README_23_1.png)
     
 
 
