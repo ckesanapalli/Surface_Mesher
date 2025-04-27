@@ -2,29 +2,29 @@ import numpy as np
 from numpy.typing import ArrayLike
 
 
-def convert_2d_face_to_3d(quad_2d_mesh: np.ndarray, fixed_axis: int, fixed_value: float) -> np.ndarray:
+def convert_2d_face_to_3d(quad_2d_mesh: np.ndarray, axis: int, offset: float) -> np.ndarray:
     """
     Convert a 2D quadrilateral mesh to a 3D mesh by adding a fixed coordinate.
     """
     face_count = quad_2d_mesh.shape[0]
     quads_3d_mesh = np.empty((face_count, 4, 3), dtype=float)
 
-    match fixed_axis:
+    match axis:
         case 0:
-            quads_3d_mesh[:, :, 0] = fixed_value
+            quads_3d_mesh[:, :, 0] = offset
             quads_3d_mesh[:, :, 1] = quad_2d_mesh[:, :, 0]
             quads_3d_mesh[:, :, 2] = quad_2d_mesh[:, :, 1]
         case 1:
             quads_3d_mesh[:, :, 0] = quad_2d_mesh[:, :, 1]
-            quads_3d_mesh[:, :, 1] = fixed_value
+            quads_3d_mesh[:, :, 1] = offset
             quads_3d_mesh[:, :, 2] = quad_2d_mesh[:, :, 0]
         case 2:
             quads_3d_mesh[:, :, 0] = quad_2d_mesh[:, :, 0]
             quads_3d_mesh[:, :, 1] = quad_2d_mesh[:, :, 1]
-            quads_3d_mesh[:, :, 2] = fixed_value
+            quads_3d_mesh[:, :, 2] = offset
 
         case _:
-            axis_error_msg = f"fixed_axis must be 0 (x), 1 (y), or 2 (z). Got {fixed_axis}."
+            axis_error_msg = f"fixed_axis must be 0 (x), 1 (y), or 2 (z). Got {axis}."
             raise ValueError(axis_error_msg)
 
     return quads_3d_mesh

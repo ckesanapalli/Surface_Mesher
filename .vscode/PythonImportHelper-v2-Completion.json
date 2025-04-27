@@ -132,6 +132,14 @@
         "documentation": {}
     },
     {
+        "label": "ArrayLike",
+        "importPath": "numpy.typing",
+        "description": "numpy.typing",
+        "isExtraImport": true,
+        "detail": "numpy.typing",
+        "documentation": {}
+    },
+    {
         "label": "re",
         "kind": 6,
         "isExtraImport": true,
@@ -150,7 +158,7 @@
         "documentation": {}
     },
     {
-        "label": "cuboid_mesh",
+        "label": "cuboid_mesher",
         "importPath": "surface_mesher",
         "description": "surface_mesher",
         "isExtraImport": true,
@@ -158,7 +166,7 @@
         "documentation": {}
     },
     {
-        "label": "cuboid_mesh_with_resolution",
+        "label": "cuboid_mesher_with_resolution",
         "importPath": "surface_mesher",
         "description": "surface_mesher",
         "isExtraImport": true,
@@ -166,7 +174,23 @@
         "documentation": {}
     },
     {
-        "label": "disk_mesh_radial",
+        "label": "cylinder_mesher_radial",
+        "importPath": "surface_mesher",
+        "description": "surface_mesher",
+        "isExtraImport": true,
+        "detail": "surface_mesher",
+        "documentation": {}
+    },
+    {
+        "label": "cylinder_mesher_square_centered",
+        "importPath": "surface_mesher",
+        "description": "surface_mesher",
+        "isExtraImport": true,
+        "detail": "surface_mesher",
+        "documentation": {}
+    },
+    {
+        "label": "disk_mesher_radial",
         "importPath": "surface_mesher",
         "description": "surface_mesher",
         "isExtraImport": true,
@@ -182,7 +206,7 @@
         "documentation": {}
     },
     {
-        "label": "disk_mesh_square_centered",
+        "label": "disk_mesher_square_centered",
         "importPath": "surface_mesher",
         "description": "surface_mesher",
         "isExtraImport": true,
@@ -219,6 +243,38 @@
         "description": "surface_mesher",
         "isExtraImport": true,
         "detail": "surface_mesher",
+        "documentation": {}
+    },
+    {
+        "label": "revolve_curve_along_path",
+        "importPath": "surface_mesher.revolve",
+        "description": "surface_mesher.revolve",
+        "isExtraImport": true,
+        "detail": "surface_mesher.revolve",
+        "documentation": {}
+    },
+    {
+        "label": "circular_revolve",
+        "importPath": "surface_mesher.revolve",
+        "description": "surface_mesher.revolve",
+        "isExtraImport": true,
+        "detail": "surface_mesher.revolve",
+        "documentation": {}
+    },
+    {
+        "label": "sphere_mesher_from_projection",
+        "importPath": "surface_mesher.sphere",
+        "description": "surface_mesher.sphere",
+        "isExtraImport": true,
+        "detail": "surface_mesher.sphere",
+        "documentation": {}
+    },
+    {
+        "label": "sphere_mesher_from_radial",
+        "importPath": "surface_mesher.sphere",
+        "description": "surface_mesher.sphere",
+        "isExtraImport": true,
+        "detail": "surface_mesher.sphere",
         "documentation": {}
     },
     {
@@ -582,30 +638,39 @@
         "documentation": {}
     },
     {
-        "label": "cuboid_mesh",
+        "label": "cuboid_mesher",
         "kind": 2,
         "importPath": "src.surface_mesher.cuboid",
         "description": "src.surface_mesher.cuboid",
-        "peekOfCode": "def cuboid_mesh(x_coords: ArrayLike, y_coords: ArrayLike, z_coords: ArrayLike) -> np.ndarray:\n    \"\"\"\n    Generate a full cuboid surface mesh using explicit coordinate arrays along each axis.\n    This function creates quadrilateral surface faces based on 1D coordinate arrays for the\n    x, y, and z axes. The surface mesh includes all six sides of the cuboid spanned by\n    the given coordinates. Vertex order for each quad is counter-clockwise.\n    Parameters\n    ----------\n    x_coords : ArrayLike of float\n        1D strictly increasing array of x-axis positions for vertical planes (YZ-facing).",
+        "peekOfCode": "def cuboid_mesher(x_coords: ArrayLike, y_coords: ArrayLike, z_coords: ArrayLike) -> np.ndarray:\n    \"\"\"\n    Generate a full cuboid surface mesh using explicit coordinate arrays along each axis.\n    This function creates quadrilateral surface faces based on 1D coordinate arrays for the\n    x, y, and z axes. The surface mesh includes all six sides of the cuboid spanned by\n    the given coordinates. Vertex order for each quad is counter-clockwise.\n    Parameters\n    ----------\n    x_coords : ArrayLike of float\n        1D strictly increasing array of x-axis positions for vertical planes (YZ-facing).",
         "detail": "src.surface_mesher.cuboid",
         "documentation": {}
     },
     {
-        "label": "cuboid_mesh_with_resolution",
+        "label": "cuboid_mesher_with_resolution",
         "kind": 2,
         "importPath": "src.surface_mesher.cuboid",
         "description": "src.surface_mesher.cuboid",
-        "peekOfCode": "def cuboid_mesh_with_resolution(\n    length: float, width: float, height: float, origin: tuple[float, float, float] = (0.0, 0.0, 0.0), resolution: int | tuple[int, int, int] = (1, 1, 1)\n) -> np.ndarray:\n    \"\"\"\n    Generate a 3D surface mesh of a cuboid with quadrilateral faces based on resolution.\n    Parameters\n    ----------\n    length : float\n        Length of the cuboid along the x-axis.\n    width : float",
+        "peekOfCode": "def cuboid_mesher_with_resolution(\n    length: float, width: float, height: float, origin: tuple[float, float, float] = (0.0, 0.0, 0.0), resolution: int | tuple[int, int, int] = (1, 1, 1)\n) -> np.ndarray:\n    \"\"\"\n    Generate a 3D surface mesh of a cuboid with quadrilateral faces based on resolution.\n    Parameters\n    ----------\n    length : float\n        Length of the cuboid along the x-axis.\n    width : float",
         "detail": "src.surface_mesher.cuboid",
         "documentation": {}
     },
     {
-        "label": "disk_mesh_radial",
+        "label": "cylinder_mesher_radial",
         "kind": 2,
-        "importPath": "src.surface_mesher.disk",
-        "description": "src.surface_mesher.disk",
-        "peekOfCode": "def disk_mesh_radial(radius: float, radial_resolution: int, segment_resolution: int) -> np.ndarray:\n    \"\"\"\n    Generate a 2D circular mesh with curvilinear quadrilateral faces.\n    The mesh is constructed using radial and angular divisions, and\n    each cell is approximately a curved quadrilateral.\n    Parameters\n    ----------\n    radius : float\n        Radius of the disk.\n    radial_resolution : int",
-        "detail": "src.surface_mesher.disk",
+        "importPath": "src.surface_mesher.cylinder",
+        "description": "src.surface_mesher.cylinder",
+        "peekOfCode": "def cylinder_mesher_radial(radius: float, height: float, radial_resolution: int, segment_resolution: int, height_resolution: int) -> np.ndarray:\n    \"\"\"\n    Generate a triangular mesh for a closed cylinder.\n    Parameters\n    ----------\n    radius : float\n        Radius of the cylinder.\n    height : float\n        Height of the cylinder.\n    radial_resolution : int",
+        "detail": "src.surface_mesher.cylinder",
+        "documentation": {}
+    },
+    {
+        "label": "cylinder_mesher_square_centered",
+        "kind": 2,
+        "importPath": "src.surface_mesher.cylinder",
+        "description": "src.surface_mesher.cylinder",
+        "peekOfCode": "def cylinder_mesher_square_centered(radius: float, height: float, radial_resolution: int, half_square_resolution: int, height_resolution: int) -> np.ndarray:\n    \"\"\"\n    Generate a mesh of a closed cylinder where the caps are based on a square-centered pattern.\n    Parameters\n    ----------\n    radius : float\n        Radius of the cylinder.\n    height : float\n        Height of the cylinder.\n    radial_resolution : int",
+        "detail": "src.surface_mesher.cylinder",
         "documentation": {}
     },
     {
@@ -618,11 +683,20 @@
         "documentation": {}
     },
     {
-        "label": "disk_mesh_square_centered",
+        "label": "disk_mesher_radial",
         "kind": 2,
         "importPath": "src.surface_mesher.disk",
         "description": "src.surface_mesher.disk",
-        "peekOfCode": "def disk_mesh_square_centered(radius: float, square_resolution: int, radial_resolution: int, square_side_radius_ratio: float = 1, square_disk_rotation: float = 0) -> np.ndarray:\n    \"\"\"\n    Generate a quadrilateral mesh for a filled disk using a square core and radial interpolation.\n    Parameters\n    ----------\n    radius : float\n        Radius of the disk. Must be positive.\n    square_resolution : int\n        Number of subdivisions along one side of the square core.\n    radial_resolution : int",
+        "peekOfCode": "def disk_mesher_radial(radius: float, radial_resolution: int, segment_resolution: int) -> np.ndarray:\n    \"\"\"\n    Generate a 2D circular mesh with curvilinear quadrilateral faces.\n    The mesh is constructed using radial and angular divisions, and\n    each cell is approximately a curved quadrilateral.\n    Parameters\n    ----------\n    radius : float\n        Radius of the disk.\n    radial_resolution : int",
+        "detail": "src.surface_mesher.disk",
+        "documentation": {}
+    },
+    {
+        "label": "disk_mesher_square_centered",
+        "kind": 2,
+        "importPath": "src.surface_mesher.disk",
+        "description": "src.surface_mesher.disk",
+        "peekOfCode": "def disk_mesher_square_centered(radius: float, square_resolution: int, radial_resolution: int, square_side_radius_ratio: float = 1, square_disk_rotation: float = 0) -> np.ndarray:\n    \"\"\"\n    Generate a quadrilateral mesh for a filled disk using a square core and radial interpolation.\n    Parameters\n    ----------\n    radius : float\n        Radius of the disk. Must be positive.\n    square_resolution : int\n        Number of subdivisions along one side of the square core.\n    radial_resolution : int",
         "detail": "src.surface_mesher.disk",
         "documentation": {}
     },
@@ -631,7 +705,7 @@
         "kind": 2,
         "importPath": "src.surface_mesher.edge",
         "description": "src.surface_mesher.edge",
-        "peekOfCode": "def convert_2d_face_to_3d(quad_2d_mesh: np.ndarray, fixed_axis: int, fixed_value: float) -> np.ndarray:\n    \"\"\"\n    Convert a 2D quadrilateral mesh to a 3D mesh by adding a fixed coordinate.\n    \"\"\"\n    face_count = quad_2d_mesh.shape[0]\n    quads_3d_mesh = np.empty((face_count, 4, 3), dtype=float)\n    match fixed_axis:\n        case 0:\n            quads_3d_mesh[:, :, 0] = fixed_value\n            quads_3d_mesh[:, :, 1] = quad_2d_mesh[:, :, 0]",
+        "peekOfCode": "def convert_2d_face_to_3d(quad_2d_mesh: np.ndarray, axis: int, offset: float) -> np.ndarray:\n    \"\"\"\n    Convert a 2D quadrilateral mesh to a 3D mesh by adding a fixed coordinate.\n    \"\"\"\n    face_count = quad_2d_mesh.shape[0]\n    quads_3d_mesh = np.empty((face_count, 4, 3), dtype=float)\n    match axis:\n        case 0:\n            quads_3d_mesh[:, :, 0] = offset\n            quads_3d_mesh[:, :, 1] = quad_2d_mesh[:, :, 0]",
         "detail": "src.surface_mesher.edge",
         "documentation": {}
     },
@@ -663,173 +737,335 @@
         "documentation": {}
     },
     {
-        "label": "test_cuboid_mesh_basic",
+        "label": "revolve_curve_along_path",
+        "kind": 2,
+        "importPath": "src.surface_mesher.revolve",
+        "description": "src.surface_mesher.revolve",
+        "peekOfCode": "def revolve_curve_along_path(curve: ArrayLike, revolve_path: ArrayLike) -> np.ndarray:\n    \"\"\"\n    Revolve a 2D curve along a given path to create a 3D surface mesh.\n    Parameters\n    ----------\n    curve : ArrayLike\n        An (n, 2) array representing (x, z) coordinates of the 2D curve.\n    revolve_path : ArrayLike\n        An (m, 2) array representing (angle in radians, radius) polar coordinates of the revolve path.\n    Returns",
+        "detail": "src.surface_mesher.revolve",
+        "documentation": {}
+    },
+    {
+        "label": "circular_revolve",
+        "kind": 2,
+        "importPath": "src.surface_mesher.revolve",
+        "description": "src.surface_mesher.revolve",
+        "peekOfCode": "def circular_revolve(curve: ArrayLike, segment_resolution: int, start_angle: float = 0.0, end_angle: float = 2 * np.pi) -> np.ndarray:\n    \"\"\"\n    Revolve a 2D curve around the Z-axis counter-clockwise along a circular path.\n    Parameters\n    ----------\n    curve : ArrayLike\n        An (n, 2) array representing (radius, axial) coordinates of the curve to revolve.\n    segment_resolution : int\n        Number of angular divisions for the revolution.\n    start_angle : float, optional",
+        "detail": "src.surface_mesher.revolve",
+        "documentation": {}
+    },
+    {
+        "label": "sphere_mesher_from_projection",
+        "kind": 2,
+        "importPath": "src.surface_mesher.sphere",
+        "description": "src.surface_mesher.sphere",
+        "peekOfCode": "def sphere_mesher_from_projection(radius: float, resolution: int) -> np.ndarray:\n    \"\"\"\n    Generate a quadrilateral mesh approximating a sphere using cube projection.\n    The method starts by creating a subdivided cube mesh, then normalizes and scales\n    it onto the sphere surface.\n    Parameters\n    ----------\n    radius : float\n        Radius of the resulting sphere.\n    resolution : int",
+        "detail": "src.surface_mesher.sphere",
+        "documentation": {}
+    },
+    {
+        "label": "sphere_mesher_from_radial",
+        "kind": 2,
+        "importPath": "src.surface_mesher.sphere",
+        "description": "src.surface_mesher.sphere",
+        "peekOfCode": "def sphere_mesher_from_radial(\n    radius: float,\n    radial_resolution: int,\n    segment_resolution: int,\n    start_angle: float = 0,\n    end_angle: float = 2 * np.pi,\n) -> np.ndarray:\n    \"\"\"\n    Generate a mesh approximating a sphere using radial divisions.\n    The method uses spherical coordinates to create the mesh.",
+        "detail": "src.surface_mesher.sphere",
+        "documentation": {}
+    },
+    {
+        "label": "test_cuboid_mesher_basic",
         "kind": 2,
         "importPath": "tests.test_cuboid",
         "description": "tests.test_cuboid",
-        "peekOfCode": "def test_cuboid_mesh_basic():\n    x = [0.0, 1.0]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]\n    faces = cuboid_mesh(x, y, z)\n    assert faces.shape == (6, 4, 3)\ndef test_cuboid_mesh_multiple_cells():\n    x = [0.0, 1.0, 2.0]\n    y = [0.0, 0.5, 1.0]\n    z = [0.0, 0.5, 1.0]",
+        "peekOfCode": "def test_cuboid_mesher_basic():\n    x = [0.0, 1.0]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]\n    faces = cuboid_mesher(x, y, z)\n    assert faces.shape == (6, 4, 3)\ndef test_cuboid_mesher_multiple_cells():\n    x = [0.0, 1.0, 2.0]\n    y = [0.0, 0.5, 1.0]\n    z = [0.0, 0.5, 1.0]",
         "detail": "tests.test_cuboid",
         "documentation": {}
     },
     {
-        "label": "test_cuboid_mesh_multiple_cells",
+        "label": "test_cuboid_mesher_multiple_cells",
         "kind": 2,
         "importPath": "tests.test_cuboid",
         "description": "tests.test_cuboid",
-        "peekOfCode": "def test_cuboid_mesh_multiple_cells():\n    x = [0.0, 1.0, 2.0]\n    y = [0.0, 0.5, 1.0]\n    z = [0.0, 0.5, 1.0]\n    faces = cuboid_mesh(x, y, z)\n    assert faces.shape == (24, 4, 3)\n@pytest.mark.parametrize(\"container_type\", [list, tuple, np.array])\ndef test_cuboid_mesh_accepts_arraylike(container_type):\n    x = container_type([0.0, 1.0, 2.0])\n    y = container_type([0.0, 1.0])",
+        "peekOfCode": "def test_cuboid_mesher_multiple_cells():\n    x = [0.0, 1.0, 2.0]\n    y = [0.0, 0.5, 1.0]\n    z = [0.0, 0.5, 1.0]\n    faces = cuboid_mesher(x, y, z)\n    assert faces.shape == (24, 4, 3)\n@pytest.mark.parametrize(\"container_type\", [list, tuple, np.array])\ndef test_cuboid_mesher_accepts_arraylike(container_type):\n    x = container_type([0.0, 1.0, 2.0])\n    y = container_type([0.0, 1.0])",
         "detail": "tests.test_cuboid",
         "documentation": {}
     },
     {
-        "label": "test_cuboid_mesh_accepts_arraylike",
+        "label": "test_cuboid_mesher_accepts_arraylike",
         "kind": 2,
         "importPath": "tests.test_cuboid",
         "description": "tests.test_cuboid",
-        "peekOfCode": "def test_cuboid_mesh_accepts_arraylike(container_type):\n    x = container_type([0.0, 1.0, 2.0])\n    y = container_type([0.0, 1.0])\n    z = container_type([0.0, 0.5, 1.0])\n    faces = cuboid_mesh(x, y, z)\n    assert faces.shape == (16, 4, 3)\ndef test_cuboid_mesh_invalid_dimensions():\n    x = np.array([[0.0, 1.0]])  # Not 1D\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]",
+        "peekOfCode": "def test_cuboid_mesher_accepts_arraylike(container_type):\n    x = container_type([0.0, 1.0, 2.0])\n    y = container_type([0.0, 1.0])\n    z = container_type([0.0, 0.5, 1.0])\n    faces = cuboid_mesher(x, y, z)\n    assert faces.shape == (16, 4, 3)\ndef test_cuboid_mesher_invalid_dimensions():\n    x = np.array([[0.0, 1.0]])  # Not 1D\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]",
         "detail": "tests.test_cuboid",
         "documentation": {}
     },
     {
-        "label": "test_cuboid_mesh_invalid_dimensions",
+        "label": "test_cuboid_mesher_invalid_dimensions",
         "kind": 2,
         "importPath": "tests.test_cuboid",
         "description": "tests.test_cuboid",
-        "peekOfCode": "def test_cuboid_mesh_invalid_dimensions():\n    x = np.array([[0.0, 1.0]])  # Not 1D\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]\n    with pytest.raises(ValueError, match=re.escape(\"x_coords must be 1D, got shape (1, 2).\")):\n        cuboid_mesh(x, y, z)\ndef test_cuboid_mesh_too_few_values():\n    x = [0.0]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]",
+        "peekOfCode": "def test_cuboid_mesher_invalid_dimensions():\n    x = np.array([[0.0, 1.0]])  # Not 1D\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]\n    with pytest.raises(ValueError, match=re.escape(\"x_coords must be 1D, got shape (1, 2).\")):\n        cuboid_mesher(x, y, z)\ndef test_cuboid_mesher_too_few_values():\n    x = [0.0]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]",
         "detail": "tests.test_cuboid",
         "documentation": {}
     },
     {
-        "label": "test_cuboid_mesh_too_few_values",
+        "label": "test_cuboid_mesher_too_few_values",
         "kind": 2,
         "importPath": "tests.test_cuboid",
         "description": "tests.test_cuboid",
-        "peekOfCode": "def test_cuboid_mesh_too_few_values():\n    x = [0.0]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]\n    with pytest.raises(ValueError, match=\"x_coords must have at least 2 points, got 1.\"):\n        cuboid_mesh(x, y, z)\ndef test_cuboid_mesh_non_strictly_increasing():\n    x = [0.0, 1.0, 0.5]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]",
+        "peekOfCode": "def test_cuboid_mesher_too_few_values():\n    x = [0.0]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]\n    with pytest.raises(ValueError, match=\"x_coords must have at least 2 points, got 1.\"):\n        cuboid_mesher(x, y, z)\ndef test_cuboid_mesher_non_strictly_increasing():\n    x = [0.0, 1.0, 0.5]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]",
         "detail": "tests.test_cuboid",
         "documentation": {}
     },
     {
-        "label": "test_cuboid_mesh_non_strictly_increasing",
+        "label": "test_cuboid_mesher_non_strictly_increasing",
         "kind": 2,
         "importPath": "tests.test_cuboid",
         "description": "tests.test_cuboid",
-        "peekOfCode": "def test_cuboid_mesh_non_strictly_increasing():\n    x = [0.0, 1.0, 0.5]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]\n    with pytest.raises(ValueError, match=\"x_coords must be strictly increasing.\"):\n        cuboid_mesh(x, y, z)\ndef test_cuboid_mesh_quad_shape_and_ccw():\n    x = [0.0, 1.0]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]",
+        "peekOfCode": "def test_cuboid_mesher_non_strictly_increasing():\n    x = [0.0, 1.0, 0.5]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]\n    with pytest.raises(ValueError, match=\"x_coords must be strictly increasing.\"):\n        cuboid_mesher(x, y, z)\ndef test_cuboid_mesher_quad_shape_and_ccw():\n    x = [0.0, 1.0]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]",
         "detail": "tests.test_cuboid",
         "documentation": {}
     },
     {
-        "label": "test_cuboid_mesh_quad_shape_and_ccw",
+        "label": "test_cuboid_mesher_quad_shape_and_ccw",
         "kind": 2,
         "importPath": "tests.test_cuboid",
         "description": "tests.test_cuboid",
-        "peekOfCode": "def test_cuboid_mesh_quad_shape_and_ccw():\n    x = [0.0, 1.0]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]\n    faces = cuboid_mesh(x, y, z)\n    assert faces.shape[1:] == (4, 3)\ndef test_cuboid_mesh_large_axis():\n    x = np.linspace(0, 1, 10)\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]",
+        "peekOfCode": "def test_cuboid_mesher_quad_shape_and_ccw():\n    x = [0.0, 1.0]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]\n    faces = cuboid_mesher(x, y, z)\n    assert faces.shape[1:] == (4, 3)\ndef test_cuboid_mesher_large_axis():\n    x = np.linspace(0, 1, 10)\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]",
         "detail": "tests.test_cuboid",
         "documentation": {}
     },
     {
-        "label": "test_cuboid_mesh_large_axis",
+        "label": "test_cuboid_mesher_large_axis",
         "kind": 2,
         "importPath": "tests.test_cuboid",
         "description": "tests.test_cuboid",
-        "peekOfCode": "def test_cuboid_mesh_large_axis():\n    x = np.linspace(0, 1, 10)\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]\n    faces = cuboid_mesh(x, y, z)\n    assert faces.shape[0] == 38\ndef test_cuboid_mesh_degenerate_case_single_face_each():\n    x = [0.0, 1.0]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]",
+        "peekOfCode": "def test_cuboid_mesher_large_axis():\n    x = np.linspace(0, 1, 10)\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]\n    faces = cuboid_mesher(x, y, z)\n    assert faces.shape[0] == 38\ndef test_cuboid_mesher_degenerate_case_single_face_each():\n    x = [0.0, 1.0]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]",
         "detail": "tests.test_cuboid",
         "documentation": {}
     },
     {
-        "label": "test_cuboid_mesh_degenerate_case_single_face_each",
+        "label": "test_cuboid_mesher_degenerate_case_single_face_each",
         "kind": 2,
         "importPath": "tests.test_cuboid",
         "description": "tests.test_cuboid",
-        "peekOfCode": "def test_cuboid_mesh_degenerate_case_single_face_each():\n    x = [0.0, 1.0]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]\n    faces = cuboid_mesh(x, y, z)\n    assert faces.shape[0] == 6\n    for quad in faces:\n        assert quad.shape == (4, 3)\n# --------------------------- #\n# cuboid_mesh_with_resolution Tests #",
+        "peekOfCode": "def test_cuboid_mesher_degenerate_case_single_face_each():\n    x = [0.0, 1.0]\n    y = [0.0, 1.0]\n    z = [0.0, 1.0]\n    faces = cuboid_mesher(x, y, z)\n    assert faces.shape[0] == 6\n    for quad in faces:\n        assert quad.shape == (4, 3)\n# --------------------------- #\n# cuboid_mesher_with_resolution Tests #",
         "detail": "tests.test_cuboid",
         "documentation": {}
     },
     {
-        "label": "test_cuboid_mesh_with_resolution_scalar",
+        "label": "test_cuboid_mesher_with_resolution_scalar",
         "kind": 2,
         "importPath": "tests.test_cuboid",
         "description": "tests.test_cuboid",
-        "peekOfCode": "def test_cuboid_mesh_with_resolution_scalar():\n    faces = cuboid_mesh_with_resolution(2.0, 1.0, 1.0, origin=(0.0, 0.0, 0.0), resolution=2)\n    assert faces.shape == (24, 4, 3)\ndef test_cuboid_mesh_with_resolution_arraylike():\n    faces = cuboid_mesh_with_resolution(2.0, 1.0, 1.0, origin=(0.0, 0.0, 0.0), resolution=[2, 1, 2])\n    assert isinstance(faces, np.ndarray)\n    assert faces.shape[1:] == (4, 3)\ndef test_cuboid_mesh_with_resolution_invalid_shape():\n    with pytest.raises(ValueError, match=\"resolution must be a single int or an array-like of three ints.\"):\n        cuboid_mesh_with_resolution(2.0, 1.0, 1.0, resolution=[2, 2])",
+        "peekOfCode": "def test_cuboid_mesher_with_resolution_scalar():\n    faces = cuboid_mesher_with_resolution(2.0, 1.0, 1.0, origin=(0.0, 0.0, 0.0), resolution=2)\n    assert faces.shape == (24, 4, 3)\ndef test_cuboid_mesher_with_resolution_arraylike():\n    faces = cuboid_mesher_with_resolution(2.0, 1.0, 1.0, origin=(0.0, 0.0, 0.0), resolution=[2, 1, 2])\n    assert isinstance(faces, np.ndarray)\n    assert faces.shape[1:] == (4, 3)\ndef test_cuboid_mesher_with_resolution_invalid_shape():\n    with pytest.raises(ValueError, match=\"resolution must be a single int or an array-like of three ints.\"):\n        cuboid_mesher_with_resolution(2.0, 1.0, 1.0, resolution=[2, 2])",
         "detail": "tests.test_cuboid",
         "documentation": {}
     },
     {
-        "label": "test_cuboid_mesh_with_resolution_arraylike",
+        "label": "test_cuboid_mesher_with_resolution_arraylike",
         "kind": 2,
         "importPath": "tests.test_cuboid",
         "description": "tests.test_cuboid",
-        "peekOfCode": "def test_cuboid_mesh_with_resolution_arraylike():\n    faces = cuboid_mesh_with_resolution(2.0, 1.0, 1.0, origin=(0.0, 0.0, 0.0), resolution=[2, 1, 2])\n    assert isinstance(faces, np.ndarray)\n    assert faces.shape[1:] == (4, 3)\ndef test_cuboid_mesh_with_resolution_invalid_shape():\n    with pytest.raises(ValueError, match=\"resolution must be a single int or an array-like of three ints.\"):\n        cuboid_mesh_with_resolution(2.0, 1.0, 1.0, resolution=[2, 2])\ndef test_cuboid_mesh_with_resolution_nonpositive():\n    with pytest.raises(ValueError, match=\"resolution must contain only positive values.\"):\n        cuboid_mesh_with_resolution(2.0, 1.0, 1.0, resolution=[2, 0, 2])",
+        "peekOfCode": "def test_cuboid_mesher_with_resolution_arraylike():\n    faces = cuboid_mesher_with_resolution(2.0, 1.0, 1.0, origin=(0.0, 0.0, 0.0), resolution=[2, 1, 2])\n    assert isinstance(faces, np.ndarray)\n    assert faces.shape[1:] == (4, 3)\ndef test_cuboid_mesher_with_resolution_invalid_shape():\n    with pytest.raises(ValueError, match=\"resolution must be a single int or an array-like of three ints.\"):\n        cuboid_mesher_with_resolution(2.0, 1.0, 1.0, resolution=[2, 2])\ndef test_cuboid_mesher_with_resolution_nonpositive():\n    with pytest.raises(ValueError, match=\"resolution must contain only positive values.\"):\n        cuboid_mesher_with_resolution(2.0, 1.0, 1.0, resolution=[2, 0, 2])",
         "detail": "tests.test_cuboid",
         "documentation": {}
     },
     {
-        "label": "test_cuboid_mesh_with_resolution_invalid_shape",
+        "label": "test_cuboid_mesher_with_resolution_invalid_shape",
         "kind": 2,
         "importPath": "tests.test_cuboid",
         "description": "tests.test_cuboid",
-        "peekOfCode": "def test_cuboid_mesh_with_resolution_invalid_shape():\n    with pytest.raises(ValueError, match=\"resolution must be a single int or an array-like of three ints.\"):\n        cuboid_mesh_with_resolution(2.0, 1.0, 1.0, resolution=[2, 2])\ndef test_cuboid_mesh_with_resolution_nonpositive():\n    with pytest.raises(ValueError, match=\"resolution must contain only positive values.\"):\n        cuboid_mesh_with_resolution(2.0, 1.0, 1.0, resolution=[2, 0, 2])",
+        "peekOfCode": "def test_cuboid_mesher_with_resolution_invalid_shape():\n    with pytest.raises(ValueError, match=\"resolution must be a single int or an array-like of three ints.\"):\n        cuboid_mesher_with_resolution(2.0, 1.0, 1.0, resolution=[2, 2])\ndef test_cuboid_mesher_with_resolution_nonpositive():\n    with pytest.raises(ValueError, match=\"resolution must contain only positive values.\"):\n        cuboid_mesher_with_resolution(2.0, 1.0, 1.0, resolution=[2, 0, 2])",
         "detail": "tests.test_cuboid",
         "documentation": {}
     },
     {
-        "label": "test_cuboid_mesh_with_resolution_nonpositive",
+        "label": "test_cuboid_mesher_with_resolution_nonpositive",
         "kind": 2,
         "importPath": "tests.test_cuboid",
         "description": "tests.test_cuboid",
-        "peekOfCode": "def test_cuboid_mesh_with_resolution_nonpositive():\n    with pytest.raises(ValueError, match=\"resolution must contain only positive values.\"):\n        cuboid_mesh_with_resolution(2.0, 1.0, 1.0, resolution=[2, 0, 2])",
+        "peekOfCode": "def test_cuboid_mesher_with_resolution_nonpositive():\n    with pytest.raises(ValueError, match=\"resolution must contain only positive values.\"):\n        cuboid_mesher_with_resolution(2.0, 1.0, 1.0, resolution=[2, 0, 2])",
         "detail": "tests.test_cuboid",
         "documentation": {}
     },
     {
-        "label": "test_disk_mesh_radial_basic_shape",
+        "label": "test_cylinder_mesher_radial_basic_shape",
+        "kind": 2,
+        "importPath": "tests.test_cylinder",
+        "description": "tests.test_cylinder",
+        "peekOfCode": "def test_cylinder_mesher_radial_basic_shape():\n    mesh = cylinder_mesher_radial(1.0, 2.0, 5, 8, 6)\n    assert isinstance(mesh, np.ndarray)\n    assert mesh.ndim == 3\n    assert mesh.shape[1:] == (4, 3)\ndef test_cylinder_mesher_radial_faces_count():\n    radial_res, segment_res, height_res = 5, 8, 6\n    expected_disk_faces = radial_res * segment_res\n    expected_lateral_faces = (height_res) * segment_res\n    expected_total_faces = 2 * expected_disk_faces + expected_lateral_faces",
+        "detail": "tests.test_cylinder",
+        "documentation": {}
+    },
+    {
+        "label": "test_cylinder_mesher_radial_faces_count",
+        "kind": 2,
+        "importPath": "tests.test_cylinder",
+        "description": "tests.test_cylinder",
+        "peekOfCode": "def test_cylinder_mesher_radial_faces_count():\n    radial_res, segment_res, height_res = 5, 8, 6\n    expected_disk_faces = radial_res * segment_res\n    expected_lateral_faces = (height_res) * segment_res\n    expected_total_faces = 2 * expected_disk_faces + expected_lateral_faces\n    mesh = cylinder_mesher_radial(1.0, 2.0, radial_res, segment_res, height_res)\n    assert mesh.shape[0] == expected_total_faces\ndef test_cylinder_mesher_radial_coordinate_bounds():\n    radius = 1.0\n    height = 2.0",
+        "detail": "tests.test_cylinder",
+        "documentation": {}
+    },
+    {
+        "label": "test_cylinder_mesher_radial_coordinate_bounds",
+        "kind": 2,
+        "importPath": "tests.test_cylinder",
+        "description": "tests.test_cylinder",
+        "peekOfCode": "def test_cylinder_mesher_radial_coordinate_bounds():\n    radius = 1.0\n    height = 2.0\n    mesh = cylinder_mesher_radial(radius, height, 4, 8, 5)\n    xy = mesh[..., :2]\n    r = np.linalg.norm(xy, axis=-1)\n    assert np.all(r <= radius + 1e-6)\n    z = mesh[..., 2]\n    assert np.all(z >= -height/2 - 1e-6)\n    assert np.all(z <= height/2 + 1e-6)",
+        "detail": "tests.test_cylinder",
+        "documentation": {}
+    },
+    {
+        "label": "test_cylinder_mesher_radial_various_resolutions",
+        "kind": 2,
+        "importPath": "tests.test_cylinder",
+        "description": "tests.test_cylinder",
+        "peekOfCode": "def test_cylinder_mesher_radial_various_resolutions(radial_res, segment_res, height_res):\n    mesh = cylinder_mesher_radial(1.0, 2.0, radial_res, segment_res, height_res)\n    assert mesh.shape[1:] == (4, 3)\n# ---------------------- #\n# cylinder_mesher_square_centered Tests\n# ---------------------- #\ndef test_cylinder_mesher_square_centered_basic_shape():\n    mesh = cylinder_mesher_square_centered(1.0, 2.0, 5, 4, 8)\n    assert isinstance(mesh, np.ndarray)\n    assert mesh.ndim == 3",
+        "detail": "tests.test_cylinder",
+        "documentation": {}
+    },
+    {
+        "label": "test_cylinder_mesher_square_centered_basic_shape",
+        "kind": 2,
+        "importPath": "tests.test_cylinder",
+        "description": "tests.test_cylinder",
+        "peekOfCode": "def test_cylinder_mesher_square_centered_basic_shape():\n    mesh = cylinder_mesher_square_centered(1.0, 2.0, 5, 4, 8)\n    assert isinstance(mesh, np.ndarray)\n    assert mesh.ndim == 3\n    assert mesh.shape[1:] == (4, 3)\ndef test_cylinder_mesher_square_centered_faces_count():\n    radial_res, half_square_res, height_res = 4, 3, 5\n    square_res = 2 * half_square_res\n    expected_disk_faces = (square_res * square_res) + (square_res * 4 * radial_res)\n    expected_lateral_faces = height_res * (square_res * 4)",
+        "detail": "tests.test_cylinder",
+        "documentation": {}
+    },
+    {
+        "label": "test_cylinder_mesher_square_centered_faces_count",
+        "kind": 2,
+        "importPath": "tests.test_cylinder",
+        "description": "tests.test_cylinder",
+        "peekOfCode": "def test_cylinder_mesher_square_centered_faces_count():\n    radial_res, half_square_res, height_res = 4, 3, 5\n    square_res = 2 * half_square_res\n    expected_disk_faces = (square_res * square_res) + (square_res * 4 * radial_res)\n    expected_lateral_faces = height_res * (square_res * 4)\n    expected_total_faces = 2 * expected_disk_faces + expected_lateral_faces\n    mesh = cylinder_mesher_square_centered(1.0, 2.0, radial_res, half_square_res, height_res)\n    assert mesh.shape[0] == expected_total_faces\ndef test_cylinder_mesher_square_centered_coordinate_bounds():\n    radius = 1.0",
+        "detail": "tests.test_cylinder",
+        "documentation": {}
+    },
+    {
+        "label": "test_cylinder_mesher_square_centered_coordinate_bounds",
+        "kind": 2,
+        "importPath": "tests.test_cylinder",
+        "description": "tests.test_cylinder",
+        "peekOfCode": "def test_cylinder_mesher_square_centered_coordinate_bounds():\n    radius = 1.0\n    height = 2.0\n    mesh = cylinder_mesher_square_centered(radius, height, 5, 4, 8)\n    xy = mesh[..., :2]\n    r = np.linalg.norm(xy, axis=-1)\n    assert np.all(r <= radius + 1e-6)\n    z = mesh[..., 2]\n    assert np.all(z >= -height/2 - 1e-6)\n    assert np.all(z <= height/2 + 1e-6)",
+        "detail": "tests.test_cylinder",
+        "documentation": {}
+    },
+    {
+        "label": "test_cylinder_mesher_square_centered_various_resolutions",
+        "kind": 2,
+        "importPath": "tests.test_cylinder",
+        "description": "tests.test_cylinder",
+        "peekOfCode": "def test_cylinder_mesher_square_centered_various_resolutions(radial_res, half_square_res, height_res):\n    mesh = cylinder_mesher_square_centered(1.0, 2.0, radial_res, half_square_res, height_res)\n    assert mesh.shape[1:] == (4, 3)\n# ---------------------- #\n# Error Handling Tests\n# ---------------------- #\n@pytest.mark.parametrize(\"radius\", [-1.0, 0.0])\ndef test_cylinder_mesher_radial_invalid_radius(radius):\n    with pytest.raises(ValueError, match=\"radius must be positive\"):\n        cylinder_mesher_radial(radius, 2.0, 5, 8, 6)",
+        "detail": "tests.test_cylinder",
+        "documentation": {}
+    },
+    {
+        "label": "test_cylinder_mesher_radial_invalid_radius",
+        "kind": 2,
+        "importPath": "tests.test_cylinder",
+        "description": "tests.test_cylinder",
+        "peekOfCode": "def test_cylinder_mesher_radial_invalid_radius(radius):\n    with pytest.raises(ValueError, match=\"radius must be positive\"):\n        cylinder_mesher_radial(radius, 2.0, 5, 8, 6)\n@pytest.mark.parametrize(\"radius\", [-1.0, 0.0])\ndef test_cylinder_mesher_square_centered_invalid_radius(radius):\n    with pytest.raises(ValueError, match=\"radius must be positive\"):\n        cylinder_mesher_square_centered(radius, 2.0, 5, 4, 8)\n@pytest.mark.parametrize(\"height\", [-1.0, 0.0])\ndef test_cylinder_mesher_radial_invalid_height(height):\n    with pytest.raises(ValueError, match=\"height must be positive\"):",
+        "detail": "tests.test_cylinder",
+        "documentation": {}
+    },
+    {
+        "label": "test_cylinder_mesher_square_centered_invalid_radius",
+        "kind": 2,
+        "importPath": "tests.test_cylinder",
+        "description": "tests.test_cylinder",
+        "peekOfCode": "def test_cylinder_mesher_square_centered_invalid_radius(radius):\n    with pytest.raises(ValueError, match=\"radius must be positive\"):\n        cylinder_mesher_square_centered(radius, 2.0, 5, 4, 8)\n@pytest.mark.parametrize(\"height\", [-1.0, 0.0])\ndef test_cylinder_mesher_radial_invalid_height(height):\n    with pytest.raises(ValueError, match=\"height must be positive\"):\n        cylinder_mesher_radial(1.0, height, 5, 8, 6)\n@pytest.mark.parametrize(\"height\", [-1.0, 0.0])\ndef test_cylinder_mesher_square_centered_invalid_height(height):\n    with pytest.raises(ValueError, match=\"height must be positive\"):",
+        "detail": "tests.test_cylinder",
+        "documentation": {}
+    },
+    {
+        "label": "test_cylinder_mesher_radial_invalid_height",
+        "kind": 2,
+        "importPath": "tests.test_cylinder",
+        "description": "tests.test_cylinder",
+        "peekOfCode": "def test_cylinder_mesher_radial_invalid_height(height):\n    with pytest.raises(ValueError, match=\"height must be positive\"):\n        cylinder_mesher_radial(1.0, height, 5, 8, 6)\n@pytest.mark.parametrize(\"height\", [-1.0, 0.0])\ndef test_cylinder_mesher_square_centered_invalid_height(height):\n    with pytest.raises(ValueError, match=\"height must be positive\"):\n        cylinder_mesher_square_centered(1.0, height, 5, 4, 8)\n@pytest.mark.parametrize(\"bad_res\", [0, -1])\ndef test_cylinder_mesher_radial_invalid_resolutions(bad_res):\n    with pytest.raises(ValueError):",
+        "detail": "tests.test_cylinder",
+        "documentation": {}
+    },
+    {
+        "label": "test_cylinder_mesher_square_centered_invalid_height",
+        "kind": 2,
+        "importPath": "tests.test_cylinder",
+        "description": "tests.test_cylinder",
+        "peekOfCode": "def test_cylinder_mesher_square_centered_invalid_height(height):\n    with pytest.raises(ValueError, match=\"height must be positive\"):\n        cylinder_mesher_square_centered(1.0, height, 5, 4, 8)\n@pytest.mark.parametrize(\"bad_res\", [0, -1])\ndef test_cylinder_mesher_radial_invalid_resolutions(bad_res):\n    with pytest.raises(ValueError):\n        cylinder_mesher_radial(1.0, 2.0, bad_res, 8, 6)\n    with pytest.raises(ValueError):\n        cylinder_mesher_radial(1.0, 2.0, 5, bad_res, 6)\n    with pytest.raises(ValueError):",
+        "detail": "tests.test_cylinder",
+        "documentation": {}
+    },
+    {
+        "label": "test_cylinder_mesher_radial_invalid_resolutions",
+        "kind": 2,
+        "importPath": "tests.test_cylinder",
+        "description": "tests.test_cylinder",
+        "peekOfCode": "def test_cylinder_mesher_radial_invalid_resolutions(bad_res):\n    with pytest.raises(ValueError):\n        cylinder_mesher_radial(1.0, 2.0, bad_res, 8, 6)\n    with pytest.raises(ValueError):\n        cylinder_mesher_radial(1.0, 2.0, 5, bad_res, 6)\n    with pytest.raises(ValueError):\n        cylinder_mesher_radial(1.0, 2.0, 5, 8, bad_res)\n@pytest.mark.parametrize(\"bad_res\", [0, -1])\ndef test_cylinder_mesher_square_centered_invalid_resolutions(bad_res):\n    with pytest.raises(ValueError):",
+        "detail": "tests.test_cylinder",
+        "documentation": {}
+    },
+    {
+        "label": "test_cylinder_mesher_square_centered_invalid_resolutions",
+        "kind": 2,
+        "importPath": "tests.test_cylinder",
+        "description": "tests.test_cylinder",
+        "peekOfCode": "def test_cylinder_mesher_square_centered_invalid_resolutions(bad_res):\n    with pytest.raises(ValueError):\n        cylinder_mesher_square_centered(1.0, 2.0, bad_res, 4, 8)\n    with pytest.raises(ValueError):\n        cylinder_mesher_square_centered(1.0, 2.0, 5, bad_res, 8)\n    with pytest.raises(ValueError):\n        cylinder_mesher_square_centered(1.0, 2.0, 5, 4, bad_res)",
+        "detail": "tests.test_cylinder",
+        "documentation": {}
+    },
+    {
+        "label": "test_disk_mesher_radial_basic_shape",
         "kind": 2,
         "importPath": "tests.test_disk",
         "description": "tests.test_disk",
-        "peekOfCode": "def test_disk_mesh_radial_basic_shape():\n    mesh = disk_mesh_radial(1.0, 5, 8)\n    expected_faces = 5 * 8\n    assert isinstance(mesh, np.ndarray)\n    assert mesh.shape == (expected_faces, 4, 2)\ndef test_disk_mesh_radial_output_dtype():\n    mesh = disk_mesh_radial(1.0, 3, 3)\n    assert np.issubdtype(mesh.dtype, np.floating)\ndef test_disk_mesh_radial_radius_limit():\n    mesh = disk_mesh_radial(1.0, 10, 10)",
+        "peekOfCode": "def test_disk_mesher_radial_basic_shape():\n    mesh = disk_mesher_radial(1.0, 5, 8)\n    expected_faces = 5 * 8\n    assert isinstance(mesh, np.ndarray)\n    assert mesh.shape == (expected_faces, 4, 2)\ndef test_disk_mesher_radial_output_dtype():\n    mesh = disk_mesher_radial(1.0, 3, 3)\n    assert np.issubdtype(mesh.dtype, np.floating)\ndef test_disk_mesher_radial_radius_limit():\n    mesh = disk_mesher_radial(1.0, 10, 10)",
         "detail": "tests.test_disk",
         "documentation": {}
     },
     {
-        "label": "test_disk_mesh_radial_output_dtype",
+        "label": "test_disk_mesher_radial_output_dtype",
         "kind": 2,
         "importPath": "tests.test_disk",
         "description": "tests.test_disk",
-        "peekOfCode": "def test_disk_mesh_radial_output_dtype():\n    mesh = disk_mesh_radial(1.0, 3, 3)\n    assert np.issubdtype(mesh.dtype, np.floating)\ndef test_disk_mesh_radial_radius_limit():\n    mesh = disk_mesh_radial(1.0, 10, 10)\n    r = np.linalg.norm(mesh, axis=-1)\n    assert np.all(r <= 1.0 + 1e-6)\n@pytest.mark.parametrize(\"radial_resolution, segment_resolution\", [\n    (1, 1),\n    (2, 4),",
+        "peekOfCode": "def test_disk_mesher_radial_output_dtype():\n    mesh = disk_mesher_radial(1.0, 3, 3)\n    assert np.issubdtype(mesh.dtype, np.floating)\ndef test_disk_mesher_radial_radius_limit():\n    mesh = disk_mesher_radial(1.0, 10, 10)\n    r = np.linalg.norm(mesh, axis=-1)\n    assert np.all(r <= 1.0 + 1e-6)\n@pytest.mark.parametrize(\"radial_resolution, segment_resolution\", [\n    (1, 1),\n    (2, 4),",
         "detail": "tests.test_disk",
         "documentation": {}
     },
     {
-        "label": "test_disk_mesh_radial_radius_limit",
+        "label": "test_disk_mesher_radial_radius_limit",
         "kind": 2,
         "importPath": "tests.test_disk",
         "description": "tests.test_disk",
-        "peekOfCode": "def test_disk_mesh_radial_radius_limit():\n    mesh = disk_mesh_radial(1.0, 10, 10)\n    r = np.linalg.norm(mesh, axis=-1)\n    assert np.all(r <= 1.0 + 1e-6)\n@pytest.mark.parametrize(\"radial_resolution, segment_resolution\", [\n    (1, 1),\n    (2, 4),\n    (5, 10),\n])\ndef test_disk_mesh_radial_various_resolutions(radial_resolution, segment_resolution):",
+        "peekOfCode": "def test_disk_mesher_radial_radius_limit():\n    mesh = disk_mesher_radial(1.0, 10, 10)\n    r = np.linalg.norm(mesh, axis=-1)\n    assert np.all(r <= 1.0 + 1e-6)\n@pytest.mark.parametrize(\"radial_resolution, segment_resolution\", [\n    (1, 1),\n    (2, 4),\n    (5, 10),\n])\ndef test_disk_mesher_radial_various_resolutions(radial_resolution, segment_resolution):",
         "detail": "tests.test_disk",
         "documentation": {}
     },
     {
-        "label": "test_disk_mesh_radial_various_resolutions",
+        "label": "test_disk_mesher_radial_various_resolutions",
         "kind": 2,
         "importPath": "tests.test_disk",
         "description": "tests.test_disk",
-        "peekOfCode": "def test_disk_mesh_radial_various_resolutions(radial_resolution, segment_resolution):\n    mesh = disk_mesh_radial(1.0, radial_resolution, segment_resolution)\n    expected_faces = radial_resolution * segment_resolution\n    assert mesh.shape == (expected_faces, 4, 2)\ndef test_disk_mesh_radial_zero_radius():\n    mesh = disk_mesh_radial(0.0, 5, 8)\n    assert np.allclose(mesh, 0.0)\ndef test_disk_mesh_radial_negative_inputs():\n    with pytest.raises(ValueError, match=\"Invalid radius\"):\n        disk_mesh_radial(-1.0, 5, 5)",
+        "peekOfCode": "def test_disk_mesher_radial_various_resolutions(radial_resolution, segment_resolution):\n    mesh = disk_mesher_radial(1.0, radial_resolution, segment_resolution)\n    expected_faces = radial_resolution * segment_resolution\n    assert mesh.shape == (expected_faces, 4, 2)\ndef test_disk_mesher_radial_zero_radius():\n    mesh = disk_mesher_radial(0.0, 5, 8)\n    assert np.allclose(mesh, 0.0)\ndef test_disk_mesher_radial_negative_inputs():\n    with pytest.raises(ValueError, match=\"Invalid radius\"):\n        disk_mesher_radial(-1.0, 5, 5)",
         "detail": "tests.test_disk",
         "documentation": {}
     },
     {
-        "label": "test_disk_mesh_radial_zero_radius",
+        "label": "test_disk_mesher_radial_zero_radius",
         "kind": 2,
         "importPath": "tests.test_disk",
         "description": "tests.test_disk",
-        "peekOfCode": "def test_disk_mesh_radial_zero_radius():\n    mesh = disk_mesh_radial(0.0, 5, 8)\n    assert np.allclose(mesh, 0.0)\ndef test_disk_mesh_radial_negative_inputs():\n    with pytest.raises(ValueError, match=\"Invalid radius\"):\n        disk_mesh_radial(-1.0, 5, 5)\n    with pytest.raises(ValueError, match=\"Invalid resolution\"):\n        disk_mesh_radial(1.0, -1, 5)\n    with pytest.raises(ValueError, match=\"Invalid resolution\"):\n        disk_mesh_radial(1.0, 5, -3)",
+        "peekOfCode": "def test_disk_mesher_radial_zero_radius():\n    mesh = disk_mesher_radial(0.0, 5, 8)\n    assert np.allclose(mesh, 0.0)\ndef test_disk_mesher_radial_negative_inputs():\n    with pytest.raises(ValueError, match=\"Invalid radius\"):\n        disk_mesher_radial(-1.0, 5, 5)\n    with pytest.raises(ValueError, match=\"Invalid resolution\"):\n        disk_mesher_radial(1.0, -1, 5)\n    with pytest.raises(ValueError, match=\"Invalid resolution\"):\n        disk_mesher_radial(1.0, 5, -3)",
         "detail": "tests.test_disk",
         "documentation": {}
     },
     {
-        "label": "test_disk_mesh_radial_negative_inputs",
+        "label": "test_disk_mesher_radial_negative_inputs",
         "kind": 2,
         "importPath": "tests.test_disk",
         "description": "tests.test_disk",
-        "peekOfCode": "def test_disk_mesh_radial_negative_inputs():\n    with pytest.raises(ValueError, match=\"Invalid radius\"):\n        disk_mesh_radial(-1.0, 5, 5)\n    with pytest.raises(ValueError, match=\"Invalid resolution\"):\n        disk_mesh_radial(1.0, -1, 5)\n    with pytest.raises(ValueError, match=\"Invalid resolution\"):\n        disk_mesh_radial(1.0, 5, -3)\n# ---------------------------------- #\n# circumference_edges Tests          #\n# ---------------------------------- #",
+        "peekOfCode": "def test_disk_mesher_radial_negative_inputs():\n    with pytest.raises(ValueError, match=\"Invalid radius\"):\n        disk_mesher_radial(-1.0, 5, 5)\n    with pytest.raises(ValueError, match=\"Invalid resolution\"):\n        disk_mesher_radial(1.0, -1, 5)\n    with pytest.raises(ValueError, match=\"Invalid resolution\"):\n        disk_mesher_radial(1.0, 5, -3)\n# ---------------------------------- #\n# circumference_edges Tests          #\n# ---------------------------------- #",
         "detail": "tests.test_disk",
         "documentation": {}
     },
@@ -856,7 +1092,7 @@
         "kind": 2,
         "importPath": "tests.test_disk",
         "description": "tests.test_disk",
-        "peekOfCode": "def test_circumference_edges_negative_radius():\n    with pytest.raises(ValueError, match=\"Invalid radius\"):\n        circumference_edges(-1.0, 12)\ndef test_circumference_edges_invalid_segment_resolution():\n    with pytest.raises(ValueError, match=\"Invalid segment_resolution\"):\n        circumference_edges(1.0, 0)\n# ---------------------------------- #\n# disk_mesh_square_centered Tests    #\n# ---------------------------------- #\ndef test_disk_mesh_square_centered_basic_shape():",
+        "peekOfCode": "def test_circumference_edges_negative_radius():\n    with pytest.raises(ValueError, match=\"Invalid radius\"):\n        circumference_edges(-1.0, 12)\ndef test_circumference_edges_invalid_segment_resolution():\n    with pytest.raises(ValueError, match=\"Invalid segment_resolution\"):\n        circumference_edges(1.0, 0)\n# ---------------------------------- #\n# disk_mesher_square_centered Tests    #\n# ---------------------------------- #\ndef test_disk_mesher_square_centered_basic_shape():",
         "detail": "tests.test_disk",
         "documentation": {}
     },
@@ -865,43 +1101,43 @@
         "kind": 2,
         "importPath": "tests.test_disk",
         "description": "tests.test_disk",
-        "peekOfCode": "def test_circumference_edges_invalid_segment_resolution():\n    with pytest.raises(ValueError, match=\"Invalid segment_resolution\"):\n        circumference_edges(1.0, 0)\n# ---------------------------------- #\n# disk_mesh_square_centered Tests    #\n# ---------------------------------- #\ndef test_disk_mesh_square_centered_basic_shape():\n    mesh = disk_mesh_square_centered(1.0, 5, 5)\n    assert mesh.shape[1:] == (4, 2)\n    assert mesh.ndim == 3",
+        "peekOfCode": "def test_circumference_edges_invalid_segment_resolution():\n    with pytest.raises(ValueError, match=\"Invalid segment_resolution\"):\n        circumference_edges(1.0, 0)\n# ---------------------------------- #\n# disk_mesher_square_centered Tests    #\n# ---------------------------------- #\ndef test_disk_mesher_square_centered_basic_shape():\n    mesh = disk_mesher_square_centered(1.0, 5, 5)\n    assert mesh.shape[1:] == (4, 2)\n    assert mesh.ndim == 3",
         "detail": "tests.test_disk",
         "documentation": {}
     },
     {
-        "label": "test_disk_mesh_square_centered_basic_shape",
+        "label": "test_disk_mesher_square_centered_basic_shape",
         "kind": 2,
         "importPath": "tests.test_disk",
         "description": "tests.test_disk",
-        "peekOfCode": "def test_disk_mesh_square_centered_basic_shape():\n    mesh = disk_mesh_square_centered(1.0, 5, 5)\n    assert mesh.shape[1:] == (4, 2)\n    assert mesh.ndim == 3\ndef test_disk_mesh_square_centered_increasing_size():\n    mesh_small = disk_mesh_square_centered(1.0, 2, 2)\n    mesh_large = disk_mesh_square_centered(1.0, 5, 5)\n    assert mesh_large.shape[0] > mesh_small.shape[0]\ndef test_disk_mesh_square_centered_invalid_inputs():\n    with pytest.raises(ValueError, match=\"radius must be positive\"):",
+        "peekOfCode": "def test_disk_mesher_square_centered_basic_shape():\n    mesh = disk_mesher_square_centered(1.0, 5, 5)\n    assert mesh.shape[1:] == (4, 2)\n    assert mesh.ndim == 3\ndef test_disk_mesher_square_centered_increasing_size():\n    mesh_small = disk_mesher_square_centered(1.0, 2, 2)\n    mesh_large = disk_mesher_square_centered(1.0, 5, 5)\n    assert mesh_large.shape[0] > mesh_small.shape[0]\ndef test_disk_mesher_square_centered_invalid_inputs():\n    with pytest.raises(ValueError, match=\"radius must be positive\"):",
         "detail": "tests.test_disk",
         "documentation": {}
     },
     {
-        "label": "test_disk_mesh_square_centered_increasing_size",
+        "label": "test_disk_mesher_square_centered_increasing_size",
         "kind": 2,
         "importPath": "tests.test_disk",
         "description": "tests.test_disk",
-        "peekOfCode": "def test_disk_mesh_square_centered_increasing_size():\n    mesh_small = disk_mesh_square_centered(1.0, 2, 2)\n    mesh_large = disk_mesh_square_centered(1.0, 5, 5)\n    assert mesh_large.shape[0] > mesh_small.shape[0]\ndef test_disk_mesh_square_centered_invalid_inputs():\n    with pytest.raises(ValueError, match=\"radius must be positive\"):\n        disk_mesh_square_centered(0.0, 5, 5)\n    with pytest.raises(ValueError, match=\"square_resolution must be at least 1\"):\n        disk_mesh_square_centered(1.0, 0, 5)\n    with pytest.raises(ValueError, match=\"radial_resolution must be at least 1\"):",
+        "peekOfCode": "def test_disk_mesher_square_centered_increasing_size():\n    mesh_small = disk_mesher_square_centered(1.0, 2, 2)\n    mesh_large = disk_mesher_square_centered(1.0, 5, 5)\n    assert mesh_large.shape[0] > mesh_small.shape[0]\ndef test_disk_mesher_square_centered_invalid_inputs():\n    with pytest.raises(ValueError, match=\"radius must be positive\"):\n        disk_mesher_square_centered(0.0, 5, 5)\n    with pytest.raises(ValueError, match=\"square_resolution must be at least 1\"):\n        disk_mesher_square_centered(1.0, 0, 5)\n    with pytest.raises(ValueError, match=\"radial_resolution must be at least 1\"):",
         "detail": "tests.test_disk",
         "documentation": {}
     },
     {
-        "label": "test_disk_mesh_square_centered_invalid_inputs",
+        "label": "test_disk_mesher_square_centered_invalid_inputs",
         "kind": 2,
         "importPath": "tests.test_disk",
         "description": "tests.test_disk",
-        "peekOfCode": "def test_disk_mesh_square_centered_invalid_inputs():\n    with pytest.raises(ValueError, match=\"radius must be positive\"):\n        disk_mesh_square_centered(0.0, 5, 5)\n    with pytest.raises(ValueError, match=\"square_resolution must be at least 1\"):\n        disk_mesh_square_centered(1.0, 0, 5)\n    with pytest.raises(ValueError, match=\"radial_resolution must be at least 1\"):\n        disk_mesh_square_centered(1.0, 5, 0)\n    with pytest.raises(ValueError, match=\"square_side_radius_ratio must be in\"):\n        disk_mesh_square_centered(1.0, 5, 5, square_side_radius_ratio=0)\n    with pytest.raises(ValueError, match=\"square_side_radius_ratio must be in\"):",
+        "peekOfCode": "def test_disk_mesher_square_centered_invalid_inputs():\n    with pytest.raises(ValueError, match=\"radius must be positive\"):\n        disk_mesher_square_centered(0.0, 5, 5)\n    with pytest.raises(ValueError, match=\"square_resolution must be at least 1\"):\n        disk_mesher_square_centered(1.0, 0, 5)\n    with pytest.raises(ValueError, match=\"radial_resolution must be at least 1\"):\n        disk_mesher_square_centered(1.0, 5, 0)\n    with pytest.raises(ValueError, match=\"square_side_radius_ratio must be in\"):\n        disk_mesher_square_centered(1.0, 5, 5, square_side_radius_ratio=0)\n    with pytest.raises(ValueError, match=\"square_side_radius_ratio must be in\"):",
         "detail": "tests.test_disk",
         "documentation": {}
     },
     {
-        "label": "test_disk_mesh_square_centered_with_rotation",
+        "label": "test_disk_mesher_square_centered_with_rotation",
         "kind": 2,
         "importPath": "tests.test_disk",
         "description": "tests.test_disk",
-        "peekOfCode": "def test_disk_mesh_square_centered_with_rotation():\n    mesh_rotated = disk_mesh_square_centered(1.0, 5, 5, square_disk_rotation=np.pi/8)\n    mesh_non_rotated = disk_mesh_square_centered(1.0, 5, 5, square_disk_rotation=0)\n    assert mesh_rotated.shape == mesh_non_rotated.shape",
+        "peekOfCode": "def test_disk_mesher_square_centered_with_rotation():\n    mesh_rotated = disk_mesher_square_centered(1.0, 5, 5, square_disk_rotation=np.pi/8)\n    mesh_non_rotated = disk_mesher_square_centered(1.0, 5, 5, square_disk_rotation=0)\n    assert mesh_rotated.shape == mesh_non_rotated.shape",
         "detail": "tests.test_disk",
         "documentation": {}
     },
@@ -910,7 +1146,7 @@
         "kind": 2,
         "importPath": "tests.test_edge",
         "description": "tests.test_edge",
-        "peekOfCode": "def test_convert_2d_face_to_3d_basic():\n    quad_2d = np.array([[[0, 0], [1, 0], [1, 1], [0, 1]]])\n    result = convert_2d_face_to_3d(quad_2d, fixed_axis=2, fixed_value=5.0)\n    expected = np.array([[[0, 0, 5], [1, 0, 5], [1, 1, 5], [0, 1, 5]]])\n    np.testing.assert_array_equal(result, expected)\ndef test_convert_2d_face_to_3d_all_axes():\n    quad_2d = np.array([[[0, 0], [1, 0], [1, 1], [0, 1]]])\n    for axis in [0, 1, 2]:\n        result = convert_2d_face_to_3d(quad_2d, fixed_axis=axis, fixed_value=3.5)\n        assert result.shape == (1, 4, 3)",
+        "peekOfCode": "def test_convert_2d_face_to_3d_basic():\n    quad_2d = np.array([[[0, 0], [1, 0], [1, 1], [0, 1]]])\n    result = convert_2d_face_to_3d(quad_2d, axis=2, offset=5.0)\n    expected = np.array([[[0, 0, 5], [1, 0, 5], [1, 1, 5], [0, 1, 5]]])\n    np.testing.assert_array_equal(result, expected)\ndef test_convert_2d_face_to_3d_all_axes():\n    quad_2d = np.array([[[0, 0], [1, 0], [1, 1], [0, 1]]])\n    for axis in [0, 1, 2]:\n        result = convert_2d_face_to_3d(quad_2d, axis=axis, offset=3.5)\n        assert result.shape == (1, 4, 3)",
         "detail": "tests.test_edge",
         "documentation": {}
     },
@@ -919,7 +1155,7 @@
         "kind": 2,
         "importPath": "tests.test_edge",
         "description": "tests.test_edge",
-        "peekOfCode": "def test_convert_2d_face_to_3d_all_axes():\n    quad_2d = np.array([[[0, 0], [1, 0], [1, 1], [0, 1]]])\n    for axis in [0, 1, 2]:\n        result = convert_2d_face_to_3d(quad_2d, fixed_axis=axis, fixed_value=3.5)\n        assert result.shape == (1, 4, 3)\n        assert np.allclose(result[:, :, axis], 3.5)\ndef test_convert_2d_face_to_3d_invalid_axis():\n    quad_2d = np.array([[[0, 0], [1, 0], [1, 1], [0, 1]]])\n    with pytest.raises(ValueError, match=re.escape(\"fixed_axis must be 0 (x), 1 (y), or 2 (z). Got 3.\")):\n        convert_2d_face_to_3d(quad_2d, fixed_axis=3, fixed_value=0)",
+        "peekOfCode": "def test_convert_2d_face_to_3d_all_axes():\n    quad_2d = np.array([[[0, 0], [1, 0], [1, 1], [0, 1]]])\n    for axis in [0, 1, 2]:\n        result = convert_2d_face_to_3d(quad_2d, axis=axis, offset=3.5)\n        assert result.shape == (1, 4, 3)\n        assert np.allclose(result[:, :, axis], 3.5)\ndef test_convert_2d_face_to_3d_invalid_axis():\n    quad_2d = np.array([[[0, 0], [1, 0], [1, 1], [0, 1]]])\n    with pytest.raises(ValueError, match=re.escape(\"fixed_axis must be 0 (x), 1 (y), or 2 (z). Got 3.\")):\n        convert_2d_face_to_3d(quad_2d, axis=3, offset=0)",
         "detail": "tests.test_edge",
         "documentation": {}
     },
@@ -928,7 +1164,7 @@
         "kind": 2,
         "importPath": "tests.test_edge",
         "description": "tests.test_edge",
-        "peekOfCode": "def test_convert_2d_face_to_3d_invalid_axis():\n    quad_2d = np.array([[[0, 0], [1, 0], [1, 1], [0, 1]]])\n    with pytest.raises(ValueError, match=re.escape(\"fixed_axis must be 0 (x), 1 (y), or 2 (z). Got 3.\")):\n        convert_2d_face_to_3d(quad_2d, fixed_axis=3, fixed_value=0)\n# --------------------------- #\n# quad_faces_from_edges Tests #\n# --------------------------- #\ndef test_quad_faces_from_edges_basic():\n    u = np.array([0, 1])\n    v = np.array([0, 1])",
+        "peekOfCode": "def test_convert_2d_face_to_3d_invalid_axis():\n    quad_2d = np.array([[[0, 0], [1, 0], [1, 1], [0, 1]]])\n    with pytest.raises(ValueError, match=re.escape(\"fixed_axis must be 0 (x), 1 (y), or 2 (z). Got 3.\")):\n        convert_2d_face_to_3d(quad_2d, axis=3, offset=0)\n# --------------------------- #\n# quad_faces_from_edges Tests #\n# --------------------------- #\ndef test_quad_faces_from_edges_basic():\n    u = np.array([0, 1])\n    v = np.array([0, 1])",
         "detail": "tests.test_edge",
         "documentation": {}
     },
@@ -1011,6 +1247,204 @@
         "description": "tests.test_edge",
         "peekOfCode": "def test_rectangle_perimeter_too_few_points():\n    length_edge = np.array([0.0])\n    width_edge = np.array([0.0, 1.0])\n    with pytest.raises(ValueError, match=\"length_edge and width_edge must have at least 2 points\"):\n        rectangle_perimeter(length_edge, width_edge)",
         "detail": "tests.test_edge",
+        "documentation": {}
+    },
+    {
+        "label": "test_revolve_curve_along_path_basic",
+        "kind": 2,
+        "importPath": "tests.test_revolve",
+        "description": "tests.test_revolve",
+        "peekOfCode": "def test_revolve_curve_along_path_basic():\n    curve = np.array([[1, 2], [3, 4]])\n    revolve_path = np.array([[0, 1], [np.pi/2, 2]])\n    mesh = revolve_curve_along_path(curve, revolve_path)\n    assert isinstance(mesh, np.ndarray)\n    assert mesh.shape == (1, 4, 3)\ndef test_revolve_curve_along_path_multiple_segments():\n    curve = np.array([[0, 0], [1, 1], [2, 0]])\n    revolve_path = np.array([[0, 1], [np.pi/2, 2], [np.pi, 3]])\n    mesh = revolve_curve_along_path(curve, revolve_path)",
+        "detail": "tests.test_revolve",
+        "documentation": {}
+    },
+    {
+        "label": "test_revolve_curve_along_path_multiple_segments",
+        "kind": 2,
+        "importPath": "tests.test_revolve",
+        "description": "tests.test_revolve",
+        "peekOfCode": "def test_revolve_curve_along_path_multiple_segments():\n    curve = np.array([[0, 0], [1, 1], [2, 0]])\n    revolve_path = np.array([[0, 1], [np.pi/2, 2], [np.pi, 3]])\n    mesh = revolve_curve_along_path(curve, revolve_path)\n    assert mesh.shape == ((3-1)*(3-1), 4, 3)  # (m-1)*(n-1)\ndef test_revolve_curve_along_path_invalid_curve_shape():\n    curve = np.array([1, 2, 3])  # 1D\n    revolve_path = np.array([[0, 1], [np.pi/2, 2]])\n    with pytest.raises(ValueError, match=\"Curve must be a \\\\(n, 2\\\\) array\"):\n        revolve_curve_along_path(curve, revolve_path)",
+        "detail": "tests.test_revolve",
+        "documentation": {}
+    },
+    {
+        "label": "test_revolve_curve_along_path_invalid_curve_shape",
+        "kind": 2,
+        "importPath": "tests.test_revolve",
+        "description": "tests.test_revolve",
+        "peekOfCode": "def test_revolve_curve_along_path_invalid_curve_shape():\n    curve = np.array([1, 2, 3])  # 1D\n    revolve_path = np.array([[0, 1], [np.pi/2, 2]])\n    with pytest.raises(ValueError, match=\"Curve must be a \\\\(n, 2\\\\) array\"):\n        revolve_curve_along_path(curve, revolve_path)\ndef test_revolve_curve_along_path_invalid_revolve_path_shape():\n    curve = np.array([[1, 2], [3, 4]])\n    revolve_path = np.array([0, 1])  # 1D\n    with pytest.raises(ValueError, match=\"Revolve path must be a \\\\(m, 2\\\\) array\"):\n        revolve_curve_along_path(curve, revolve_path)",
+        "detail": "tests.test_revolve",
+        "documentation": {}
+    },
+    {
+        "label": "test_revolve_curve_along_path_invalid_revolve_path_shape",
+        "kind": 2,
+        "importPath": "tests.test_revolve",
+        "description": "tests.test_revolve",
+        "peekOfCode": "def test_revolve_curve_along_path_invalid_revolve_path_shape():\n    curve = np.array([[1, 2], [3, 4]])\n    revolve_path = np.array([0, 1])  # 1D\n    with pytest.raises(ValueError, match=\"Revolve path must be a \\\\(m, 2\\\\) array\"):\n        revolve_curve_along_path(curve, revolve_path)\n# ----------------------------- #\n# circular_revolve tests        #\n# ----------------------------- #\ndef test_circular_revolve_basic():\n    curve = np.array([",
+        "detail": "tests.test_revolve",
+        "documentation": {}
+    },
+    {
+        "label": "test_circular_revolve_basic",
+        "kind": 2,
+        "importPath": "tests.test_revolve",
+        "description": "tests.test_revolve",
+        "peekOfCode": "def test_circular_revolve_basic():\n    curve = np.array([\n        [1.0, 0.0],\n        [2.0, 1.0],\n    ])\n    segment_resolution = 8\n    mesh = circular_revolve(curve, segment_resolution)\n    assert isinstance(mesh, np.ndarray)\n    assert mesh.shape == (8 * (2-1), 4, 3)  # (segments * (n-1))\ndef test_circular_revolve_full_circle():",
+        "detail": "tests.test_revolve",
+        "documentation": {}
+    },
+    {
+        "label": "test_circular_revolve_full_circle",
+        "kind": 2,
+        "importPath": "tests.test_revolve",
+        "description": "tests.test_revolve",
+        "peekOfCode": "def test_circular_revolve_full_circle():\n    curve = np.array([\n        [1.0, 0.0],\n        [2.0, 1.0],\n        [2.5, 2.0],\n    ])\n    segment_resolution = 12\n    mesh = circular_revolve(curve, segment_resolution)\n    assert mesh.shape == (12 * (3-1), 4, 3)\ndef test_circular_revolve_partial_revolve():",
+        "detail": "tests.test_revolve",
+        "documentation": {}
+    },
+    {
+        "label": "test_circular_revolve_partial_revolve",
+        "kind": 2,
+        "importPath": "tests.test_revolve",
+        "description": "tests.test_revolve",
+        "peekOfCode": "def test_circular_revolve_partial_revolve():\n    curve = np.array([\n        [1.0, 0.0],\n        [2.0, 1.0],\n    ])\n    segment_resolution = 4\n    mesh = circular_revolve(curve, segment_resolution, start_angle=0, end_angle=np.pi)\n    assert mesh.shape == (4 * (2-1), 4, 3)\ndef test_circular_revolve_invalid_curve_shape():\n    curve = np.array([1.0, 2.0])  # 1D",
+        "detail": "tests.test_revolve",
+        "documentation": {}
+    },
+    {
+        "label": "test_circular_revolve_invalid_curve_shape",
+        "kind": 2,
+        "importPath": "tests.test_revolve",
+        "description": "tests.test_revolve",
+        "peekOfCode": "def test_circular_revolve_invalid_curve_shape():\n    curve = np.array([1.0, 2.0])  # 1D\n    with pytest.raises(ValueError, match=\"curve must be a \\\\(n, 2\\\\) array\"):\n        circular_revolve(curve, segment_resolution=8)\ndef test_circular_revolve_invalid_segment_resolution():\n    curve = np.array([\n        [1.0, 0.0],\n        [2.0, 1.0],\n    ])\n    with pytest.raises(ValueError, match=\"segment_resolution must be at least 1\"):",
+        "detail": "tests.test_revolve",
+        "documentation": {}
+    },
+    {
+        "label": "test_circular_revolve_invalid_segment_resolution",
+        "kind": 2,
+        "importPath": "tests.test_revolve",
+        "description": "tests.test_revolve",
+        "peekOfCode": "def test_circular_revolve_invalid_segment_resolution():\n    curve = np.array([\n        [1.0, 0.0],\n        [2.0, 1.0],\n    ])\n    with pytest.raises(ValueError, match=\"segment_resolution must be at least 1\"):\n        circular_revolve(curve, segment_resolution=0)\n# ----------------------------- #\n# Randomized property test      #\n# ----------------------------- #",
+        "detail": "tests.test_revolve",
+        "documentation": {}
+    },
+    {
+        "label": "test_circular_revolve_randomized",
+        "kind": 2,
+        "importPath": "tests.test_revolve",
+        "description": "tests.test_revolve",
+        "peekOfCode": "def test_circular_revolve_randomized(segments):\n    np.random.seed(42)\n    curve = np.random.rand(5, 2)  # Random 5-point curve\n    mesh = circular_revolve(curve, segments)\n    assert mesh.shape == (segments * (5-1), 4, 3)\n    assert np.isfinite(mesh).all()",
+        "detail": "tests.test_revolve",
+        "documentation": {}
+    },
+    {
+        "label": "test_sphere_projection_basic",
+        "kind": 2,
+        "importPath": "tests.test_sphere",
+        "description": "tests.test_sphere",
+        "peekOfCode": "def test_sphere_projection_basic() -> None:\n    radius = 1.0\n    resolution = 10\n    mesh = sphere_mesher_from_projection(radius, resolution)\n    assert isinstance(mesh, np.ndarray)\n    assert mesh.ndim == 3\n    assert mesh.shape[1:] == (4, 3)\n    np.testing.assert_allclose(np.linalg.norm(mesh, axis=2), radius)\ndef test_sphere_projection_invalid_radius() -> None:\n    with pytest.raises(ValueError, match=\"Radius must be positive\"):",
+        "detail": "tests.test_sphere",
+        "documentation": {}
+    },
+    {
+        "label": "test_sphere_projection_invalid_radius",
+        "kind": 2,
+        "importPath": "tests.test_sphere",
+        "description": "tests.test_sphere",
+        "peekOfCode": "def test_sphere_projection_invalid_radius() -> None:\n    with pytest.raises(ValueError, match=\"Radius must be positive\"):\n        sphere_mesher_from_projection(0, 10)\n    with pytest.raises(ValueError, match=\"Radius must be positive\"):\n        sphere_mesher_from_projection(-1, 10)\ndef test_sphere_projection_invalid_resolution() -> None:\n    with pytest.raises(ValueError, match=\"resolution must be at least 1\"):\n        sphere_mesher_from_projection(1.0, 0)\n    with pytest.raises(ValueError, match=\"resolution must be at least 1\"):\n        sphere_mesher_from_projection(1.0, -5)",
+        "detail": "tests.test_sphere",
+        "documentation": {}
+    },
+    {
+        "label": "test_sphere_projection_invalid_resolution",
+        "kind": 2,
+        "importPath": "tests.test_sphere",
+        "description": "tests.test_sphere",
+        "peekOfCode": "def test_sphere_projection_invalid_resolution() -> None:\n    with pytest.raises(ValueError, match=\"resolution must be at least 1\"):\n        sphere_mesher_from_projection(1.0, 0)\n    with pytest.raises(ValueError, match=\"resolution must be at least 1\"):\n        sphere_mesher_from_projection(1.0, -5)\ndef test_sphere_projection_shape_scaling() -> None:\n    radius = 3.5\n    resolution = 5\n    mesh = sphere_mesher_from_projection(radius, resolution)\n    np.testing.assert_allclose(np.linalg.norm(mesh, axis=2), radius)",
+        "detail": "tests.test_sphere",
+        "documentation": {}
+    },
+    {
+        "label": "test_sphere_projection_shape_scaling",
+        "kind": 2,
+        "importPath": "tests.test_sphere",
+        "description": "tests.test_sphere",
+        "peekOfCode": "def test_sphere_projection_shape_scaling() -> None:\n    radius = 3.5\n    resolution = 5\n    mesh = sphere_mesher_from_projection(radius, resolution)\n    np.testing.assert_allclose(np.linalg.norm(mesh, axis=2), radius)\n# ------------------------------ #\n# sphere_mesher_from_radial tests\n# ------------------------------ #\ndef test_sphere_radial_basic() -> None:\n    radius = 1.0",
+        "detail": "tests.test_sphere",
+        "documentation": {}
+    },
+    {
+        "label": "test_sphere_radial_basic",
+        "kind": 2,
+        "importPath": "tests.test_sphere",
+        "description": "tests.test_sphere",
+        "peekOfCode": "def test_sphere_radial_basic() -> None:\n    radius = 1.0\n    radial_resolution = 10\n    segment_resolution = 10\n    mesh = sphere_mesher_from_radial(radius, radial_resolution, segment_resolution)\n    assert isinstance(mesh, np.ndarray)\n    assert mesh.ndim == 3\n    assert mesh.shape == (radial_resolution * segment_resolution, 4, 3)\ndef test_sphere_radial_partial_angle() -> None:\n    radius = 1.0",
+        "detail": "tests.test_sphere",
+        "documentation": {}
+    },
+    {
+        "label": "test_sphere_radial_partial_angle",
+        "kind": 2,
+        "importPath": "tests.test_sphere",
+        "description": "tests.test_sphere",
+        "peekOfCode": "def test_sphere_radial_partial_angle() -> None:\n    radius = 1.0\n    radial_resolution = 5\n    segment_resolution = 8\n    mesh = sphere_mesher_from_radial(radius, radial_resolution, segment_resolution, start_angle=0, end_angle=np.pi)\n    assert mesh.shape == (radial_resolution * segment_resolution, 4, 3)\ndef test_sphere_radial_invalid_radius() -> None:\n    with pytest.raises(ValueError, match=\"Radius must be positive\"):\n        sphere_mesher_from_radial(0, 10, 10)\ndef test_sphere_radial_invalid_radial_resolution() -> None:",
+        "detail": "tests.test_sphere",
+        "documentation": {}
+    },
+    {
+        "label": "test_sphere_radial_invalid_radius",
+        "kind": 2,
+        "importPath": "tests.test_sphere",
+        "description": "tests.test_sphere",
+        "peekOfCode": "def test_sphere_radial_invalid_radius() -> None:\n    with pytest.raises(ValueError, match=\"Radius must be positive\"):\n        sphere_mesher_from_radial(0, 10, 10)\ndef test_sphere_radial_invalid_radial_resolution() -> None:\n    with pytest.raises(ValueError, match=\"radial_resolution must be at least 1\"):\n        sphere_mesher_from_radial(1.0, 0, 10)\ndef test_sphere_radial_invalid_segment_resolution() -> None:\n    with pytest.raises(ValueError, match=\"segment_resolution must be at least 1\"):\n        sphere_mesher_from_radial(1.0, 10, 0)\n@pytest.mark.parametrize(\"radius\", [0.5, 1.0, 10.0])",
+        "detail": "tests.test_sphere",
+        "documentation": {}
+    },
+    {
+        "label": "test_sphere_radial_invalid_radial_resolution",
+        "kind": 2,
+        "importPath": "tests.test_sphere",
+        "description": "tests.test_sphere",
+        "peekOfCode": "def test_sphere_radial_invalid_radial_resolution() -> None:\n    with pytest.raises(ValueError, match=\"radial_resolution must be at least 1\"):\n        sphere_mesher_from_radial(1.0, 0, 10)\ndef test_sphere_radial_invalid_segment_resolution() -> None:\n    with pytest.raises(ValueError, match=\"segment_resolution must be at least 1\"):\n        sphere_mesher_from_radial(1.0, 10, 0)\n@pytest.mark.parametrize(\"radius\", [0.5, 1.0, 10.0])\ndef test_sphere_radial_radius_variations(radius) -> None:\n    mesh = sphere_mesher_from_radial(radius, 5, 8)\n    norms = np.linalg.norm(mesh, axis=2)",
+        "detail": "tests.test_sphere",
+        "documentation": {}
+    },
+    {
+        "label": "test_sphere_radial_invalid_segment_resolution",
+        "kind": 2,
+        "importPath": "tests.test_sphere",
+        "description": "tests.test_sphere",
+        "peekOfCode": "def test_sphere_radial_invalid_segment_resolution() -> None:\n    with pytest.raises(ValueError, match=\"segment_resolution must be at least 1\"):\n        sphere_mesher_from_radial(1.0, 10, 0)\n@pytest.mark.parametrize(\"radius\", [0.5, 1.0, 10.0])\ndef test_sphere_radial_radius_variations(radius) -> None:\n    mesh = sphere_mesher_from_radial(radius, 5, 8)\n    norms = np.linalg.norm(mesh, axis=2)\n    np.testing.assert_allclose(norms, radius)\n# ------------------------------ #\n# randomized stress test",
+        "detail": "tests.test_sphere",
+        "documentation": {}
+    },
+    {
+        "label": "test_sphere_radial_radius_variations",
+        "kind": 2,
+        "importPath": "tests.test_sphere",
+        "description": "tests.test_sphere",
+        "peekOfCode": "def test_sphere_radial_radius_variations(radius) -> None:\n    mesh = sphere_mesher_from_radial(radius, 5, 8)\n    norms = np.linalg.norm(mesh, axis=2)\n    np.testing.assert_allclose(norms, radius)\n# ------------------------------ #\n# randomized stress test\n# ------------------------------ #\ndef test_sphere_projection_randomized() -> None:\n    np.random.seed(0)\n    radius = np.random.uniform(0.5, 5.0)",
+        "detail": "tests.test_sphere",
+        "documentation": {}
+    },
+    {
+        "label": "test_sphere_projection_randomized",
+        "kind": 2,
+        "importPath": "tests.test_sphere",
+        "description": "tests.test_sphere",
+        "peekOfCode": "def test_sphere_projection_randomized() -> None:\n    np.random.seed(0)\n    radius = np.random.uniform(0.5, 5.0)\n    resolution = np.random.randint(3, 20)\n    mesh = sphere_mesher_from_projection(radius, resolution)\n    assert mesh.shape[1:] == (4, 3)\n    assert np.isfinite(mesh).all()\ndef test_sphere_radial_randomized() -> None:\n    np.random.seed(1)\n    radius = np.random.uniform(0.5, 5.0)",
+        "detail": "tests.test_sphere",
+        "documentation": {}
+    },
+    {
+        "label": "test_sphere_radial_randomized",
+        "kind": 2,
+        "importPath": "tests.test_sphere",
+        "description": "tests.test_sphere",
+        "peekOfCode": "def test_sphere_radial_randomized() -> None:\n    np.random.seed(1)\n    radius = np.random.uniform(0.5, 5.0)\n    radial_res = np.random.randint(3, 15)\n    segment_res = np.random.randint(5, 20)\n    mesh = sphere_mesher_from_radial(radius, radial_res, segment_res)\n    assert mesh.shape == (radial_res * segment_res, 4, 3)\n    assert np.isfinite(mesh).all()",
+        "detail": "tests.test_sphere",
         "documentation": {}
     }
 ]

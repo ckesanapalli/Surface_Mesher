@@ -4,7 +4,7 @@ from numpy.typing import ArrayLike
 from .edge import convert_2d_face_to_3d, quad_faces_from_edges
 
 
-def cuboid_mesh(x_coords: ArrayLike, y_coords: ArrayLike, z_coords: ArrayLike) -> np.ndarray:
+def cuboid_mesher(x_coords: ArrayLike, y_coords: ArrayLike, z_coords: ArrayLike) -> np.ndarray:
     """
     Generate a full cuboid surface mesh using explicit coordinate arrays along each axis.
 
@@ -38,7 +38,7 @@ def cuboid_mesh(x_coords: ArrayLike, y_coords: ArrayLike, z_coords: ArrayLike) -
     >>> x = [0.0, 1.0, 2.0]
     >>> y = [0.0, 1.0]
     >>> z = [0.0, 0.5, 1.0]
-    >>> faces = cuboid_mesh(x, y, z)
+    >>> faces = cuboid_mesher(x, y, z)
     >>> print(faces.shape)  # 6 faces total from the cuboid
     (16, 4, 3)
     """
@@ -67,18 +67,18 @@ def cuboid_mesh(x_coords: ArrayLike, y_coords: ArrayLike, z_coords: ArrayLike) -
 
     return np.concatenate(
         [
-            convert_2d_face_to_3d(xy, fixed_axis=2, fixed_value=zf0),
-            convert_2d_face_to_3d(xy, fixed_axis=2, fixed_value=zf1),
-            convert_2d_face_to_3d(yz, fixed_axis=0, fixed_value=xf0),
-            convert_2d_face_to_3d(yz, fixed_axis=0, fixed_value=xf1),
-            convert_2d_face_to_3d(zx, fixed_axis=1, fixed_value=yf0),
-            convert_2d_face_to_3d(zx, fixed_axis=1, fixed_value=yf1),
+            convert_2d_face_to_3d(xy, axis=2, offset=zf0),
+            convert_2d_face_to_3d(xy, axis=2, offset=zf1),
+            convert_2d_face_to_3d(yz, axis=0, offset=xf0),
+            convert_2d_face_to_3d(yz, axis=0, offset=xf1),
+            convert_2d_face_to_3d(zx, axis=1, offset=yf0),
+            convert_2d_face_to_3d(zx, axis=1, offset=yf1),
         ],
         axis=0,
     )
 
 
-def cuboid_mesh_with_resolution(
+def cuboid_mesher_with_resolution(
     length: float, width: float, height: float, origin: tuple[float, float, float] = (0.0, 0.0, 0.0), resolution: int | tuple[int, int, int] = (1, 1, 1)
 ) -> np.ndarray:
     """
@@ -105,12 +105,12 @@ def cuboid_mesh_with_resolution(
 
     Examples
     --------
-    >>> from surface_mesher import cuboid_mesh_with_resolution
-    >>> mesh = cuboid_mesh_with_resolution(2.0, 1.0, 1.0, resolution=2)
+    >>> from surface_mesher import cuboid_mesher_with_resolution
+    >>> mesh = cuboid_mesher_with_resolution(2.0, 1.0, 1.0, resolution=2)
     >>> mesh.shape
     (24, 4, 3)
 
-    >>> mesh = cuboid_mesh_with_resolution(2.0, 1.0, 1.0, resolution=[2, 1, 2])
+    >>> mesh = cuboid_mesher_with_resolution(2.0, 1.0, 1.0, resolution=[2, 1, 2])
     >>> mesh.shape[1:]
     (4, 3)
     """
@@ -136,4 +136,4 @@ def cuboid_mesh_with_resolution(
     y_coords = np.linspace(-y_edge_point, y_edge_point, res_y + 1)
     z_coords = np.linspace(-z_edge_point, z_edge_point, res_z + 1)
 
-    return cuboid_mesh(x_coords, y_coords, z_coords)
+    return cuboid_mesher(x_coords, y_coords, z_coords)
