@@ -18,7 +18,7 @@ classifiers = [
   "Development Status :: 4 - Beta",
 
   # Indicate who your project is intended for
-  "Intended Audience :: General",
+  "Intended Audience :: Science/Research",
   "License :: OSI Approved :: MIT License",
   "Topic :: Scientific/Engineering",
   "Topic :: Software Development :: Libraries :: Python Modules",
