@@ -38,7 +38,13 @@ Use cases include:
 
 ## 🚀 Installation
 
-You can install the latest development version via Git:
+To install stable version via PyPI:
+
+```bash
+pip install surfmesh
+```
+
+For the latest development version via Git:
 
 ```bash
 pip install git+https://github.com/ckesanapalli/surface-mesher.git
