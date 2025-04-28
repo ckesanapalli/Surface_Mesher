@@ -1,3 +1,4 @@
+from .common import extract_vertices_faces
 from .cuboid import cuboid_mesher, cuboid_mesher_with_resolution
 from .cylinder import cylinder_mesher_radial, cylinder_mesher_square_centered
 from .disk import circumference_edges, disk_mesher_radial, disk_mesher_square_centered
@@ -15,6 +16,7 @@ __all__ = [
     "cylinder_mesher_square_centered",
     "disk_mesher_radial",
     "disk_mesher_square_centered",
+    "extract_vertices_faces",
     "mesh_between_edges",
     "quad_faces_from_edges",
     "rectangle_perimeter",

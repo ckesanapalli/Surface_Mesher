@@ -467,19 +467,13 @@ plt.show()
 
 
 ```python
+
 radius = 1.0
 radial_resolution = 20
 segment_resolution = 20
 mesh = sm.sphere_mesher_from_radial(radius, radial_resolution, segment_resolution)
 
-# reshape mesh to (n_faces * 4, 3)
-mesh_flat = mesh.reshape(-1, 3)  # (n_faces * 4, 3)
-
-# Find unique vertices and indices
-vertices, inverse_indices = np.unique(mesh_flat, axis=0, return_inverse=True)
-
-# Reshape inverse indices to (n_faces, 4)
-faces = inverse_indices.reshape(mesh.shape[0], 4)
+vertices, faces = sm.extract_vertices_faces(mesh)
 
 print(f"Generated a Radial Sphere Mesh with {faces.shape[0]} faces and {vertices.shape[0]} vertices.")
 print(f"Vertices shape: {vertices.shape}, Faces shape: {faces.shape}")
