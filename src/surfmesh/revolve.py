@@ -43,7 +43,7 @@ def revolve_curve_along_path(curve: ArrayLike, revolve_path: ArrayLike) -> np.nd
 
     x0, z0 = curve[1:, 0], curve[1:, 1]
     x1, z1 = curve[:-1, 0], curve[:-1, 1]
-    
+
     curve_matrix = np.array([
         [x0, x0, z0],
         [x0, x0, z0],
