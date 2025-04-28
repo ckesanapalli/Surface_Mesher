@@ -473,7 +473,7 @@ radial_resolution = 20
 segment_resolution = 20
 mesh = sm.sphere_mesher_from_radial(radius, radial_resolution, segment_resolution)
 
-vertices, faces = sm.extract_vertices_faces(mesh)
+vertices, faces = sm.extract_vertices_faces(mesh.round(6))
 
 print(f"Generated a Radial Sphere Mesh with {faces.shape[0]} faces and {vertices.shape[0]} vertices.")
 print(f"Vertices shape: {vertices.shape}, Faces shape: {faces.shape}")
@@ -482,20 +482,20 @@ print(f"First 5 faces:\n{faces[:5]}")
 
 ```
 
-    Generated a Radial Sphere Mesh with 400 faces and 441 vertices.
-    Vertices shape: (441, 3), Faces shape: (400, 4)
+    Generated a Radial Sphere Mesh with 400 faces and 382 vertices.
+    Vertices shape: (382, 3), Faces shape: (400, 4)
     First 5 vertices:
-    [[-1.00000000e+00  1.22464680e-16  0.00000000e+00]
-     [-9.87688341e-01  1.20956936e-16 -1.56434465e-01]
-     [-9.87688341e-01  1.20956936e-16  1.56434465e-01]
-     [-9.51056516e-01 -3.09016994e-01  0.00000000e+00]
-     [-9.51056516e-01  1.16470832e-16 -3.09016994e-01]]
+    [[-1.        0.        0.      ]
+     [-0.987688  0.       -0.156434]
+     [-0.987688  0.        0.156434]
+     [-0.951057 -0.309017  0.      ]
+     [-0.951057  0.       -0.309017]]
     First 5 faces:
-    [[273 277 248 240]
-     [311 322 277 273]
-     [339 343 322 311]
-     [361 376 343 339]
-     [385 389 376 361]]
+    [[233 235 190 190]
+     [269 278 235 233]
+     [295 297 278 269]
+     [315 328 297 295]
+     [337 339 328 315]]
     
 
 ## 📌 Roadmap
