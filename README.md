@@ -146,6 +146,7 @@ plt.show()
 
 
 ```python
+radius = 1.0
 square_resolution = 5
 radial_resolution = 10
 square_side_radius_ratio = 0.5
@@ -461,6 +462,47 @@ plt.show()
 ![png](README_files/README_23_1.png)
     
 
+
+## 12. Extract Faces and Vertices from the mesh
+
+
+```python
+radius = 1.0
+radial_resolution = 20
+segment_resolution = 20
+mesh = sm.sphere_mesher_from_radial(radius, radial_resolution, segment_resolution)
+
+# reshape mesh to (n_faces * 4, 3)
+mesh_flat = mesh.reshape(-1, 3)  # (n_faces * 4, 3)
+
+# Find unique vertices and indices
+vertices, inverse_indices = np.unique(mesh_flat, axis=0, return_inverse=True)
+
+# Reshape inverse indices to (n_faces, 4)
+faces = inverse_indices.reshape(mesh.shape[0], 4)
+
+print(f"Generated a Radial Sphere Mesh with {faces.shape[0]} faces and {vertices.shape[0]} vertices.")
+print(f"Vertices shape: {vertices.shape}, Faces shape: {faces.shape}")
+print(f"First 5 vertices:\n{vertices[:5]}")
+print(f"First 5 faces:\n{faces[:5]}")
+
+```
+
+    Generated a Radial Sphere Mesh with 400 faces and 441 vertices.
+    Vertices shape: (441, 3), Faces shape: (400, 4)
+    First 5 vertices:
+    [[-1.00000000e+00  1.22464680e-16  0.00000000e+00]
+     [-9.87688341e-01  1.20956936e-16 -1.56434465e-01]
+     [-9.87688341e-01  1.20956936e-16  1.56434465e-01]
+     [-9.51056516e-01 -3.09016994e-01  0.00000000e+00]
+     [-9.51056516e-01  1.16470832e-16 -3.09016994e-01]]
+    First 5 faces:
+    [[273 277 248 240]
+     [311 322 277 273]
+     [339 343 322 311]
+     [361 376 343 339]
+     [385 389 376 361]]
+    
 
 ## 📌 Roadmap
 
