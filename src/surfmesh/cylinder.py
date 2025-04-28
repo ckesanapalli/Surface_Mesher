@@ -65,9 +65,12 @@ def cylinder_mesher_radial(radius: float, height: float, radial_resolution: int,
 
     disk_mesh = disk_mesher_radial(radius, radial_resolution, segment_resolution)
 
-    bottom_disk_mesh = convert_2d_face_to_3d(disk_mesh, axis=2, offset=-height / 2)
-    top_disk_mesh = convert_2d_face_to_3d(disk_mesh, axis=2, offset=height / 2)
+    # flip the disk mesh to create the top disk
+    disk_mesh_flip = np.flip(disk_mesh, axis=1)
 
+    top_disk_mesh = convert_2d_face_to_3d(disk_mesh, axis=2, offset=height / 2)
+    bottom_disk_mesh = convert_2d_face_to_3d(disk_mesh_flip, axis=2, offset=-height / 2)
+    
     height_coords = 0.5 * height * np.linspace(-1, 1, height_resolution + 1)
     radial_coords = radius * np.ones_like(height_coords)
     lateral_curve = np.array([radial_coords, height_coords]).T
@@ -135,8 +138,11 @@ def cylinder_mesher_square_centered(radius: float, height: float, radial_resolut
 
     disk_mesh = disk_mesher_square_centered(radius, square_resolution, radial_resolution)
 
-    bottom_disk_mesh = convert_2d_face_to_3d(disk_mesh, axis=2, offset=-height / 2)
+    # flip the disk mesh to create the top disk
+    disk_mesh_flip = np.flip(disk_mesh, axis=1)
+
     top_disk_mesh = convert_2d_face_to_3d(disk_mesh, axis=2, offset=height / 2)
+    bottom_disk_mesh = convert_2d_face_to_3d(disk_mesh_flip, axis=2, offset=-height / 2)
 
     segment_resolution = square_resolution * 4
 

@@ -60,6 +60,9 @@ def cuboid_mesher(x_coords: ArrayLike, y_coords: ArrayLike, z_coords: ArrayLike)
     xy = quad_faces_from_edges(x, y)
     yz = quad_faces_from_edges(y, z)
     zx = quad_faces_from_edges(z, x)
+    yx = np.flip(xy, axis=1)
+    zy = np.flip(yz, axis=1)
+    xz = np.flip(zx, axis=1)
 
     xf0, xf1 = x[0], x[-1]
     yf0, yf1 = y[0], y[-1]
@@ -67,11 +70,11 @@ def cuboid_mesher(x_coords: ArrayLike, y_coords: ArrayLike, z_coords: ArrayLike)
 
     return np.concatenate(
         [
-            convert_2d_face_to_3d(xy, axis=2, offset=zf0),
+            convert_2d_face_to_3d(yx, axis=2, offset=zf0),
             convert_2d_face_to_3d(xy, axis=2, offset=zf1),
-            convert_2d_face_to_3d(yz, axis=0, offset=xf0),
+            convert_2d_face_to_3d(zy, axis=0, offset=xf0),
             convert_2d_face_to_3d(yz, axis=0, offset=xf1),
-            convert_2d_face_to_3d(zx, axis=1, offset=yf0),
+            convert_2d_face_to_3d(xz, axis=1, offset=yf0),
             convert_2d_face_to_3d(zx, axis=1, offset=yf1),
         ],
         axis=0,

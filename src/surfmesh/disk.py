@@ -155,8 +155,8 @@ def disk_mesher_square_centered(radius: float, square_resolution: int, radial_re
     segment_resolution = square_resolution * 4 + 1
     circumference = circumference_edges(radius, segment_resolution, start_angle=np.pi / 4 + square_disk_rotation, counter_clockwise=True)
 
-    # Radial interpolation mesh
-    radial_edges = np.stack([square_boundary, circumference])
+    # Radial interpolation mesh. np.flip is align the face normal with the square mesh.
+    radial_edges = np.flip(np.stack([square_boundary, circumference]), axis=1)
     radial_mesh = mesh_between_edges(radial_edges, radial_resolution)
 
     # Final mesh

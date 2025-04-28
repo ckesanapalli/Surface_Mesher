@@ -153,6 +153,9 @@ def rectangle_perimeter(length_edge: ArrayLike, width_edge: ArrayLike) -> np.nda
      [1. 1. 0. 0. 1.]]
     """
 
+    length_edge = np.asarray(length_edge, dtype=float)
+    width_edge = np.asarray(width_edge, dtype=float)
+
     if length_edge.size < 2 or width_edge.size < 2:
         msg = f"length_edge and width_edge must have at least 2 points. Got Length edge: {length_edge.size}, Width edge: {width_edge.size}."
         raise ValueError(msg)
