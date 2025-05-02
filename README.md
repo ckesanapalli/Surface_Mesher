@@ -500,7 +500,7 @@ print(f"First 5 faces:\n{faces[:5]}")
     
 
 ## Citation
-If you use this library in your research, please consider citing the following citation: [citation.bib](citation.bib)
+If you use this library in your research, please consider citing the following citation: [CITATION.bib](CITATION.bib)
 
 
 ```python
@@ -509,13 +509,11 @@ from pathlib import Path
 
 url = "https://zenodo.org/records/15298588/export/bibtex"
 content = urlopen(url).read().decode("utf-8")
-Path("../citation.bib").write_text(content)
-print("Citation saved to citation.bib")
+Path("../CITATION.bib").write_text(content)
 print("BibTeX citation:\n")
 print(content)
 ```
 
-    Citation saved to citation.bib
     BibTeX citation:
     
     @software{chaitanya_kesanapalli_2025_15298588,
@@ -546,6 +544,5 @@ print(content)
 - [ ] STL/PLY export support
 - [ ] Mesh visualization utilities
 - [ ] Export to BEM-compatible formats
-
 
 
