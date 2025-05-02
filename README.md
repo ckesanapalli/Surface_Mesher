@@ -509,7 +509,7 @@ from pathlib import Path
 
 url = "https://zenodo.org/records/15298588/export/bibtex"
 content = urlopen(url).read().decode("utf-8")
-Path("../CITATION.bib").write_text(content)
+Path("../CITATION.bib").write_text(content, encoding="utf-8")
 print(content)
 ```
 
