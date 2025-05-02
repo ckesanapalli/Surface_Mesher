@@ -510,12 +510,9 @@ from pathlib import Path
 url = "https://zenodo.org/records/15298588/export/bibtex"
 content = urlopen(url).read().decode("utf-8")
 Path("../CITATION.bib").write_text(content)
-print("BibTeX citation:\n")
 print(content)
 ```
 
-    BibTeX citation:
-    
     @software{chaitanya_kesanapalli_2025_15298588,
       author       = {Chaitanya Kesanapalli},
       title        = {SurfMesh},
