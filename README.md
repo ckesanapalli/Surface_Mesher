@@ -5,6 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.txt)
 [![Python Version](https://img.shields.io/pypi/pyversions/surfmesh)](https://www.python.org/downloads/)
 [![SurfMesh](https://img.shields.io/pypi/v/surfmesh)](https://pypi.org/project/surfmesh/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15298588.svg)](https://doi.org/10.5281/zenodo.15298588)
 
 
 
@@ -496,6 +497,43 @@ print(f"First 5 faces:\n{faces[:5]}")
      [295 297 278 269]
      [315 328 297 295]
      [337 339 328 315]]
+    
+
+## Citation
+If you use this library in your research, please consider citing the following citation: [citation.bib](citation.bib)
+
+
+```python
+from urllib.request import urlopen
+from pathlib import Path
+
+url = "https://zenodo.org/records/15298588/export/bibtex"
+content = urlopen(url).read().decode("utf-8")
+Path("citation.bib").write_text(content)
+print("Citation saved to citation.bib")
+print("BibTeX citation:\n")
+print(content)
+```
+
+    Citation saved to citation.bib
+    BibTeX citation:
+    
+    @software{chaitanya_kesanapalli_2025_15298588,
+      author       = {Chaitanya Kesanapalli},
+      title        = {SurfMesh},
+      month        = apr,
+      year         = 2025,
+      publisher    = {Zenodo},
+      version      = {v0.2},
+      doi          = {10.5281/zenodo.15298588},
+      url          = {https://doi.org/10.5281/zenodo.15298588},
+      swhid        = {swh:1:dir:17d13ade48cf763577a55d76cbd69c3ebfda8fbb
+                       ;origin=https://doi.org/10.5281/zenodo.15298035;vi
+                       sit=swh:1:snp:81a5188f930fc00f53a38853ff78cf140217
+                       aafc;anchor=swh:1:rel:f2b2d3966583101539faa625db75
+                       16e5e1d6393d;path=ckesanapalli-surfmesh-005395d
+                      },
+    }
     
 
 ## 📌 Roadmap
