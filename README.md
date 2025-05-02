@@ -547,11 +547,5 @@ print(content)
 - [ ] Mesh visualization utilities
 - [ ] Export to BEM-compatible formats
 
----
-
-## 📄 License
-
-MIT License © 2025 Chaitanya Kesanapalli
-
 
 
