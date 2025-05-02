@@ -81,8 +81,8 @@ plot_res = (4, 4)
 ```python
 # Define two edges
 x = np.linspace(0, np.pi / 2, 20)
-edge1 = np.array([x, np.sin(x)])
-edge2 = np.array([x, np.exp(x)])
+edge1 = np.array([x[2:], np.sin(x[2:])])
+edge2 = np.array([x[:-2], np.exp(x[:-2])])
 
 # Generate the mesh
 radial_resolution = 10
@@ -99,7 +99,7 @@ ax.set_title("Mesh Between Edges")
 plt.show()
 ```
 
-    Generated mesh with 190 quadrilateral faces.
+    Generated mesh with 170 quadrilateral faces.
     
 
 
