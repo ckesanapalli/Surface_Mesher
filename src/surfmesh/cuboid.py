@@ -117,18 +117,18 @@ def cuboid_mesher_with_resolution(
     >>> mesh.shape[1:]
     (4, 3)
     """
-    resolution = np.array(resolution, dtype=int)
+    resolution_array = np.array(resolution, dtype=int)
 
-    if resolution.ndim == 0:
-        resolution = np.full(3, resolution)
-    elif resolution.shape != (3,):
+    if resolution_array.ndim == 0:
+        resolution_array = np.full(3, resolution_array)
+    elif resolution_array.shape != (3,):
         msg = "resolution must be a single int or an array-like of three ints."
         raise ValueError(msg)
-    if np.any(resolution <= 0):
+    if np.any(resolution_array <= 0):
         msg = "resolution must contain only positive values."
         raise ValueError(msg)
 
-    res_x, res_y, res_z = resolution
+    res_x, res_y, res_z = resolution_array
     ox, oy, oz = origin
 
     x_edge_point = ox + length / 2.0

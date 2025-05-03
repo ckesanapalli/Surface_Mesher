@@ -1,4 +1,3 @@
-import re
 import pytest
 import numpy as np
 from surfmesh import (
